@@ -195,7 +195,7 @@ export default async function ArtistDetailPage({
           </div>
 
           {/* RIGHT: Photo Card (Mobile Order 1) */}
-          <div className="w-full md:w-7/12 order-1 md:order-2 h-[40vh] md:h-[70vh] relative flex items-center justify-center md:justify-end">
+          <div className="w-full md:w-7/12 order-1 md:order-2 h-auto md:h-[70vh] relative flex items-center justify-center md:justify-end mb-8 md:mb-0">
             {/* Floating Card Container */}
             <div className="relative w-full max-w-xs md:max-w-lg aspect-[3/4] md:aspect-[4/5] bg-neutral-900 overflow-hidden shadow-2xl shadow-black/50 border border-white/5 group">
               {/* Film Grain Texture Overlay */}

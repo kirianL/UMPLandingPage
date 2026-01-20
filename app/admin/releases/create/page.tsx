@@ -5,7 +5,7 @@ export default async function CreateReleasePage() {
   const supabase = await createClient();
   const { data: artists } = await supabase
     .from("artists")
-    .select("id, name")
+    .select("*")
     .eq("is_active", true)
     .order("name");
 

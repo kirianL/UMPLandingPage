@@ -13,7 +13,7 @@ export default async function EditReleasePage({
   // Parallel fetching
   const [releaseRes, artistsRes] = await Promise.all([
     supabase.from("releases").select("*").eq("id", id).single(),
-    supabase.from("artists").select("id, name").eq("is_active", true),
+    supabase.from("artists").select("*").eq("is_active", true),
   ]);
 
   const release = releaseRes.data;

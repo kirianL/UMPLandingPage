@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 2%; /* #050505 */
+    --foreground: 0 0% 94%; /* #F0F0F0 */
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 94%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 94%;
+
+    --primary: 145 48% 20%; /* Verde bosque oscuro #1a4d2e */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 20%; /* #333333 */
+    --secondary-foreground: 0 0% 94%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
+
+    --accent: 145 48% 20%; /* Verde bosque oscuro */
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 145 48% 20%; /* Verde bosque oscuro */
+
+    --radius: 0rem; /* Sharp edges for "Underground/Brutalist" feel, or 0.25rem */
+  }
+
+  .dark {
+    --background: 0 0% 2%;
+    --foreground: 0 0% 94%;
+    /* ... repeat if allowing light mode switch, but user wants DARK. */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

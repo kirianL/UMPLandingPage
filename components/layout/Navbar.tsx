@@ -159,7 +159,7 @@ export default function Navbar() {
                     </span>
                   </button>
                   <p className="text-[10px] text-center text-neutral-600 font-mono uppercase">
-                    © 2024 UMP Music
+                    © 2026 UMP Music
                   </p>
                 </div>
               </div>

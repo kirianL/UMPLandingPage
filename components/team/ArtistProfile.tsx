@@ -7,6 +7,8 @@ import { FaInstagram, FaSpotify, FaApple, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
 
+import Dither from "@/components/ui/dither";
+
 interface ArtistWithReleases extends Artist {
   releases: Release[];
 }
@@ -27,9 +29,23 @@ export default function ArtistProfile({
     <div className="min-h-screen bg-neutral-950 text-white selection:bg-primary selection:text-black font-sans">
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col pt-20 overflow-hidden">
+        {/* Dither Background */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <Dither
+            waveColor={[0.1, 0.3, 0.18]}
+            disableAnimation={false}
+            enableMouseInteraction={false}
+            mouseRadius={0.3}
+            colorNum={4}
+            waveAmplitude={0.3}
+            waveFrequency={3}
+            waveSpeed={0.01}
+          />
+        </div>
+
         {/* Abstract Typographic Background */}
-        <div className="absolute inset-0 select-none overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center opacity-[0.03]">
+        <div className="absolute inset-0 select-none overflow-hidden pointer-events-none z-0 mix-blend-overlay opacity-30">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center">
             <h1
               className="text-[40vw] font-black leading-none tracking-tighter text-transparent"
               style={{ WebkitTextStroke: "2px white" }}
@@ -40,7 +56,7 @@ export default function ArtistProfile({
         </div>
 
         {/* Ambient Light */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden mix-blend-soft-light">
           <div
             className="absolute inset-0 w-full h-full"
             style={{

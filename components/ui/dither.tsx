@@ -322,39 +322,31 @@ export default function Dither({
   enableMouseInteraction = true,
   mouseRadius = 1,
 }: DitherProps) {
-  // Convert normalized [0-1] RGB to CSS string 0-255
-  const cssColor = `rgb(${Math.round(waveColor[0] * 255)}, ${Math.round(waveColor[1] * 255)}, ${Math.round(waveColor[2] * 255)})`;
-
   return (
-    <div
-      className="w-full h-full relative"
-      style={{ backgroundColor: cssColor }}
+    <Canvas
+      className={`w-full h-full relative ${!enableMouseInteraction ? "pointer-events-none" : ""}`}
+      camera={{ position: [0, 0, 6] }}
+      dpr={[1, 1]} // Enforce 1x DPR for performance
+      gl={{
+        antialias: false,
+        preserveDrawingBuffer: false,
+        depth: false,
+        stencil: false,
+        alpha: true,
+      }} // Disable unused buffers
+      frameloop={disableAnimation ? "demand" : "always"} // Stop render loop if static
     >
-      <Canvas
-        className={`w-full h-full absolute inset-0 ${!enableMouseInteraction ? "pointer-events-none" : ""}`}
-        camera={{ position: [0, 0, 6] }}
-        dpr={[1, 1]} // Enforce 1x DPR for performance
-        gl={{
-          antialias: false,
-          preserveDrawingBuffer: false,
-          depth: false,
-          stencil: false,
-          alpha: true,
-        }} // Disable unused buffers
-        frameloop={disableAnimation ? "demand" : "always"} // Stop render loop if static
-      >
-        <DitheredWaves
-          waveSpeed={waveSpeed}
-          waveFrequency={waveFrequency}
-          waveAmplitude={waveAmplitude}
-          waveColor={waveColor}
-          colorNum={colorNum}
-          pixelSize={pixelSize}
-          disableAnimation={disableAnimation}
-          enableMouseInteraction={enableMouseInteraction}
-          mouseRadius={mouseRadius}
-        />
-      </Canvas>
-    </div>
+      <DitheredWaves
+        waveSpeed={waveSpeed}
+        waveFrequency={waveFrequency}
+        waveAmplitude={waveAmplitude}
+        waveColor={waveColor}
+        colorNum={colorNum}
+        pixelSize={pixelSize}
+        disableAnimation={disableAnimation}
+        enableMouseInteraction={enableMouseInteraction}
+        mouseRadius={mouseRadius}
+      />
+    </Canvas>
   );
 }

@@ -30,7 +30,7 @@ export default function ProducerProfile({
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col pt-20 overflow-hidden">
         {/* Dither Background */}
-        <div className="absolute inset-0 z-0 opacity-40">
+        <div className="absolute inset-0 z-0 opacity-40 bg-[rgb(26,77,230)]">
           <Dither
             waveColor={[0.1, 0.3, 0.9]}
             disableAnimation

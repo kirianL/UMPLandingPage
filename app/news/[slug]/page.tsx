@@ -67,8 +67,8 @@ export default async function NewsDetailPage({
     <div className="min-h-screen bg-neutral-950 text-white selection:bg-primary selection:text-black overflow-x-hidden">
       {/* Background Ambience */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900/20 rounded-full blur-[120px] opacity-40 mix-blend-screen" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-primary/10 rounded-full blur-[120px] opacity-30 mix-blend-screen" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-900/20 rounded-full blur-[60px] opacity-30" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-primary/10 rounded-full blur-[60px] opacity-20" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 max-w-6xl pt-24 md:pt-32 pb-20">
@@ -85,14 +85,19 @@ export default async function NewsDetailPage({
         <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-16 lg:mb-20 items-end">
           <div className="lg:col-span-8 space-y-6 lg:space-y-8">
             {/* Metadata Tags - More Editorial */}
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-neutral-500 border-b border-white/10 pb-4 w-fit">
-              <span className="text-primary font-bold">
-                {new Date(newsItem.published_at).toLocaleDateString("es-ES", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
+            <div className="flex items-center justify-between border-b border-white/10 pb-4 w-full md:w-fit gap-8">
+              <div className="flex flex-wrap items-center gap-4 text-xs font-mono uppercase tracking-widest text-neutral-500">
+                <span className="text-primary font-bold">
+                  {new Date(newsItem.published_at).toLocaleDateString("es-ES", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              </div>
+              <div className="lg:hidden">
+                <ShareButton title={newsItem.title} />
+              </div>
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-quilon text-white uppercase tracking-[-0.02em] leading-[0.9]">

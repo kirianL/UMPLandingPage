@@ -139,10 +139,10 @@ class RetroEffectImpl extends Effect {
     pixelSize = 2.0,
     resolution = new THREE.Vector2(800, 600),
   } = {}) {
-    const uniforms = new Map([
+    const uniforms = new Map<string, THREE.Uniform>([
       ["colorNum", new THREE.Uniform(colorNum)],
       ["pixelSize", new THREE.Uniform(pixelSize)],
-      ["resolution", new THREE.Uniform(resolution)], // Pass resolution to the effect
+      ["resolution", new THREE.Uniform(resolution)],
     ]);
     super("RetroEffect", ditherFragmentShader, { uniforms });
   }

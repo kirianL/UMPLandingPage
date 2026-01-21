@@ -132,30 +132,38 @@ export default async function Home() {
       {/* LATEST NEWS - EDITORIAL COMPONENT */}
       <NewsList news={latestNews} />
 
-      {/* MINIMAL FOOTER / NEWSLETTER */}
-      <section className="py-32 bg-white text-black text-center">
-        <div className="container px-4 max-w-2xl mx-auto space-y-12">
-          <h2 className="text-5xl md:text-7xl font-black font-quilon uppercase tracking-tighter leading-[0.8] mb-8">
-            Join the <br /> Culture
+      {/* DEMO SUBMISSION / CTA */}
+      <section className="py-24 md:py-32 bg-white text-black text-center border-t border-black/5">
+        <div className="container px-4 max-w-3xl mx-auto space-y-8">
+          <div className="inline-block border border-black/20 rounded-full px-4 py-1 mb-4">
+            <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase">
+              Scouting
+            </span>
+          </div>
+
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-quilon uppercase tracking-tighter leading-[0.9]">
+            ¿Tienes música <br /> <span className="text-primary">nueva?</span>
           </h2>
 
-          <form className="flex flex-col gap-8 relative items-center">
-            <input
-              type="email"
-              placeholder="YOUR EMAIL"
-              className="w-full bg-transparent border-b-2 border-black/10 px-0 py-4 text-center text-xl md:text-2xl font-bold uppercase placeholder:text-black/20 focus:outline-none focus:border-black transition-colors"
-            />
-            <Button
-              size="lg"
-              className="bg-black text-white px-12 rounded-full font-mono text-xs uppercase tracking-widest hover:bg-primary hover:text-black transition-all hover:scale-105"
-            >
-              Subscribe
-            </Button>
-          </form>
-
-          <p className="text-[10px] text-black/40 font-mono uppercase tracking-widest mt-12">
-            © 2026 UMP Music Group. All Rights Reserved.
+          <p className="text-neutral-600 font-medium text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
+            Siempre estamos buscando el próximo sonido que defina a Puerto
+            Limón. Envíanos tus demos o contáctanos para bookings.
           </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <a
+              href="mailto:demos@umpmusic.com"
+              className="inline-flex h-12 items-center justify-center rounded-full bg-black px-8 text-xs font-mono font-bold uppercase tracking-widest text-white transition-all hover:bg-primary hover:scale-105"
+            >
+              Enviar Demo
+            </a>
+            <a
+              href="/contact"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-black/20 px-8 text-xs font-mono font-bold uppercase tracking-widest text-black transition-all hover:bg-black/5"
+            >
+              Contacto
+            </a>
+          </div>
         </div>
       </section>
     </div>

@@ -27,23 +27,25 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-md">
-      <div className="container max-w-6xl flex h-14 items-center justify-between px-4 md:px-6">
+      <div className="container flex h-20 items-center justify-between px-4 md:px-6">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="relative h-8 w-24 md:h-10 md:w-32 transition-transform hover:scale-105">
-            <Image
-              src="/assets/LOGO-UMP.webp"
-              alt="UMP Music Logo"
-              fill
-              className="object-contain invert brightness-0"
-              priority
-              sizes="(max-width: 768px) 96px, 128px"
-            />
+          <div className="flex items-center">
+            <div className="relative h-16 w-32">
+              <Image
+                src="/assets/LOGO-UMP.webp"
+                alt="UMP Music Logo"
+                fill
+                className="object-contain invert brightness-0"
+                priority
+                sizes="(max-width: 768px) 100px, 128px"
+              />
+            </div>
           </div>
         </Link>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           {[
             { name: "EQUIPO", path: "/artists" },
             { name: "NOTICIAS", path: "/news" },
@@ -54,7 +56,7 @@ export default function Navbar() {
               key={link.path}
               href={link.path}
               prefetch={true}
-              className={`text-xs font-bold tracking-widest transition-colors hover:text-primary ${
+              className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive(link.path) ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -65,7 +67,7 @@ export default function Navbar() {
 
         {/* ACTIONS & MOBILE NAV */}
         <div className="flex items-center gap-4">
-          <span className="text-[10px] font-bold tracking-widest text-muted-foreground hover:text-white cursor-pointer transition-colors hidden sm:block">
+          <span className="text-xs font-bold text-muted-foreground hover:text-white cursor-pointer transition-colors hidden sm:block">
             ES / EN
           </span>
 
@@ -74,58 +76,72 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden text-white hover:bg-white/10 hover:text-primary h-8 w-8"
+                className="md:hidden text-white hover:bg-white/10 hover:text-primary"
               >
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="bg-black/95 border-l border-white/10 text-white w-full sm:max-w-md p-0"
+              className="bg-black/90 backdrop-blur-xl border-l border-white/10 text-white w-[260px] p-0"
             >
-              <SheetHeader className="p-6 border-b border-white/10 flex flex-row items-center justify-between">
-                <div className="relative h-8 w-24">
-                  <Image
-                    src="/assets/LOGO-UMP.webp"
-                    alt="UMP Music Logo"
-                    fill
-                    className="object-contain invert brightness-0"
-                    sizes="96px"
-                  />
-                </div>
-                {/* Close button is handled by Sheet primitive, but we can style the header area */}
-                <SheetTitle className="sr-only">Menú de Navegación</SheetTitle>
-                <SheetDescription className="sr-only">
-                  Explora el universo UMP Music
-                </SheetDescription>
-              </SheetHeader>
-
-              <div className="flex flex-col h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-100">
-                <nav className="flex flex-col gap-6 p-8 mt-4">
+              <div className="flex flex-col h-full bg-gradient-to-b from-black/50 to-transparent">
+                <SheetHeader className="p-6 pb-2 border-b border-white/5 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <div className="relative h-10 w-20">
+                      <Image
+                        src="/assets/LOGO-UMP.webp"
+                        alt="UMP Music Logo"
+                        fill
+                        className="object-contain invert brightness-0"
+                        priority
+                      />
+                    </div>
+                  </div>
+                  <SheetTitle className="sr-only">
+                    Menú de Navegación
+                  </SheetTitle>
+                  <SheetDescription className="sr-only">
+                    Navegación principal
+                  </SheetDescription>
+                </SheetHeader>
+                <nav className="flex flex-col gap-1 p-3 mt-2">
                   {[
                     { name: "HOME", path: "/" },
-                    { name: "ARTISTAS", path: "/artists" },
+                    { name: "EQUIPO", path: "/artists" },
                     { name: "NOTICIAS", path: "/news" },
                     { name: "NOSOTROS", path: "/about" },
                     { name: "CONTACTO", path: "/contact" },
-                  ].map((link, index) => (
+                  ].map((link) => (
                     <Link
                       key={link.path}
                       href={link.path}
-                      className={`text-4xl md:text-5xl font-black uppercase tracking-tighter transition-all duration-300 hover:text-primary hover:pl-4 font-quilon ${
-                        isActive(link.path) ? "text-primary pl-4" : "text-white"
+                      prefetch={true}
+                      className={`group flex items-center justify-between p-3 rounded-lg transition-all duration-300 hover:bg-white/5 ${
+                        isActive(link.path)
+                          ? "bg-white/10 text-white border-l-2 border-primary"
+                          : "text-neutral-400 hover:text-white border-l-2 border-transparent"
                       }`}
                       onClick={handleLinkClick}
                     >
-                      {link.name}
+                      <span className="text-sm font-bold tracking-wider">
+                        {link.name}
+                      </span>
+                      <span
+                        className={`block h-1.5 w-1.5 rounded-full transition-colors ${
+                          isActive(link.path)
+                            ? "bg-primary shadow-[0_0_8px_rgba(26,77,46,0.8)]"
+                            : "bg-transparent group-hover:bg-white/20"
+                        }`}
+                      />
                     </Link>
                   ))}
                 </nav>
 
-                <div className="mt-auto p-8 border-t border-white/10">
-                  <p className="text-xs text-neutral-500 font-mono text-center">
-                    © 2025 UMP MUSIC. <br /> TODOS LOS DERECHOS RESERVADOS.
+                <div className="mt-auto p-6 border-t border-white/5">
+                  <p className="text-[10px] text-center text-neutral-600 font-mono uppercase">
+                    © 2024 UMP Music
                   </p>
                 </div>
               </div>

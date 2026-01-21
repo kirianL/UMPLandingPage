@@ -326,8 +326,16 @@ export default function Dither({
     <Canvas
       className="w-full h-full relative"
       camera={{ position: [0, 0, 6] }}
-      dpr={1}
-      gl={{ antialias: true, preserveDrawingBuffer: true }}
+      dpr={[1, 1]} // Enforce 1x DPR for performance
+      gl={{
+        antialias: false,
+        preserveDrawingBuffer: false,
+        depth: false,
+        stencil: false,
+        alpha: true,
+      }} // Disable unused buffers
+      frameloop={disableAnimation ? "demand" : "always"} // Stop render loop if static
+      events={enableMouseInteraction ? undefined : () => null} // Disable event system if no interaction
     >
       <DitheredWaves
         waveSpeed={waveSpeed}

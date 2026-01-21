@@ -33,7 +33,7 @@ export default function ArtistProfile({
         <div className="absolute inset-0 z-0 opacity-40">
           <Dither
             waveColor={[0.1, 0.3, 0.18]}
-            disableAnimation={false}
+            disableAnimation
             enableMouseInteraction={false}
             mouseRadius={0.3}
             colorNum={4}

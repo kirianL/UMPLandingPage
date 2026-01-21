@@ -39,7 +39,7 @@ export default function DJProfile({
         <div className="absolute inset-0 z-0 opacity-40">
           <Dither
             waveColor={[0.5, 0.0, 0.8]}
-            disableAnimation={false}
+            disableAnimation
             enableMouseInteraction={false}
             mouseRadius={0.3}
             colorNum={4}

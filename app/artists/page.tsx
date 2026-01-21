@@ -42,7 +42,7 @@ export default async function ArtistsPage() {
               Equipo / 2026
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-[-0.02em] uppercase leading-[0.8]">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-quilon text-white tracking-[-0.02em] uppercase leading-[0.8]">
             <span
               className="relative inline-block"
               style={{ fontStretch: "condensed" }}

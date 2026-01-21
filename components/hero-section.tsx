@@ -7,10 +7,7 @@ import Image from "next/image";
 export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-black">
-      {/* Background with grain texture - more intense */}
-      <div className="absolute inset-0 bg-black">
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-200"></div>
-      </div>
+      <div className="absolute inset-0 bg-black"></div>
 
       {/* Clean green wave background - no dots */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -35,7 +32,7 @@ export function HeroSection() {
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             {/* Left - Logo/Title */}
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-[-0.02em] uppercase leading-[0.8] relative inline-block">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-quilon tracking-[-0.02em] uppercase leading-[0.8] relative inline-block">
                 <span className="relative" style={{ fontStretch: "condensed" }}>
                   UMP
                   <svg
@@ -79,7 +76,7 @@ export function HeroSection() {
               <div className="relative w-full h-full bg-[#1b4b2f] p-[3px] md:p-1 shadow-2xl shadow-black/70 border-2 border-[#2d7a4a]">
                 <div className="relative w-full h-full bg-neutral-950 overflow-hidden border border-neutral-800">
                   {/* Stronger halftone/Noise effect overlay */}
-                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-50 mix-blend-overlay z-10"></div>
+
                   {/* Vignette effect */}
                   <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40 z-10"></div>
                   <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-[10px] md:text-xs border border-dashed border-neutral-800">
@@ -96,7 +93,7 @@ export function HeroSection() {
               <div className="relative w-full h-full bg-[#1b4b2f] p-[3px] md:p-1 shadow-2xl shadow-black/70 border-2 border-[#2d7a4a]">
                 <div className="relative w-full h-full bg-neutral-950 overflow-hidden border border-neutral-800">
                   {/* Stronger halftone/Noise effect overlay */}
-                  <div className="absolute int-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-50 mix-blend-overlay z-10"></div>
+
                   {/* Vignette effect */}
                   <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40 z-10"></div>
                   <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-[10px] md:text-xs border border-dashed border-neutral-800">
@@ -113,7 +110,7 @@ export function HeroSection() {
               <div className="relative w-full h-full bg-[#1b4b2f] p-[3px] md:p-1 shadow-2xl shadow-black/70 border-2 border-[#2d7a4a]">
                 <div className="relative w-full h-full bg-neutral-950 overflow-hidden border border-neutral-800">
                   {/* Stronger halftone/Noise effect overlay */}
-                  <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-50 mix-blend-overlay z-10"></div>
+
                   {/* Vignette effect */}
                   <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40 z-10"></div>
                   <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-[10px] md:text-xs border border-dashed border-neutral-800">

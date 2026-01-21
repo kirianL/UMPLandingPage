@@ -21,7 +21,7 @@ export default async function NewsPage() {
               Noticias / 2026
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-[-0.02em] leading-[0.8] mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-quilon text-white uppercase tracking-[-0.02em] leading-[0.8] mb-6">
             <span style={{ fontStretch: "condensed" }}>
               Últimas
               <br />

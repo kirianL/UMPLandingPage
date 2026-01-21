@@ -43,7 +43,44 @@ export default function EditArtistForm({ artist }: { artist: any }) {
         </Button>
       </div>
 
-      <form action={handleSubmit} className="space-y-8">
+      <form
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setLoading(true);
+
+          try {
+            const formData = new FormData(e.currentTarget);
+
+            // Client-side compression
+            const photoFile = formData.get("photo_file") as File;
+            if (photoFile && photoFile.size > 0) {
+              // Import dynamically to avoid SSR issues if any, though "use client" handles it
+              const { compressImage } = await import("@/lib/image-compression");
+              const compressed = await compressImage(photoFile);
+              formData.set("photo_file", compressed);
+              console.log(
+                `Compressed: ${photoFile.size} -> ${compressed.size}`,
+              );
+            }
+
+            const result = await updateArtist(artist.id, formData);
+
+            if (result.success) {
+              toast.success(result.message);
+              router.refresh();
+              router.push("/admin/artists");
+            } else {
+              toast.error(result.message);
+            }
+          } catch (err) {
+            console.error(err);
+            toast.error("Error inesperado al guardar");
+          } finally {
+            setLoading(false);
+          }
+        }}
+        className="space-y-8"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Main Info */}
           <div className="space-y-6">
@@ -155,7 +192,7 @@ export default function EditArtistForm({ artist }: { artist: any }) {
                   className="bg-neutral-900 border-neutral-800 text-white cursor-pointer file:cursor-pointer file:text-primary file:font-semibold"
                 />
                 <p className="text-xs text-neutral-500">
-                  Deja vacío para mantener la imagen actual.
+                  La imagen se optimizará automáticamente a WebP.
                 </p>
               </div>
             </div>

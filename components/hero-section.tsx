@@ -29,15 +29,18 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-neutral-950" />
 
-        {/* User Requested Background Image - Optimized Raw Image */}
-        <img
-          src="/assets/home/Home.jpeg"
-          alt="Limon Aesthetic"
-          className="absolute inset-0 w-full h-full object-cover opacity-75 mix-blend-overlay"
-          {...({ fetchPriority: "high" } as any)}
-          loading="eager"
-          decoding="sync"
-        />
+        {/* User Requested Background Image - Optimized with next/image for Mobile LCP */}
+        <div className="relative w-full h-full">
+          <Image
+            src="/assets/home/Home.jpeg"
+            alt="Limon Aesthetic"
+            fill
+            priority
+            sizes="100vw"
+            quality={85}
+            className="object-cover opacity-75 mix-blend-overlay"
+          />
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/5 to-[#050505]" />
 

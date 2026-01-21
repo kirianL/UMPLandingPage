@@ -132,15 +132,8 @@ export default function RosterFilter({
                     </div>
                   )}
 
-                  {/* Hover Overlay - Minimalist View Profile Button */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                    <span className="bg-primary text-black font-bold text-sm uppercase px-6 py-2 rounded-full tracking-widest hover:scale-110 transition-transform">
-                      {dict.view_profile}
-                    </span>
-                  </div>
-
-                  {/* Info Badge - Always visible but darker on hover? No, let's keep it clean */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-0">
+                  {/* Info Badge */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300">
                     <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-1">
                       {artist.name}
                     </h3>

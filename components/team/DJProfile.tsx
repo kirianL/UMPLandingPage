@@ -36,7 +36,7 @@ export default function DJProfile({
       {/* HERO SECTION */}
       <section className="relative w-full min-h-screen flex flex-col pt-20 overflow-hidden">
         {/* Dither Background */}
-        <div className="absolute inset-0 z-0 opacity-40 bg-[rgb(128,0,204)]">
+        <div className="absolute inset-0 z-0 opacity-40">
           <Dither
             waveColor={[0.5, 0.0, 0.8]}
             disableAnimation

@@ -324,7 +324,7 @@ export default function Dither({
 }: DitherProps) {
   return (
     <Canvas
-      className="w-full h-full relative"
+      className={`w-full h-full relative ${!enableMouseInteraction ? "pointer-events-none" : ""}`}
       camera={{ position: [0, 0, 6] }}
       dpr={[1, 1]} // Enforce 1x DPR for performance
       gl={{
@@ -335,7 +335,6 @@ export default function Dither({
         alpha: true,
       }} // Disable unused buffers
       frameloop={disableAnimation ? "demand" : "always"} // Stop render loop if static
-      events={enableMouseInteraction ? undefined : () => null} // Disable event system if no interaction
     >
       <DitheredWaves
         waveSpeed={waveSpeed}

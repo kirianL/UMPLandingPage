@@ -145,7 +145,19 @@ export default function Navbar() {
                   ))}
                 </nav>
 
-                <div className="mt-auto p-6 border-t border-white/5">
+                <div className="mt-auto p-6 border-t border-white/5 space-y-4">
+                  <button
+                    onClick={toggleLanguage}
+                    className="w-full py-2 text-xs font-bold text-neutral-400 hover:text-white cursor-pointer transition-colors uppercase border border-white/10 rounded-md hover:bg-white/5 flex items-center justify-center gap-2"
+                  >
+                    <span className={language === "es" ? "text-white" : ""}>
+                      ESPAÑOL
+                    </span>
+                    <span className="text-white/20">|</span>
+                    <span className={language === "en" ? "text-white" : ""}>
+                      ENGLISH
+                    </span>
+                  </button>
                   <p className="text-[10px] text-center text-neutral-600 font-mono uppercase">
                     © 2024 UMP Music
                   </p>

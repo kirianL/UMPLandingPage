@@ -5,7 +5,14 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { News } from "@/lib/types";
 
-export default function NewsCard({ news }: { news: News }) {
+export default function NewsCard({
+  news,
+}: {
+  news: Pick<
+    News,
+    "id" | "title" | "slug" | "image_url" | "published_at" | "excerpt"
+  >;
+}) {
   return (
     <Link href={`/news/${news.slug}`} className="group block">
       <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 border border-white/10 mb-4">

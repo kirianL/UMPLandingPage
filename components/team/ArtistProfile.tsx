@@ -155,11 +155,7 @@ export default function ArtistProfile({
           <div className="w-full md:col-span-7 lg:col-span-7 order-1 md:order-2 h-auto flex items-center justify-center md:justify-end mb-8 md:mb-0">
             <div className="relative w-full max-w-[280px] md:max-w-[300px] lg:max-w-[420px] xl:max-w-[500px] aspect-[3/4] md:aspect-[4/5] bg-neutral-900 overflow-hidden shadow-2xl shadow-black/50 border border-white/5 group">
               <div className="absolute inset-0 z-20 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none mix-blend-overlay"></div>
-              <motion.div
-                className="relative w-full h-full"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              >
+              <div className="relative w-full h-full animate-pulse-slow">
                 {artist.photo_url ? (
                   <Image
                     src={artist.photo_url}
@@ -176,7 +172,7 @@ export default function ArtistProfile({
                     </span>
                   </div>
                 )}
-              </motion.div>
+              </div>
               <div className="absolute top-4 left-4 z-30">
                 <div className="h-2 w-12 bg-primary/80" />
               </div>

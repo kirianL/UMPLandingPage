@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,10 +17,13 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   const handleLinkClick = () => {
     setOpen(false);
   };
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-md">
@@ -42,34 +46,23 @@ export default function Navbar() {
 
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/artists"
-            prefetch={true}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            EQUIPO
-          </Link>
-          <Link
-            href="/news"
-            prefetch={true}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            NOTICIAS
-          </Link>
-          <Link
-            href="/about"
-            prefetch={true}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            NOSOTROS
-          </Link>
-          <Link
-            href="/contact"
-            prefetch={true}
-            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-          >
-            CONTACTO
-          </Link>
+          {[
+            { name: "EQUIPO", path: "/artists" },
+            { name: "NOTICIAS", path: "/news" },
+            { name: "NOSOTROS", path: "/about" },
+            { name: "CONTACTO", path: "/contact" },
+          ].map((link) => (
+            <Link
+              key={link.path}
+              href={link.path}
+              prefetch={true}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                isActive(link.path) ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
         </nav>
 
         {/* ACTIONS & MOBILE NAV */}
@@ -102,41 +95,24 @@ export default function Navbar() {
                 </SheetDescription>
               </SheetHeader>
               <nav className="grid gap-3 text-lg font-medium py-6">
-                <Link
-                  href="/"
-                  className="hover:text-primary transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  HOME
-                </Link>
-                <Link
-                  href="/artists"
-                  className="hover:text-primary transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  ARTISTAS
-                </Link>
-                <Link
-                  href="/news"
-                  className="hover:text-primary transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  NOTICIAS
-                </Link>
-                <Link
-                  href="/about"
-                  className="hover:text-primary transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  NOSOTROS
-                </Link>
-                <Link
-                  href="/contact"
-                  className="hover:text-primary transition-colors"
-                  onClick={handleLinkClick}
-                >
-                  CONTACTO
-                </Link>
+                {[
+                  { name: "HOME", path: "/" },
+                  { name: "ARTISTAS", path: "/artists" },
+                  { name: "NOTICIAS", path: "/news" },
+                  { name: "NOSOTROS", path: "/about" },
+                  { name: "CONTACTO", path: "/contact" },
+                ].map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    className={`transition-colors hover:text-primary ${
+                      isActive(link.path) ? "text-primary" : ""
+                    }`}
+                    onClick={handleLinkClick}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </nav>
             </SheetContent>
           </Sheet>

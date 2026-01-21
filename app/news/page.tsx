@@ -12,10 +12,10 @@ export default async function NewsPage() {
     .order("published_at", { ascending: false });
 
   return (
-    <div className="min-h-screen bg-black pt-24 pb-24">
+    <div className="min-h-screen bg-black pb-24">
       {/* Header */}
-      <div className="container px-4 md:px-6 mb-12">
-        <div className="border-t border-white/10 pt-8">
+      <div className="container px-4 md:px-6 mb-12 pt-8">
+        <div className="">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-[10px] md:text-xs font-mono text-neutral-500 tracking-[0.2em] uppercase border border-neutral-800 px-2 py-1">
               Noticias / 2026

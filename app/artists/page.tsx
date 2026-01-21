@@ -34,9 +34,9 @@ export default async function ArtistsPage() {
   const artists = await getArtists();
 
   return (
-    <div className="flex flex-col min-h-screen pt-24 bg-black">
-      <section className="container px-4 md:px-6 mb-12">
-        <div className="flex flex-col space-y-4 mb-8 md:mb-12 border-t border-white/10 pt-8">
+    <div className="flex flex-col min-h-screen bg-black">
+      <section className="container px-4 md:px-6 mb-12 pt-8">
+        <div className="flex flex-col space-y-4 mb-8 md:mb-12">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[10px] md:text-xs font-mono text-neutral-500 tracking-[0.2em] uppercase border border-neutral-800 px-2 py-1">
               Equipo / 2026

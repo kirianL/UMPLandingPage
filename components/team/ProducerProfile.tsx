@@ -13,8 +13,12 @@ interface ArtistWithReleases extends Artist {
 
 export default function ProducerProfile({
   artist,
+  lang = "es",
+  dict,
 }: {
   artist: ArtistWithReleases;
+  lang?: string;
+  dict: any;
 }) {
   const currentYear = new Date().getFullYear();
   const startYear = new Date(artist.created_at).getFullYear();
@@ -49,7 +53,9 @@ export default function ProducerProfile({
         {/* Header Bar */}
         <div className="container mx-auto px-4 z-10">
           <div className="flex justify-between items-center py-3 md:py-4 border-b border-white/10 text-[9px] sm:text-[10px] md:text-xs font-mono uppercase tracking-widest text-neutral-500 relative">
-            <span>INGENIERO // {artist.name}</span>
+            <span>
+              {dict.engineer_label} // {artist.name}
+            </span>
             <span className="hidden md:inline absolute left-1/2 -translate-x-1/2">
               EST // {startYear}
             </span>
@@ -90,7 +96,9 @@ export default function ProducerProfile({
                 className="inline-flex items-center gap-2 border-l-2 border-blue-500 pl-3"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                  {artist.role || "PRODUCTOR"}
+                  {(lang === "en" && artist.role_en) ||
+                    artist.role ||
+                    dict.role_producer}
                 </span>
               </motion.div>
 
@@ -117,7 +125,7 @@ export default function ProducerProfile({
               >
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Origen
+                    {dict.origin_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     Limón, CR
@@ -125,7 +133,7 @@ export default function ProducerProfile({
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Desde
+                    {dict.since_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     {startYear}
@@ -133,15 +141,15 @@ export default function ProducerProfile({
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Especialidad
+                    {dict.specialty_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
-                    Beats / Mezcla
+                    {dict.beats_mix}
                   </p>
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Producciones
+                    {dict.productions_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     {artist.releases?.length || 0}
@@ -206,7 +214,7 @@ export default function ProducerProfile({
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-neutral-800">
                     <span className="font-mono text-neutral-600">
-                      [ IMAGEN ]
+                      {dict.image_placeholder}
                     </span>
                   </div>
                 )}
@@ -216,7 +224,7 @@ export default function ProducerProfile({
               </div>
               <div className="absolute bottom-4 right-4 z-30 bg-black/80 backdrop-blur-sm px-3 py-1 border border-white/10">
                 <span className="text-[10px] font-mono uppercase text-white tracking-widest">
-                  FIG. 01 // PROD
+                  {dict.fig_profile.replace("PERFIL", "PROD")}
                 </span>
               </div>
             </div>
@@ -248,14 +256,12 @@ export default function ProducerProfile({
               Capítulo I
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white">
-              El
-              <br />
-              Sonido
+              {dict.the_sound}
             </h2>
             <div className="mt-8 hidden md:block">
               <div className="w-12 h-px bg-white/20 mb-4" />
               <p className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
-                Técnica // Visión
+                {dict.technique_vision}
               </p>
             </div>
           </div>
@@ -263,7 +269,22 @@ export default function ProducerProfile({
           <div className="md:col-span-9 md:pl-12">
             <div className="relative">
               <div className="absolute -left-4 md:-left-8 top-0 h-full w-px bg-gradient-to-b from-blue-500/50 via-blue-500/20 to-transparent hidden md:block" />
-              {artist.bio_es ? (
+              {/* Bio Logic: Prefer English if lang is 'en' and bio_en exists, else fallback to bio_es */}
+              {lang === "en" && artist.bio_en ? (
+                <div className="prose prose-invert prose-lg md:prose-xl max-w-none prose-headings:font-black prose-headings:text-white prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:font-light prose-strong:text-white prose-strong:font-bold prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline">
+                  <p className="first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:mt-[-10px] first-letter:text-blue-500">
+                    {artist.bio_en.split("\n")[0]}
+                  </p>
+                  {artist.bio_en
+                    .split("\n")
+                    .slice(1)
+                    .map((para, i) => (
+                      <p key={i} className="mt-6">
+                        {para}
+                      </p>
+                    ))}
+                </div>
+              ) : artist.bio_es ? (
                 <div className="prose prose-invert prose-lg md:prose-xl max-w-none prose-headings:font-black prose-headings:text-white prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:font-light prose-strong:text-white prose-strong:font-bold prose-a:text-blue-500 prose-a:no-underline hover:prose-a:underline">
                   <p className="first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:mt-[-10px] first-letter:text-blue-500">
                     {artist.bio_es.split("\n")[0]}
@@ -280,7 +301,7 @@ export default function ProducerProfile({
               ) : (
                 <div className="flex items-center justify-center py-20 border border-white/10 bg-white/5 backdrop-blur-sm">
                   <p className="italic text-neutral-500 font-mono text-sm">
-                    [ BIOGRAFÍA_NO_DISPONIBLE ]
+                    {dict.bio_unavailable}
                   </p>
                 </div>
               )}
@@ -292,7 +313,7 @@ export default function ProducerProfile({
                       {currentYear - startYear}+
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Años Activo
+                      {dict.years_active}
                     </div>
                   </div>
                   <div className="text-center md:text-left">
@@ -300,7 +321,7 @@ export default function ProducerProfile({
                       {artist.releases.length.toString().padStart(2, "0")}
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Producciones
+                      {dict.productions_label}
                     </div>
                   </div>
                   <div className="text-center md:text-left col-span-2 md:col-span-1">
@@ -308,7 +329,7 @@ export default function ProducerProfile({
                       100%
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Calidad
+                      {dict.quality_label}
                     </div>
                   </div>
                 </div>
@@ -327,16 +348,16 @@ export default function ProducerProfile({
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-12 border-b border-white/10 pb-4 sm:pb-6 gap-3 sm:gap-4">
             <div>
               <span className="text-[10px] font-mono text-blue-500 uppercase tracking-widest mb-2 block">
-                Catálogo
+                {dict.catalog_label}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter">
-                Producciones
+                {dict.productions_label}
               </h2>
             </div>
             <div className="text-right">
               <span className="font-mono text-xs md:text-sm text-neutral-500 uppercase tracking-wider">
                 TOTAL // {artist.releases.length.toString().padStart(2, "0")}{" "}
-                TRACKS
+                {dict.tracks_label}
               </span>
             </div>
           </div>
@@ -365,7 +386,7 @@ export default function ProducerProfile({
                   )}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                      Escuchar en
+                      {dict.listen_on}
                     </span>
                     <div className="flex gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">
                       {release.spotify_url && (
@@ -404,7 +425,7 @@ export default function ProducerProfile({
                   </h3>
                   <div className="flex justify-between items-center mt-1 border-t border-white/10 pt-2">
                     <span className="text-[10px] font-mono text-neutral-500 uppercase">
-                      BEAT
+                      {dict.beat_label}
                     </span>
                     <span className="text-[10px] font-mono text-neutral-500">
                       {new Date(
@@ -426,7 +447,7 @@ export default function ProducerProfile({
           className="group inline-flex flex-col items-center gap-4"
         >
           <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
-            Volver al Equipo
+            {dict.back_to_team}
           </span>
           <div className="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
             <ArrowRight className="h-4 w-4 rotate-180 group-hover:-translate-x-1 transition-transform" />

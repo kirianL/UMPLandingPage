@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import ScrollReset from "@/components/layout/ScrollReset";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -53,9 +51,7 @@ export default function RootLayout({
         className={`${inter.className} ${quilon.variable} min-h-screen bg-black text-foreground antialiased selection:bg-primary selection:text-black`}
       >
         <ScrollReset />
-        <Navbar />
         <main className="flex-1 min-h-screen flex flex-col">{children}</main>
-        <Footer />
         <Toaster />
       </body>
     </html>

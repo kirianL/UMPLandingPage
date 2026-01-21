@@ -71,16 +71,22 @@ export default function EditArtistForm({ artist }: { artist: any }) {
               />
             </div>
 
-            <label className="text-sm font-medium text-neutral-300">Rol</label>
-            <select
-              name="role"
-              defaultValue={artist.role || "Artista"}
-              className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              <option value="Artista">Artista</option>
-              <option value="DJ">DJ</option>
-              <option value="Productor">Productor</option>
-            </select>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-neutral-300">
+                  Rol (Español)
+                </label>
+                <select
+                  name="role"
+                  defaultValue={artist.role || "Artista"}
+                  className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="Artista">Artista</option>
+                  <option value="DJ">DJ</option>
+                  <option value="Productor">Productor</option>
+                </select>
+              </div>
+            </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
@@ -89,7 +95,20 @@ export default function EditArtistForm({ artist }: { artist: any }) {
               <textarea
                 name="bio_es"
                 defaultValue={artist.bio_es}
-                rows={8}
+                rows={5}
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Biografía (Inglés)
+              </label>
+              <textarea
+                name="bio_en"
+                defaultValue={artist.bio_en || ""}
+                rows={5}
+                placeholder="Write the biography here..."
                 className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
@@ -103,14 +122,30 @@ export default function EditArtistForm({ artist }: { artist: any }) {
               </label>
               <div className="flex flex-col gap-4">
                 {artist.photo_url && (
-                  <div className="relative h-48 w-48 rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
-                    <Image
-                      src={artist.photo_url}
-                      alt="Preview"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 300px"
-                      className="object-cover"
-                    />
+                  <div className="space-y-2">
+                    <div className="relative h-48 w-48 rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
+                      <Image
+                        src={artist.photo_url}
+                        alt="Preview"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 300px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="delete_photo"
+                        name="delete_photo"
+                        className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                      />
+                      <label
+                        htmlFor="delete_photo"
+                        className="text-sm text-red-400 font-medium"
+                      >
+                        Eliminar foto actual
+                      </label>
+                    </div>
                   </div>
                 )}
                 <Input

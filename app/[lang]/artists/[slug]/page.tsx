@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ArtistProfile from "@/components/team/ArtistProfile";
 import DJProfile from "@/components/team/DJProfile";
 import ProducerProfile from "@/components/team/ProducerProfile";
+import { getDictionary } from "@/lib/dictionaries";
 
 interface ArtistWithReleases extends Artist {
   releases: Release[];
@@ -77,10 +78,11 @@ async function getArtist(slug: string) {
 export default async function ArtistDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const artist = await getArtist(slug);
+  const dict = await getDictionary(lang);
 
   if (!artist) {
     notFound();
@@ -90,7 +92,13 @@ export default async function ArtistDetailPage({
 
   // Role-based Dispatcher
   if (role.includes("dj") || role.includes("selector")) {
-    return <DJProfile artist={artist} />;
+    return (
+      <DJProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
   }
 
   if (
@@ -98,9 +106,21 @@ export default async function ArtistDetailPage({
     role.includes("producer") ||
     role.includes("ingeniero")
   ) {
-    return <ProducerProfile artist={artist} />;
+    return (
+      <ProducerProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
   }
 
   // Default to standard Artist profile
-  return <ArtistProfile artist={artist} />;
+  return (
+    <ArtistProfile
+      artist={artist}
+      lang={lang}
+      dict={dict.components.artist_profile}
+    />
+  );
 }

@@ -13,20 +13,20 @@ export default async function AdminArtistsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" asChild>
             <Link href="/admin">
               <ArrowLeft className="h-5 w-5" />
             </Link>
           </Button>
-          <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
+          <h1 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter">
             Equipo
           </h1>
         </div>
         <Button
           asChild
-          className="bg-primary text-black hover:bg-primary/90 font-bold"
+          className="w-full md:w-auto bg-primary text-black hover:bg-primary/90 font-bold"
         >
           <Link href="/admin/artists/create">
             <Plus className="mr-2 h-4 w-4" /> Nuevo Miembro
@@ -34,7 +34,7 @@ export default async function AdminArtistsPage() {
         </Button>
       </div>
 
-      <div className="border border-white/10 rounded-lg overflow-hidden bg-neutral-900">
+      <div className="border border-white/10 rounded-lg overflow-hidden bg-neutral-900 overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead className="bg-black text-neutral-400 font-medium border-b border-white/10">
             <tr>

@@ -94,6 +94,8 @@ export async function updateRelease(id: string, formData: FormData) {
 
   if (cover_url) {
     updateData.cover_url = cover_url;
+  } else if (formData.get("delete_cover") === "on") {
+    updateData.cover_url = null;
   }
 
   const { error } = await supabase

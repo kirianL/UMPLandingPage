@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "HOME",
+    "team": "EQUIPO",
+    "news": "NOTICIAS",
+    "about": "NOSOTROS",
+    "contact": "CONTACTO",
+    "admin": "ADMIN"
+  },
+  "home": {
+    "featured_title": "Nuestras Estrellas",
+    "featured_subtitle": "Nuestro Talento",
+    "view_all_team": "Ver Todo el Equipo",
+    "follow_movement": "Sigue el Movimiento",
+    "no_artists": "No hay artistas destacados disponibles.",
+    "no_image": "SIN IMAGEN",
+    "latest_news_title_1": "Últimas",
+    "latest_news_title_2": "Noticias",
+    "view_archive": "Ver Archivo Completo",
+    "news_badge": "Noticia"
+  },
+  "artists": {
+    "title_main": "Equipo",
+    "title_sub": "Nuestro",
+    "subtitle": "Talento puro de Limón para el mundo. Artistas, DJs y Productores.",
+    "breadcrumb": "Equipo / 2026"
+  },
+  "news": {
+    "title_main": "Noticias",
+    "title_sub": "Últimas",
+    "subtitle": "Mantente al día con los últimos lanzamientos, anuncios y eventos exclusivos de UMP Music Group.",
+    "breadcrumb": "Noticias / 2026",
+    "no_news": "No hay noticias publicadas en este momento.",
+    "back_to_news": "Volver a Noticias",
+    "featured_image": "Imagen Destacada",
+    "share_label": "Compartir",
+    "read_all_news": "Ver Todas las Noticias"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "wip_message": "Esta página está en construcción."
+  },
+  "contact": {
+    "title": "Contacto",
+    "wip_message": "Formulario de contacto y booking próximamente."
+  },
+  "hero": {
+    "location_line1": "Desde",
+    "location_line2": "Limón",
+    "location_line3": "para el mundo",
+    "established": "Est. 2026 • Costa Rica"
+  },
+  "footer": {
+    "description": "Sello discográfico independiente de Puerto Limón, Costa Rica. Representando la cultura real y el sonido del Caribe.",
+    "explore": "EXPLORA",
+    "contact": "CONTACTO",
+    "links": {
+      "artists": "Artistas",
+      "news": "Noticias",
+      "events": "Eventos",
+      "about": "Sobre Nosotros"
+    },
+    "rights": "Todos los derechos reservados.",
+    "developer": "Desarrollador por",
+    "admin": "Admin"
+  },
+  "components": {
+    "news_card": {
+      "no_image": "SIN IMAGEN",
+      "read_article": "Leer Artículo"
+    },
+    "roster_filter": {
+      "filter_by": "Filtrar por:",
+      "all": "Todos",
+      "artists": "Artistas",
+      "djs": "DJs",
+      "producers": "Productores",
+      "role_artist": "Artista",
+      "role_dj": "DJ",
+      "role_producer": "Productor",
+      "photo_placeholder": "FOTO",
+      "view_profile": "Ver Perfil",
+      "role_default": "Artista UMP",
+      "no_results": "No hay talentos en esta categoría aún."
+    },
+    "artist_profile": {
+      "role_default": "ARTISTA EXCLUSIVO",
+      "origin_label": "Origen",
+      "since_label": "Desde",
+      "genre_label": "Género",
+      "releases_label": "Lanzamientos",
+      "years_active": "Años Activo",
+      "authentic": "Auténtico",
+      "quality": "Calidad",
+      "bio_unavailable": "[ BIOGRAFÍA_NO_DISPONIBLE ]",
+      "image_placeholder": "[ IMAGEN ]",
+      "chapter_1": "Capítulo I",
+      "the_story": "La Historia",
+      "origin_journey": "Origen // Trayectoria",
+      "fig_profile": "FIG. 01 // PERFIL",
+      "sonic_archive": "Archivo Sonoro",
+      "latest_gems": "Últimas Joyas",
+      "total_releases": "LANZAMIENTOS",
+      "listen_on": "Escuchar en",
+      "back_to_team": "Volver al Equipo",
+      "resident_label": "RESIDENTE",
+      "engineer_label": "INGENIERO",
+      "style_label": "Estilo",
+      "specialty_label": "Especialidad",
+      "mixes_label": "Mixes",
+      "productions_label": "Producciones",
+      "open_format": "Open Format",
+      "beats_mix": "Beats / Mezcla",
+      "sessions_label": "Sesiones",
+      "mixes_sets_title": "Mixes & Sets",
+      "files_label": "ARCHIVOS",
+      "set_label": "SET",
+      "the_sound": "El Sonido",
+      "technique_vision": "Técnica // Visión",
+      "catalog_label": "Catálogo",
+      "tracks_label": "TRACKS",
+      "beat_label": "BEAT",
+      "the_vibe": "El Vibe",
+      "career_style": "Trayectoria // Estilo",
+      "live_label": "En Vivo",
+      "role_producer": "PRODUCTOR",
+      "role_resident_dj": "DJ RESIDENTE"
+    },
+    "share_button": {
+      "share_text_prefix": "Lee esta noticia en UMP Music: ",
+      "copy_success": "Enlace copiado al portapapeles",
+      "copy_error": "No se pudo copiar el enlace",
+      "button_title": "Compartir"
+    }
+  }
+}

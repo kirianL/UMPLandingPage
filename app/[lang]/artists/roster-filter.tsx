@@ -9,8 +9,40 @@ import { cn } from "@/lib/utils";
 
 type FilterType = "all" | "artista" | "dj" | "productor";
 
-export default function RosterFilter({ artists }: { artists: Artist[] }) {
+import { useParams } from "next/navigation";
+
+export default function RosterFilter({
+  artists,
+  dict,
+}: {
+  artists: Artist[];
+  dict: {
+    filter_by: string;
+    all: string;
+    artists: string;
+    djs: string;
+    producers: string;
+    role_artist: string;
+    role_dj: string;
+    role_producer: string;
+    photo_placeholder: string;
+    view_profile: string;
+    role_default: string;
+    no_results: string;
+  };
+}) {
   const [filter, setFilter] = useState<FilterType>("all");
+  const params = useParams();
+  const lang = params.lang as string;
+
+  const getTranslatedRole = (role: string | null) => {
+    if (!role) return dict.role_default;
+    const r = role.toLowerCase();
+    if (r.includes("productor") || r.includes("producer"))
+      return dict.role_producer;
+    if (r.includes("dj")) return dict.role_dj;
+    return dict.role_artist;
+  };
 
   const filteredArtists = artists.filter((artist) => {
     if (filter === "all") return true;
@@ -19,10 +51,10 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
   });
 
   const tabs: { id: FilterType; label: string; icon: any }[] = [
-    { id: "all", label: "Todos", icon: Disc },
-    { id: "artista", label: "Artistas", icon: Mic2 },
-    { id: "dj", label: "DJs", icon: Disc },
-    { id: "productor", label: "Productores", icon: Music },
+    { id: "all", label: dict.all, icon: Disc },
+    { id: "artista", label: dict.artists, icon: Mic2 },
+    { id: "dj", label: dict.djs, icon: Disc },
+    { id: "productor", label: dict.producers, icon: Music },
   ];
 
   return (
@@ -30,7 +62,7 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
       {/* Filter Tabs - New Style */}
       <div className="flex flex-wrap items-center gap-6 pb-4 border-b border-white/10">
         <span className="text-xs font-mono text-neutral-500 uppercase tracking-widest mr-2">
-          Filtrar por:
+          {dict.filter_by}
         </span>
         <div className="flex flex-wrap gap-2">
           {tabs.map((tab) => (
@@ -84,7 +116,7 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
               transition={{ duration: 0.3 }}
             >
               <Link
-                href={`/artists/${artist.slug}`}
+                href={`/${lang}/artists/${artist.slug}`}
                 className="group block h-full"
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 border border-white/5 transition-colors group-hover:border-primary/50 h-full">
@@ -96,14 +128,14 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono">
-                      [ FOTO {artist.name.toUpperCase()} ]
+                      [ {dict.photo_placeholder} {artist.name.toUpperCase()} ]
                     </div>
                   )}
 
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                     <span className="text-black font-black text-2xl uppercase tracking-tighter flex items-center gap-2">
-                      Ver Perfil <ArrowRight className="h-6 w-6" />
+                      {dict.view_profile} <ArrowRight className="h-6 w-6" />
                     </span>
                   </div>
 
@@ -113,7 +145,7 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
                       {artist.name}
                     </h3>
                     <p className="text-sm text-primary font-bold font-mono uppercase tracking-widest">
-                      {artist.role || "Artista UMP"}
+                      {getTranslatedRole(artist.role)}
                     </p>
                   </div>
                 </div>
@@ -128,9 +160,7 @@ export default function RosterFilter({ artists }: { artists: Artist[] }) {
             animate={{ opacity: 1 }}
             className="col-span-full py-20 text-center border border-dashed border-neutral-800 rounded-lg"
           >
-            <p className="text-neutral-500 font-mono">
-              No hay talentos en esta categoría aún.
-            </p>
+            <p className="text-neutral-500 font-mono">{dict.no_results}</p>
           </motion.div>
         )}
       </div>

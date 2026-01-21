@@ -14,8 +14,10 @@ import {
 } from "@/components/ui/sheet";
 import Image from "next/image";
 import { useState } from "react";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export default function Navbar() {
+  const { language, toggleLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -29,7 +31,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-md">
       <div className="container flex h-20 items-center justify-between px-4 md:px-6">
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href={`/${language}`} className="flex items-center gap-2">
           <div className="flex items-center">
             <div className="relative h-16 w-32">
               <Image
@@ -47,10 +49,10 @@ export default function Navbar() {
         {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8">
           {[
-            { name: "EQUIPO", path: "/artists" },
-            { name: "NOTICIAS", path: "/news" },
-            { name: "NOSOTROS", path: "/about" },
-            { name: "CONTACTO", path: "/contact" },
+            { name: t("nav.team"), path: `/${language}/artists` },
+            { name: t("nav.news"), path: `/${language}/news` },
+            { name: t("nav.about"), path: `/${language}/about` },
+            { name: t("nav.contact"), path: `/${language}/contact` },
           ].map((link) => (
             <Link
               key={link.path}
@@ -67,9 +69,13 @@ export default function Navbar() {
 
         {/* ACTIONS & MOBILE NAV */}
         <div className="flex items-center gap-4">
-          <span className="text-xs font-bold text-muted-foreground hover:text-white cursor-pointer transition-colors hidden sm:block">
-            ES / EN
-          </span>
+          <button
+            onClick={toggleLanguage}
+            className="text-xs font-bold text-muted-foreground hover:text-white cursor-pointer transition-colors hidden sm:block uppercase"
+          >
+            <span className={language === "es" ? "text-white" : ""}>ES</span> /{" "}
+            <span className={language === "en" ? "text-white" : ""}>EN</span>
+          </button>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -108,11 +114,11 @@ export default function Navbar() {
                 </SheetHeader>
                 <nav className="flex flex-col gap-1 p-3 mt-2">
                   {[
-                    { name: "HOME", path: "/" },
-                    { name: "EQUIPO", path: "/artists" },
-                    { name: "NOTICIAS", path: "/news" },
-                    { name: "NOSOTROS", path: "/about" },
-                    { name: "CONTACTO", path: "/contact" },
+                    { name: t("nav.home"), path: `/${language}` },
+                    { name: t("nav.team"), path: `/${language}/artists` },
+                    { name: t("nav.news"), path: `/${language}/news` },
+                    { name: t("nav.about"), path: `/${language}/about` },
+                    { name: t("nav.contact"), path: `/${language}/contact` },
                   ].map((link) => (
                     <Link
                       key={link.path}

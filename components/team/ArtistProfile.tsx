@@ -13,8 +13,12 @@ interface ArtistWithReleases extends Artist {
 
 export default function ArtistProfile({
   artist,
+  lang = "es",
+  dict,
 }: {
   artist: ArtistWithReleases;
+  lang?: string;
+  dict: any; // Using any for simplicity as strictly typing large dicts can be verbose, but ideally should be typed
 }) {
   const currentYear = new Date().getFullYear();
   const startYear = new Date(artist.created_at).getFullYear();
@@ -90,7 +94,9 @@ export default function ArtistProfile({
                 className="inline-flex items-center gap-2 border-l-2 border-primary pl-3"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                  {artist.role || "ARTISTA EXCLUSIVO"}
+                  {(lang === "en" && artist.role_en) ||
+                    artist.role ||
+                    dict.role_default}
                 </span>
               </motion.div>
 
@@ -117,7 +123,7 @@ export default function ArtistProfile({
               >
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Origen
+                    {dict.origin_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     Limón, CR
@@ -125,7 +131,7 @@ export default function ArtistProfile({
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Desde
+                    {dict.since_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     {startYear}
@@ -133,7 +139,7 @@ export default function ArtistProfile({
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Género
+                    {dict.genre_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     Urbano / Trap
@@ -141,7 +147,7 @@ export default function ArtistProfile({
                 </div>
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
-                    Lanzamientos
+                    {dict.releases_label}
                   </h4>
                   <p className="text-sm font-bold uppercase tracking-wider">
                     {artist.releases?.length || 0}
@@ -208,7 +214,7 @@ export default function ArtistProfile({
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-neutral-800">
                     <span className="font-mono text-neutral-600">
-                      [ IMAGEN ]
+                      {dict.image_placeholder}
                     </span>
                   </div>
                 )}
@@ -218,7 +224,7 @@ export default function ArtistProfile({
               </div>
               <div className="absolute bottom-4 right-4 z-30 bg-black/80 backdrop-blur-sm px-3 py-1 border border-white/10">
                 <span className="text-[10px] font-mono uppercase text-white tracking-widest">
-                  FIG. 01 // PERFIL
+                  {dict.fig_profile}
                 </span>
               </div>
             </div>
@@ -245,17 +251,15 @@ export default function ArtistProfile({
         <div className="container mx-auto px-4 relative z-10 grid md:grid-cols-12 gap-12">
           <div className="md:col-span-3 border-t-4 border-primary pt-4">
             <span className="block text-xs font-black uppercase tracking-widest mb-2 text-primary/70">
-              Capítulo I
+              {dict.chapter_1}
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9] text-white">
-              La
-              <br />
-              Historia
+              {dict.the_story}
             </h2>
             <div className="mt-8 hidden md:block">
               <div className="w-12 h-px bg-white/20 mb-4" />
               <p className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
-                Origen // Trayectoria
+                {dict.origin_journey}
               </p>
             </div>
           </div>
@@ -263,7 +267,22 @@ export default function ArtistProfile({
           <div className="md:col-span-9 md:pl-12">
             <div className="relative">
               <div className="absolute -left-4 md:-left-8 top-0 h-full w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent hidden md:block" />
-              {artist.bio_es ? (
+              {/* Bio Logic: Prefer English if lang is 'en' and bio_en exists, else fallback to bio_es */}
+              {lang === "en" && artist.bio_en ? (
+                <div className="prose prose-invert prose-lg md:prose-xl max-w-none prose-headings:font-black prose-headings:text-white prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:font-light prose-strong:text-white prose-strong:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+                  <p className="first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:mt-[-10px] first-letter:text-primary">
+                    {artist.bio_en.split("\n")[0]}
+                  </p>
+                  {artist.bio_en
+                    .split("\n")
+                    .slice(1)
+                    .map((para, i) => (
+                      <p key={i} className="mt-6">
+                        {para}
+                      </p>
+                    ))}
+                </div>
+              ) : artist.bio_es ? (
                 <div className="prose prose-invert prose-lg md:prose-xl max-w-none prose-headings:font-black prose-headings:text-white prose-p:text-neutral-300 prose-p:leading-relaxed prose-p:font-light prose-strong:text-white prose-strong:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
                   <p className="first-letter:text-7xl first-letter:font-black first-letter:float-left first-letter:mr-4 first-letter:mt-[-10px] first-letter:text-primary">
                     {artist.bio_es.split("\n")[0]}
@@ -280,7 +299,7 @@ export default function ArtistProfile({
               ) : (
                 <div className="flex items-center justify-center py-20 border border-white/10 bg-white/5 backdrop-blur-sm">
                   <p className="italic text-neutral-500 font-mono text-sm">
-                    [ BIOGRAFÍA_NO_DISPONIBLE ]
+                    {dict.bio_unavailable}
                   </p>
                 </div>
               )}
@@ -292,7 +311,7 @@ export default function ArtistProfile({
                       {currentYear - startYear}+
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Años Activo
+                      {dict.years_active}
                     </div>
                   </div>
                   <div className="text-center md:text-left">
@@ -300,7 +319,7 @@ export default function ArtistProfile({
                       {artist.releases.length.toString().padStart(2, "0")}
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Lanzamientos
+                      {dict.releases_label}
                     </div>
                   </div>
                   <div className="text-center md:text-left col-span-2 md:col-span-1">
@@ -308,7 +327,7 @@ export default function ArtistProfile({
                       100%
                     </div>
                     <div className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mt-1">
-                      Auténtico
+                      {dict.authentic}
                     </div>
                   </div>
                 </div>
@@ -327,16 +346,16 @@ export default function ArtistProfile({
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 md:mb-12 border-b border-white/10 pb-4 sm:pb-6 gap-3 sm:gap-4">
             <div>
               <span className="text-[10px] font-mono text-primary uppercase tracking-widest mb-2 block">
-                Archivo Sonoro
+                {dict.sonic_archive}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter">
-                Últimas Joyas
+                {dict.latest_gems}
               </h2>
             </div>
             <div className="text-right">
               <span className="font-mono text-xs md:text-sm text-neutral-500 uppercase tracking-wider">
                 TOTAL // {artist.releases.length.toString().padStart(2, "0")}{" "}
-                LANZAMIENTOS
+                {dict.total_releases}
               </span>
             </div>
           </div>
@@ -365,7 +384,7 @@ export default function ArtistProfile({
                   )}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                      Escuchar en
+                      {dict.listen_on}
                     </span>
                     <div className="flex gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-75">
                       {release.spotify_url && (
@@ -426,7 +445,7 @@ export default function ArtistProfile({
           className="group inline-flex flex-col items-center gap-4"
         >
           <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
-            Volver al Equipo
+            {dict.back_to_team}
           </span>
           <div className="h-12 w-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
             <ArrowRight className="h-4 w-4 rotate-180 group-hover:-translate-x-1 transition-transform" />

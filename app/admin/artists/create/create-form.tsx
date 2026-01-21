@@ -19,7 +19,6 @@ export default function CreateArtistForm() {
 
     if (result.success) {
       toast.success(result.message);
-      // Redirect to list after success
       setTimeout(() => {
         router.push("/admin/artists");
       }, 500);
@@ -72,16 +71,22 @@ export default function CreateArtistForm() {
               />
             </div>
 
-            <label className="text-sm font-medium text-neutral-300">Rol</label>
-            <select
-              name="role"
-              defaultValue="Artista"
-              className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              <option value="Artista">Artista</option>
-              <option value="DJ">DJ</option>
-              <option value="Productor">Productor</option>
-            </select>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-neutral-300">
+                  Rol (Español)
+                </label>
+                <select
+                  name="role"
+                  defaultValue="Artista"
+                  className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  <option value="Artista">Artista</option>
+                  <option value="DJ">DJ</option>
+                  <option value="Productor">Productor</option>
+                </select>
+              </div>
+            </div>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
@@ -89,8 +94,20 @@ export default function CreateArtistForm() {
               </label>
               <textarea
                 name="bio_es"
-                rows={8}
+                rows={5}
                 placeholder="Escribe la biografía aquí..."
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Biografía (Inglés)
+              </label>
+              <textarea
+                name="bio_en"
+                rows={5}
+                placeholder="Write the biography here..."
                 className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>

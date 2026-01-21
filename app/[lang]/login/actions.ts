@@ -18,6 +18,6 @@ export async function login(formData: FormData) {
     return { error: error.message };
   }
 
-  // REDIRECT TO ADMIN
-  return redirect("/admin");
+  // Return success to let client handle redirect
+  return { success: true };
 }

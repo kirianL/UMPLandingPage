@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Share2, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/news/share-button";
+import { getDictionary } from "@/lib/dictionaries";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -26,31 +27,38 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }) {
   const { slug } = await params;
   const supabase = await createServerClient();
   const { data: news } = await supabase
     .from("news")
-    .select("title, excerpt")
+    .select("title, title_en, excerpt, excerpt_en")
     .eq("slug", slug)
     .single();
 
   if (!news) return { title: "Noticia no encontrada" };
 
   return {
-    title: `${news.title} | UMP News`,
-    description: news.excerpt,
+    title: `${
+      news.title_en && (await params).lang === "en" ? news.title_en : news.title
+    } | UMP News`,
+    description:
+      news.excerpt_en && (await params).lang === "en"
+        ? news.excerpt_en
+        : news.excerpt,
   };
 }
 
 export default async function NewsDetailPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, lang } = await params;
+  const dict = await getDictionary(lang);
   const supabase = await createServerClient();
+  const isEn = lang === "en";
 
   const { data: newsItem } = await supabase
     .from("news")
@@ -74,11 +82,11 @@ export default async function NewsDetailPage({
       <div className="relative z-10 container mx-auto px-4 max-w-6xl pt-24 md:pt-32 pb-20">
         {/* Navigation */}
         <Link
-          href="/news"
+          href={`/${lang}/news`}
           className="inline-flex items-center gap-3 text-neutral-400 hover:text-primary transition-all duration-300 mb-12 font-mono text-xs uppercase tracking-[0.2em] group border border-white/5 rounded-full px-4 py-2 bg-black/50 backdrop-blur-sm hover:border-primary/50"
         >
           <ArrowLeft className="h-3 w-3 group-hover:-translate-x-1 transition-transform" />
-          <span className="relative top-[1px]">Volver a Noticias</span>
+          <span className="relative top-[1px]">{dict.news.back_to_news}</span>
         </Link>
 
         {/* Creative Header Layout */}
@@ -96,19 +104,26 @@ export default async function NewsDetailPage({
                 </span>
               </div>
               <div className="lg:hidden">
-                <ShareButton title={newsItem.title} />
+                <ShareButton
+                  title={newsItem.title}
+                  dict={dict.components.share_button}
+                />
               </div>
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black font-quilon text-white uppercase tracking-[-0.02em] leading-[0.9]">
-              {newsItem.title}
+              {isEn && newsItem.title_en ? newsItem.title_en : newsItem.title}
             </h1>
           </div>
 
           <div className="lg:col-span-4 lg:text-right lg:border-l lg:border-white/10 lg:pl-8 lg:py-2">
-            {newsItem.excerpt && (
+            {(isEn && newsItem.excerpt_en
+              ? newsItem.excerpt_en
+              : newsItem.excerpt) && (
               <p className="text-base md:text-lg text-neutral-400 font-light leading-relaxed">
-                {newsItem.excerpt}
+                {isEn && newsItem.excerpt_en
+                  ? newsItem.excerpt_en
+                  : newsItem.excerpt}
               </p>
             )}
           </div>
@@ -130,7 +145,7 @@ export default async function NewsDetailPage({
 
             <div className="absolute bottom-6 right-6 hidden md:flex items-center gap-2 bg-black/60 backdrop-blur-md px-4 py-2 border border-white/10 rounded-full">
               <span className="text-[10px] font-mono text-white/70 uppercase tracking-widest">
-                Imagen Destacada
+                {dict.news.featured_image}
               </span>
             </div>
           </div>
@@ -141,9 +156,12 @@ export default async function NewsDetailPage({
           <div className="hidden lg:block lg:col-span-2 sticky top-32 h-fit space-y-8">
             <div className="flex flex-col gap-4 border-l-2 border-white/10 pl-4 py-2">
               <span className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest block mb-2">
-                Compartir
+                {dict.news.share_label}
               </span>
-              <ShareButton title={newsItem.title} />
+              <ShareButton
+                title={newsItem.title}
+                dict={dict.components.share_button}
+              />
             </div>
           </div>
 
@@ -156,7 +174,10 @@ export default async function NewsDetailPage({
             prose-blockquote:border-l-primary prose-blockquote:bg-white/5 prose-blockquote:py-4 prose-blockquote:px-8 prose-blockquote:not-italic prose-blockquote:rounded-r-lg
             prose-img:rounded-lg prose-img:border prose-img:border-white/10 prose-img:shadow-2xl"
           >
-            {newsItem.content
+            {(isEn && newsItem.content_en
+              ? newsItem.content_en
+              : newsItem.content
+            )
               ?.split("\n")
               .map((paragraph: string, idx: number) => {
                 if (
@@ -179,23 +200,16 @@ export default async function NewsDetailPage({
         {/* Footer Navigation */}
         <div className="mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <Link
-            href="/news"
+            href={`/${lang}/news`}
             className="group flex flex-col items-center md:items-start gap-2"
           >
             <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-widest group-hover:text-primary transition-colors">
-              Volver a Noticias
+              {dict.news.back_to_news}
             </span>
             <span className="text-2xl font-black font-quilon text-white uppercase tracking-tight group-hover:text-neutral-300 transition-colors">
-              Ver Todas las Noticias
+              {dict.news.read_all_news}
             </span>
           </Link>
-
-          <Button
-            size="lg"
-            className="rounded-full bg-white text-black hover:bg-primary hover:text-black font-bold uppercase tracking-wider px-8 transition-transform hover:scale-105"
-          >
-            Suscríbete al Newsletter
-          </Button>
         </div>
       </div>
     </div>

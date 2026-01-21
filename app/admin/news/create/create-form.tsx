@@ -50,13 +50,24 @@ export default function CreateNewsForm() {
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Título <span className="text-red-500">*</span>
+                Título (Español) <span className="text-red-500">*</span>
               </label>
               <Input
                 name="title"
                 required
                 className="bg-neutral-900 border-neutral-800 text-white"
                 placeholder="Título impactante..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Título (Inglés)
+              </label>
+              <Input
+                name="title_en"
+                className="bg-neutral-900 border-neutral-800 text-white"
+                placeholder="Impactful title..."
               />
             </div>
 
@@ -74,7 +85,7 @@ export default function CreateNewsForm() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Resumen (Excerpt)
+                Resumen (Español)
               </label>
               <textarea
                 name="excerpt"
@@ -86,12 +97,36 @@ export default function CreateNewsForm() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Contenido Completo
+                Resumen (Inglés)
+              </label>
+              <textarea
+                name="excerpt_en"
+                rows={3}
+                placeholder="Short description for the list..."
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Contenido Completo (Español)
               </label>
               <textarea
                 name="content"
                 rows={10}
                 placeholder="Escribe el artículo aquí..."
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 font-mono"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Contenido Completo (Inglés)
+              </label>
+              <textarea
+                name="content_en"
+                rows={10}
+                placeholder="Write the article here..."
                 className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 font-mono"
               />
             </div>

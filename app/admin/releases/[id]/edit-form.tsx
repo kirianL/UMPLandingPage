@@ -131,13 +131,29 @@ export default function EditReleaseForm({
               </label>
               <div className="flex flex-col gap-4">
                 {release.cover_url && (
-                  <div className="relative aspect-square w-48 rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
-                    <Image
-                      src={release.cover_url}
-                      alt="Preview"
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="space-y-2">
+                    <div className="relative aspect-square w-48 rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
+                      <Image
+                        src={release.cover_url}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="delete_cover"
+                        name="delete_cover"
+                        className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                      />
+                      <label
+                        htmlFor="delete_cover"
+                        className="text-sm text-red-400 font-medium"
+                      >
+                        Eliminar portada actual
+                      </label>
+                    </div>
                   </div>
                 )}
                 <Input

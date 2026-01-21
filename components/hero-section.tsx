@@ -5,7 +5,16 @@ import { useScroll, useTransform, motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 
-export function HeroSection() {
+export function HeroSection({
+  dict,
+}: {
+  dict: {
+    location_line1: string;
+    location_line2: string;
+    location_line3: string;
+    established: string;
+  };
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -80,8 +89,9 @@ export function HeroSection() {
           {/* Location Emphasis - Requested "Remarcar que es de Limón" */}
           <div className="flex flex-col items-center gap-2">
             <h2 className="text-2xl md:text-5xl font-black font-quilon text-white uppercase tracking-[-0.02em] text-center leading-tight">
-              Desde <span className="text-primary">Limón</span>{" "}
-              <br className="md:hidden" /> para el mundo
+              {dict.location_line1}{" "}
+              <span className="text-primary">{dict.location_line2}</span>{" "}
+              <br className="md:hidden" /> {dict.location_line3}
             </h2>
             <div className="h-1 w-24 bg-primary rounded-full mt-4" />
           </div>
@@ -89,7 +99,7 @@ export function HeroSection() {
           {/* Minimalist tagline / Badge */}
           <div className="flex items-center gap-4 mt-8 opacity-60">
             <span className="text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em]">
-              Est. 2026 • Costa Rica
+              {dict.established}
             </span>
           </div>
         </motion.div>

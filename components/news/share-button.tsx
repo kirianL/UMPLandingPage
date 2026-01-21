@@ -8,16 +8,22 @@ import { useState } from "react";
 interface ShareButtonProps {
   title: string;
   url?: string;
+  dict: {
+    share_text_prefix: string;
+    copy_success: string;
+    copy_error: string;
+    button_title: string;
+  };
 }
 
-export default function ShareButton({ title, url }: ShareButtonProps) {
+export default function ShareButton({ title, url, dict }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = async () => {
     const shareUrl = url || window.location.href;
     const shareData = {
       title: title,
-      text: `Lee esta noticia en UMP Music: ${title}`,
+      text: `${dict.share_text_prefix}${title}`,
       url: shareUrl,
     };
 
@@ -31,10 +37,10 @@ export default function ShareButton({ title, url }: ShareButtonProps) {
       try {
         await navigator.clipboard.writeText(shareUrl);
         setCopied(true);
-        toast.success("Enlace copiado al portapapeles");
+        toast.success(dict.copy_success);
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
-        toast.error("No se pudo copiar el enlace");
+        toast.error(dict.copy_error);
       }
     }
   };
@@ -45,7 +51,7 @@ export default function ShareButton({ title, url }: ShareButtonProps) {
       size="icon"
       onClick={handleShare}
       className="h-8 w-8 hover:bg-white/10 hover:text-primary rounded-full transition-colors"
-      title="Compartir"
+      title={dict.button_title}
     >
       {copied ? <Check className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}
     </Button>

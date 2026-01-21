@@ -3,6 +3,7 @@ export type Artist = {
   slug: string;
   name: string;
   role: string | null;
+  role_en: string | null;
   bio_es: string | null;
   bio_en: string | null;
   photo_url: string | null;
@@ -34,6 +35,9 @@ export type News = {
   title: string;
   excerpt: string | null;
   content: string | null;
+  title_en?: string | null;
+  excerpt_en?: string | null;
+  content_en?: string | null;
   image_url: string | null;
   is_published: boolean;
   published_at: string;

@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "home": "HOME",
+    "team": "ROSTER",
+    "news": "NEWS",
+    "about": "ABOUT",
+    "contact": "CONTACT",
+    "admin": "ADMIN"
+  },
+  "home": {
+    "featured_title": "Our Stars",
+    "featured_subtitle": "Featured Artists",
+    "view_all_team": "View All Roster",
+    "follow_movement": "Follow the Movement",
+    "no_artists": "No featured artists available.",
+    "no_image": "NO IMAGE",
+    "latest_news_title_1": "Latest",
+    "latest_news_title_2": "News",
+    "view_archive": "View All News",
+    "news_badge": "News"
+  },
+  "artists": {
+    "title_main": "Roster",
+    "title_sub": "Our",
+    "subtitle": "Pure talent from Limón to the world. Artists, DJs, and Producers.",
+    "breadcrumb": "Roster / 2026"
+  },
+  "news": {
+    "title_main": "News",
+    "title_sub": "Latest",
+    "subtitle": "Stay up to date with the latest releases, announcements, and exclusive events from UMP Music Group.",
+    "breadcrumb": "News / 2026",
+    "no_news": "No news published at the moment.",
+    "back_to_news": "Back to News",
+    "featured_image": "Featured Image",
+    "share_label": "Share",
+    "read_all_news": "Read All News"
+  },
+  "about": {
+    "title": "About Us",
+    "wip_message": "This page is under construction."
+  },
+  "contact": {
+    "title": "Contact",
+    "wip_message": "Contact form and booking coming soon."
+  },
+  "hero": {
+    "location_line1": "From",
+    "location_line2": "Limón",
+    "location_line3": "to the world",
+    "established": "Est. 2026 • Costa Rica"
+  },
+  "footer": {
+    "description": "Independent record label from Puerto Limón, Costa Rica. Representing real culture and the Caribbean sound.",
+    "explore": "EXPLORE",
+    "contact": "CONTACT",
+    "links": {
+      "artists": "Roster",
+      "news": "News",
+      "events": "Events",
+      "about": "About Us"
+    },
+    "rights": "All rights reserved.",
+    "developer": "Developed by",
+    "admin": "Admin"
+  },
+  "components": {
+    "news_card": {
+      "no_image": "NO IMAGE",
+      "read_article": "Read Article"
+    },
+    "roster_filter": {
+      "filter_by": "Filter by:",
+      "all": "All",
+      "artists": "Artists",
+      "djs": "DJs",
+      "producers": "Producers",
+      "role_artist": "Artist",
+      "role_dj": "DJ",
+      "role_producer": "Producer",
+      "photo_placeholder": "PHOTO",
+      "view_profile": "View Profile",
+      "role_default": "UMP Artist",
+      "no_results": "No talent in this category yet."
+    },
+    "artist_profile": {
+      "role_default": "EXCLUSIVE ARTIST",
+      "origin_label": "Origin",
+      "since_label": "Since",
+      "genre_label": "Genre",
+      "releases_label": "Releases",
+      "years_active": "Years Active",
+      "authentic": "Authentic",
+      "quality": "Quality",
+      "bio_unavailable": "[ BIO_UNAVAILABLE ]",
+      "image_placeholder": "[ IMAGE ]",
+      "chapter_1": "Chapter I",
+      "the_story": "The Story",
+      "origin_journey": "Origin // Journey",
+      "fig_profile": "FIG. 01 // PROFILE",
+      "sonic_archive": "Sonic Archive",
+      "latest_gems": "Latest Gems",
+      "total_releases": "RELEASES",
+      "listen_on": "Listen on",
+      "back_to_team": "Back to Roster",
+      "resident_label": "RESIDENT",
+      "engineer_label": "ENGINEER",
+      "style_label": "Style",
+      "specialty_label": "Specialty",
+      "mixes_label": "Mixes",
+      "productions_label": "Productions",
+      "open_format": "Open Format",
+      "beats_mix": "Beats / Mixing",
+      "sessions_label": "Sessions",
+      "mixes_sets_title": "Mixes & Sets",
+      "files_label": "FILES",
+      "set_label": "SET",
+      "the_sound": "The Sound",
+      "technique_vision": "Technique // Vision",
+      "catalog_label": "Catalog",
+      "tracks_label": "TRACKS",
+      "beat_label": "BEAT",
+      "the_vibe": "The Vibe",
+      "career_style": "Career // Style",
+      "live_label": "Live",
+      "role_producer": "PRODUCER",
+      "role_resident_dj": "RESIDENT DJ"
+    },
+    "share_button": {
+      "share_text_prefix": "Read this news on UMP Music: ",
+      "copy_success": "Link copied to clipboard",
+      "copy_error": "Could not copy link",
+      "button_title": "Share"
+    }
+  }
+}

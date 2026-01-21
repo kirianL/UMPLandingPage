@@ -50,12 +50,23 @@ export default function EditNewsForm({ newsItem }: { newsItem: News }) {
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Título <span className="text-red-500">*</span>
+                Título (Español) <span className="text-red-500">*</span>
               </label>
               <Input
                 name="title"
                 defaultValue={newsItem.title}
                 required
+                className="bg-neutral-900 border-neutral-800 text-white"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Título (Inglés)
+              </label>
+              <Input
+                name="title_en"
+                defaultValue={newsItem.title_en || ""}
                 className="bg-neutral-900 border-neutral-800 text-white"
               />
             </div>
@@ -74,7 +85,7 @@ export default function EditNewsForm({ newsItem }: { newsItem: News }) {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Resumen (Excerpt)
+                Resumen (Español)
               </label>
               <textarea
                 name="excerpt"
@@ -86,11 +97,35 @@ export default function EditNewsForm({ newsItem }: { newsItem: News }) {
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Contenido Completo
+                Resumen (Inglés)
+              </label>
+              <textarea
+                name="excerpt_en"
+                defaultValue={newsItem.excerpt_en || ""}
+                rows={3}
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Contenido Completo (Español)
               </label>
               <textarea
                 name="content"
                 defaultValue={newsItem.content || ""}
+                rows={10}
+                className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 font-mono"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-neutral-300">
+                Contenido Completo (Inglés)
+              </label>
+              <textarea
+                name="content_en"
+                defaultValue={newsItem.content_en || ""}
                 rows={10}
                 className="w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50 font-mono"
               />
@@ -105,13 +140,29 @@ export default function EditNewsForm({ newsItem }: { newsItem: News }) {
               </label>
               <div className="flex flex-col gap-4">
                 {newsItem.image_url && (
-                  <div className="relative aspect-video w-full rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
-                    <Image
-                      src={newsItem.image_url}
-                      alt="Preview"
-                      fill
-                      className="object-cover"
-                    />
+                  <div className="space-y-2">
+                    <div className="relative aspect-video w-full rounded-md overflow-hidden border border-neutral-800 bg-neutral-900">
+                      <Image
+                        src={newsItem.image_url}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        id="delete_image"
+                        name="delete_image"
+                        className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-500"
+                      />
+                      <label
+                        htmlFor="delete_image"
+                        className="text-sm text-red-400 font-medium"
+                      >
+                        Eliminar imagen de portada
+                      </label>
+                    </div>
                   </div>
                 )}
                 <Input

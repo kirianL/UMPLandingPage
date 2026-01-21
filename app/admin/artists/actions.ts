@@ -10,7 +10,16 @@ export async function createArtist(formData: FormData) {
   const name = (formData.get("name") as string)?.trim();
   const slug = (formData.get("slug") as string)?.trim();
   const role = (formData.get("role") as string)?.trim();
+
+  // Auto-map English role based on Spanish role
+  const roleMap: Record<string, string> = {
+    Artista: "Artist",
+    DJ: "DJ",
+    Productor: "Producer",
+  };
+  const role_en = roleMap[role] || role; // Fallback to same value if not in map
   const bio_es = (formData.get("bio_es") as string)?.trim();
+  const bio_en = (formData.get("bio_en") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
   const spotify_url = (formData.get("spotify_url") as string)?.trim();
   const apple_music_url = (formData.get("apple_music_url") as string)?.trim();
@@ -34,8 +43,10 @@ export async function createArtist(formData: FormData) {
     name,
     slug,
     role,
+    role_en,
     photo_url,
     bio_es,
+    bio_en,
     instagram_url,
     spotify_url,
     apple_music_url,
@@ -63,7 +74,16 @@ export async function updateArtist(id: string, formData: FormData) {
   const name = (formData.get("name") as string)?.trim();
   const slug = (formData.get("slug") as string)?.trim();
   const role = (formData.get("role") as string)?.trim();
+
+  // Auto-map English role based on Spanish role
+  const roleMap: Record<string, string> = {
+    Artista: "Artist",
+    DJ: "DJ",
+    Productor: "Producer",
+  };
+  const role_en = roleMap[role] || role;
   const bio_es = (formData.get("bio_es") as string)?.trim();
+  const bio_en = (formData.get("bio_en") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
   const spotify_url = (formData.get("spotify_url") as string)?.trim();
   const apple_music_url = (formData.get("apple_music_url") as string)?.trim();
@@ -88,7 +108,9 @@ export async function updateArtist(id: string, formData: FormData) {
     name,
     slug,
     role,
+    role_en,
     bio_es,
+    bio_en,
     instagram_url,
     spotify_url,
     apple_music_url,
@@ -98,6 +120,8 @@ export async function updateArtist(id: string, formData: FormData) {
 
   if (photo_url) {
     updateData.photo_url = photo_url;
+  } else if (formData.get("delete_photo") === "on") {
+    updateData.photo_url = null;
   }
 
   const { error } = await supabase

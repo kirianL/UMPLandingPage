@@ -11,6 +11,9 @@ export async function createNews(formData: FormData) {
   const slug = (formData.get("slug") as string)?.trim();
   const excerpt = (formData.get("excerpt") as string)?.trim();
   const content = (formData.get("content") as string)?.trim();
+  const title_en = (formData.get("title_en") as string)?.trim();
+  const excerpt_en = (formData.get("excerpt_en") as string)?.trim();
+  const content_en = (formData.get("content_en") as string)?.trim();
   const is_published = formData.get("is_published") === "on";
 
   const imageFile = formData.get("image_file") as File;
@@ -32,6 +35,9 @@ export async function createNews(formData: FormData) {
     slug,
     excerpt,
     content,
+    title_en,
+    excerpt_en,
+    content_en,
     image_url,
     is_published,
     published_at: is_published ? new Date().toISOString() : null,
@@ -58,6 +64,9 @@ export async function updateNews(id: string, formData: FormData) {
   const slug = (formData.get("slug") as string)?.trim();
   const excerpt = (formData.get("excerpt") as string)?.trim();
   const content = (formData.get("content") as string)?.trim();
+  const title_en = (formData.get("title_en") as string)?.trim();
+  const excerpt_en = (formData.get("excerpt_en") as string)?.trim();
+  const content_en = (formData.get("content_en") as string)?.trim();
   const is_published = formData.get("is_published") === "on";
 
   const imageFile = formData.get("image_file") as File;
@@ -79,11 +88,16 @@ export async function updateNews(id: string, formData: FormData) {
     slug,
     excerpt,
     content,
+    title_en,
+    excerpt_en,
+    content_en,
     is_published,
   };
 
   if (image_url) {
     updateData.image_url = image_url;
+  } else if (formData.get("delete_image") === "on") {
+    updateData.image_url = null;
   }
 
   const { error } = await supabase.from("news").update(updateData).eq("id", id);

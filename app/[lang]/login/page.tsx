@@ -7,7 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,10 +21,15 @@ export default function LoginPage() {
       const result = await login(formData);
       if (result?.error) {
         setError(result.error);
+        setLoading(false); // Only stop loading on error
+      } else if (result?.success) {
+        // Success! Redirecting...
+        router.push("/admin");
+        // Don't setLoading(false) to prevent form flash
       }
     } catch (e) {
+      console.error(e);
       setError("Ocurrió un error inesperado.");
-    } finally {
       setLoading(false);
     }
   }

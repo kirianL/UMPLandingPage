@@ -322,9 +322,13 @@ export default function Dither({
   enableMouseInteraction = true,
   mouseRadius = 1,
 }: DitherProps) {
+  const [ready, setReady] = useState(false);
+
   return (
     <Canvas
-      className={`w-full h-full relative ${!enableMouseInteraction ? "pointer-events-none" : ""}`}
+      className={`w-full h-full relative transition-opacity duration-700 ease-in-out ${
+        ready ? "opacity-100" : "opacity-0"
+      } ${!enableMouseInteraction ? "pointer-events-none" : ""}`}
       camera={{ position: [0, 0, 6] }}
       dpr={[1, 1]} // Enforce 1x DPR for performance
       gl={{
@@ -335,6 +339,7 @@ export default function Dither({
         alpha: true,
       }} // Disable unused buffers
       frameloop={disableAnimation ? "demand" : "always"} // Stop render loop if static
+      onCreated={() => setReady(true)}
     >
       <DitheredWaves
         waveSpeed={waveSpeed}

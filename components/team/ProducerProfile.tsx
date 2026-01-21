@@ -6,8 +6,9 @@ import { ArrowRight, Disc } from "lucide-react";
 import { FaInstagram, FaSpotify, FaApple, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
 import * as motion from "framer-motion/client";
+import dynamic from "next/dynamic";
 
-import Dither from "@/components/ui/dither";
+const Dither = dynamic(() => import("@/components/ui/dither"), { ssr: false });
 
 interface ArtistWithReleases extends Artist {
   releases: Release[];

@@ -61,20 +61,60 @@ export default function ProducerProfile({
 
         {/* Hero Content */}
         <div className="container mx-auto px-4 md:px-6 lg:px-12 flex-1 grid grid-cols-1 md:grid-cols-12 items-center relative z-10 pt-4 sm:pt-6 md:pt-0 pb-8 sm:pb-12 gap-6 md:gap-8 lg:gap-16 xl:gap-24">
-          {/* Metadata */}
-          <div className="w-full md:col-span-5 lg:col-span-5 order-2 md:order-1 flex flex-col justify-end pb-8 md:pb-0">
+          {/* Metadata - Animated Stagger */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.2,
+                },
+              },
+            }}
+            className="w-full md:col-span-5 lg:col-span-5 order-2 md:order-1 flex flex-col justify-end pb-8 md:pb-0"
+          >
             <div className="space-y-6 lg:space-y-10">
-              <div className="inline-flex items-center gap-2 border-l-2 border-blue-500 pl-3">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: { duration: 0.5, ease: "easeOut" },
+                  },
+                }}
+                className="inline-flex items-center gap-2 border-l-2 border-blue-500 pl-3"
+              >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
                   {artist.role || "PRODUCTOR"}
                 </span>
-              </div>
+              </motion.div>
 
-              <h1 className="text-5xl sm:text-6xl md:text-5xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-white">
+              <motion.h1
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.5, ease: "easeOut" },
+                  },
+                }}
+                className="text-5xl sm:text-6xl md:text-5xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.85] text-white"
+              >
                 {artist.name}
-              </h1>
+              </motion.h1>
 
-              <div className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-4 border-t border-white/10 pt-6 max-w-sm">
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1, transition: { duration: 0.5 } },
+                }}
+                className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-4 border-t border-white/10 pt-6 max-w-sm"
+              >
                 <div>
                   <h4 className="text-[10px] font-mono uppercase text-neutral-500 mb-1">
                     Origen
@@ -107,7 +147,7 @@ export default function ProducerProfile({
                     {artist.releases?.length || 0}
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Socials */}
               <div className="flex flex-wrap gap-6 pt-4 lg:pt-6">
@@ -143,7 +183,7 @@ export default function ProducerProfile({
                 )}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Photo */}
           <div className="w-full md:col-span-7 lg:col-span-7 order-1 md:order-2 h-auto flex items-center justify-center md:justify-end mb-8 md:mb-0">

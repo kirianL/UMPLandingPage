@@ -24,29 +24,37 @@ export async function generateStaticParams() {
   return news?.map(({ slug }) => ({ slug })) || [];
 }
 
+import { cache } from "react";
+
+// Cached data fetcher
+const getNewsItem = cache(async (slug: string) => {
+  const supabase = await createServerClient();
+  const { data: newsItem } = await supabase
+    .from("news")
+    .select(
+      "id, title, title_en, slug, image_url, published_at, excerpt, excerpt_en, content, content_en",
+    )
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .single();
+
+  return newsItem;
+});
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string; lang: string }>;
 }) {
-  const { slug } = await params;
-  const supabase = await createServerClient();
-  const { data: news } = await supabase
-    .from("news")
-    .select("title, title_en, excerpt, excerpt_en")
-    .eq("slug", slug)
-    .single();
+  const { slug, lang } = await params;
+  const news = await getNewsItem(slug);
 
   if (!news) return { title: "Noticia no encontrada" };
+  const isEn = lang === "en";
 
   return {
-    title: `${
-      news.title_en && (await params).lang === "en" ? news.title_en : news.title
-    } | UMP News`,
-    description:
-      news.excerpt_en && (await params).lang === "en"
-        ? news.excerpt_en
-        : news.excerpt,
+    title: `${isEn && news.title_en ? news.title_en : news.title} | UMP News`,
+    description: isEn && news.excerpt_en ? news.excerpt_en : news.excerpt,
   };
 }
 
@@ -57,15 +65,9 @@ export default async function NewsDetailPage({
 }) {
   const { slug, lang } = await params;
   const dict = await getDictionary(lang);
-  const supabase = await createServerClient();
   const isEn = lang === "en";
 
-  const { data: newsItem } = await supabase
-    .from("news")
-    .select("*")
-    .eq("slug", slug)
-    .eq("is_published", true)
-    .single();
+  const newsItem = await getNewsItem(slug);
 
   if (!newsItem) {
     notFound();

@@ -29,7 +29,11 @@ export default function NewsCard({
   lang?: string;
 }) {
   return (
-    <Link href={`/${lang}/news/${news.slug}`} className="group block">
+    <Link
+      href={`/${lang}/news/${news.slug}`}
+      className="group block"
+      prefetch={true}
+    >
       <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 border border-white/10 mb-4">
         {news.image_url ? (
           <Image

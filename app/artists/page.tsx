@@ -34,13 +34,25 @@ export default async function ArtistsPage() {
   const artists = await getArtists();
 
   return (
-    <div className="flex flex-col min-h-screen pt-20">
-      <section className="container px-4 md:px-6 py-12">
-        <div className="flex flex-col space-y-4 mb-8 md:mb-12">
-          <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase">
-            Nuestro <span className="text-primary">Equipo</span>
+    <div className="flex flex-col min-h-screen pt-24 bg-black">
+      <section className="container px-4 md:px-6 mb-12">
+        <div className="flex flex-col space-y-4 mb-8 md:mb-12 border-t border-white/10 pt-8">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] md:text-xs font-mono text-neutral-500 tracking-[0.2em] uppercase border border-neutral-800 px-2 py-1">
+              Equipo / 2026
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-[-0.02em] uppercase leading-[0.8]">
+            <span
+              className="relative inline-block"
+              style={{ fontStretch: "condensed" }}
+            >
+              Nuestro
+              <br />
+              <span className="text-[#1b4b2f]">Equipo</span>
+            </span>
           </h1>
-          <p className="text-neutral-400 max-w-2xl text-lg">
+          <p className="text-neutral-400 max-w-2xl text-lg font-mono pt-4">
             Talento puro de Limón para el mundo. Artistas, DJs y Productores.
           </p>
         </div>

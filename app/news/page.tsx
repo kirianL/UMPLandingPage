@@ -14,17 +14,21 @@ export default async function NewsPage() {
   return (
     <div className="min-h-screen bg-black pt-24 pb-24">
       {/* Header */}
-      <div className="container px-4 mb-16">
+      <div className="container px-4 md:px-6 mb-12">
         <div className="border-t border-white/10 pt-8">
-          <span className="block text-xs font-mono text-primary uppercase tracking-widest mb-4">
-            Newsroom // 2026
-          </span>
-          <h1 className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-8">
-            Últimas
-            <br />
-            Noticias
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-[10px] md:text-xs font-mono text-neutral-500 tracking-[0.2em] uppercase border border-neutral-800 px-2 py-1">
+              Noticias / 2026
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white uppercase tracking-[-0.02em] leading-[0.8] mb-6">
+            <span style={{ fontStretch: "condensed" }}>
+              Últimas
+              <br />
+              <span className="text-[#1b4b2f]">Noticias</span>
+            </span>
           </h1>
-          <p className="text-xl text-neutral-400 max-w-2xl leading-relaxed">
+          <p className="text-base md:text-xl text-neutral-400 max-w-2xl leading-relaxed font-mono">
             Mantente al día con los últimos lanzamientos, anuncios y eventos
             exclusivos de UMP Music Group.
           </p>

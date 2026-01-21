@@ -50,3 +50,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .ray-light {
+    background: radial-gradient(
+      50% 50% at 50% 50%,
+      rgba(26, 77, 46, 0.5) 0%,
+      rgba(26, 77, 46, 0) 100%
+    );
+  }
+}

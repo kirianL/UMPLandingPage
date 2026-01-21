@@ -7,7 +7,7 @@ export default async function NewsPage() {
   const supabase = await createClient();
   const { data: news } = await supabase
     .from("news")
-    .select("*")
+    .select("id, title, slug, published_at, image_url")
     .eq("is_published", true)
     .order("published_at", { ascending: false });
 

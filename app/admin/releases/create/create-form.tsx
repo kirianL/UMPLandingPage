@@ -22,7 +22,7 @@ export default function CreateReleaseForm({ artists }: { artists: Artist[] }) {
       toast.success(result.message);
       setTimeout(() => {
         router.push("/admin/releases");
-      }, 1000);
+      }, 500);
     } else {
       toast.error(result.message);
     }

@@ -28,6 +28,7 @@ export default function EditReleaseForm({
     if (result.success) {
       toast.success(result.message);
       router.refresh();
+      router.push("/admin/releases");
     } else {
       toast.error(result.message);
     }

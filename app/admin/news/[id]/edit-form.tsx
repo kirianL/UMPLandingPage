@@ -22,6 +22,7 @@ export default function EditNewsForm({ newsItem }: { newsItem: News }) {
     if (result.success) {
       toast.success(result.message);
       router.refresh(); // Refresh data
+      router.push("/admin/news");
     } else {
       toast.error(result.message);
     }

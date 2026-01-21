@@ -10,10 +10,12 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="relative h-14 w-40">
-                <img
+                <Image
                   src="/assets/LOGO-UMP.webp"
                   alt="UMP Music Logo"
-                  className="h-full w-full object-contain object-left invert brightness-0"
+                  fill
+                  className="object-contain object-left invert brightness-0"
+                  sizes="(max-width: 768px) 120px, 160px"
                 />
               </div>
             </Link>

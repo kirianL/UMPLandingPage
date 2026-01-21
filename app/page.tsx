@@ -3,6 +3,8 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { Artist } from "@/lib/types";
+import Image from "next/image";
+import { HeroSection } from "@/components/hero-section";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -11,7 +13,7 @@ async function getFeaturedArtists() {
   try {
     const { data: artists, error } = await supabase
       .from("artists")
-      .select("*")
+      .select("id, name, slug, photo_url, role")
       .eq("is_active", true)
       .limit(3);
 
@@ -31,7 +33,7 @@ async function getLatestNews() {
   try {
     const { data: news, error } = await supabase
       .from("news")
-      .select("*")
+      .select("id, title, slug, image_url, published_at")
       .eq("is_published", true)
       .order("published_at", { ascending: false })
       .limit(3);
@@ -55,54 +57,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* HERO SECTION */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden border-b border-white/5">
-        {/* Background Placeholder */}
-        <div className="absolute inset-0 bg-neutral-900 z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-800 to-black opacity-60" />
-
-          {/* Grid overlay texture */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150"></div>
-
-          {/* Placeholder for Hero Video/Image */}
-          <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono text-xl border border-dashed border-neutral-800 m-8">
-            [ HERO VISUAL / VIDEO LOOPS ]
-          </div>
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
-        </div>
-
-        <div className="container relative z-20 px-4 md:px-6 flex flex-col items-start justify-end h-full pb-20 md:pb-32">
-          <div className="max-w-3xl space-y-4">
-            <h1 className="text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-              Real Culture <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">
-                From Limón.
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-neutral-400 max-w-[600px] font-medium leading-relaxed">
-              El sello discográfico independiente que redefine el sonido del
-              Caribe. Autenticidad, historias reales y talento crudo.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-6">
-              <Button
-                size="lg"
-                className="bg-primary text-black hover:bg-primary/90 font-bold uppercase tracking-wider rounded-none h-12 px-8"
-                asChild
-              >
-                <Link href="/artists">Explorar Artistas</Link>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 hover:text-white uppercase tracking-wider rounded-none h-12 px-8"
-                asChild
-              >
-                <Link href="/about">Sobre Nosotros</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* FEATURED ARTISTS */}
       <section className="py-24 bg-black relative">
@@ -126,7 +81,7 @@ export default async function Home() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {hasArtists ? (
               artists.map((artist) => (
                 <Link
@@ -137,11 +92,16 @@ export default async function Home() {
                   <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 border border-white/5">
                     {artist.photo_url ? (
                       // Optimización futura: Usar <Image> de Next.js
-                      <img
-                        src={artist.photo_url}
-                        alt={artist.name}
-                        className="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-opacity"
-                      />
+                      // Optimización: Usando <Image> de Next.js
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={artist.photo_url}
+                          alt={artist.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+                      </div>
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono">
                         [ FOTO {artist.name.toUpperCase()} ]
@@ -160,7 +120,7 @@ export default async function Home() {
                         {artist.name}
                       </h3>
                       <p className="text-sm text-neutral-400 font-mono">
-                        {artist.tagline_es || "Artista UMP"}
+                        {artist.role || "Artista UMP"}
                       </p>
                     </div>
                   </div>
@@ -264,10 +224,12 @@ export default async function Home() {
                 >
                   <div className="relative aspect-video bg-neutral-900 border border-white/10 overflow-hidden mb-4">
                     {newsItem.image_url ? (
-                      <img
+                      <Image
                         src={newsItem.image_url}
                         alt={newsItem.title}
-                        className="object-cover w-full h-full opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="absolute inset-0 flex items-center justify-center bg-neutral-800 text-neutral-600 font-mono text-xs">

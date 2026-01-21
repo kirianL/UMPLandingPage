@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Menu, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,19 +12,31 @@ import {
   SheetDescription,
 } from "@/components/ui/sheet";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-md">
       <div className="container flex h-20 items-center justify-between px-4 md:px-6">
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2">
           <div className="flex items-center">
-            <img
-              src="/assets/LOGO-UMP.webp"
-              alt="UMP Music Logo"
-              className="h-16 w-auto object-contain invert brightness-0"
-            />
+            <div className="relative h-16 w-32">
+              <Image
+                src="/assets/LOGO-UMP.webp"
+                alt="UMP Music Logo"
+                fill
+                className="object-contain invert brightness-0"
+                priority
+                sizes="(max-width: 768px) 100px, 128px"
+              />
+            </div>
           </div>
         </Link>
 
@@ -33,7 +47,7 @@ export default function Navbar() {
             prefetch={true}
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
           >
-            ARTISTAS
+            EQUIPO
           </Link>
           <Link
             href="/news"
@@ -64,7 +78,7 @@ export default function Navbar() {
             ES / EN
           </span>
 
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
@@ -87,31 +101,39 @@ export default function Navbar() {
                   Explora el universo UMP Music
                 </SheetDescription>
               </SheetHeader>
-              <nav className="grid gap-6 text-lg font-medium py-10">
-                <Link href="/" className="hover:text-primary transition-colors">
+              <nav className="grid gap-3 text-lg font-medium py-6">
+                <Link
+                  href="/"
+                  className="hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
+                >
                   HOME
                 </Link>
                 <Link
                   href="/artists"
                   className="hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
                 >
                   ARTISTAS
                 </Link>
                 <Link
                   href="/news"
                   className="hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
                 >
                   NOTICIAS
                 </Link>
                 <Link
                   href="/about"
                   className="hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
                 >
                   NOSOTROS
                 </Link>
                 <Link
                   href="/contact"
                   className="hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
                 >
                   CONTACTO
                 </Link>

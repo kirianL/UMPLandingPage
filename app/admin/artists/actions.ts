@@ -9,10 +9,11 @@ export async function createArtist(formData: FormData) {
 
   const name = (formData.get("name") as string)?.trim();
   const slug = (formData.get("slug") as string)?.trim();
-  const tagline_es = (formData.get("tagline_es") as string)?.trim();
+  const role = (formData.get("role") as string)?.trim();
   const bio_es = (formData.get("bio_es") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
   const spotify_url = (formData.get("spotify_url") as string)?.trim();
+  const apple_music_url = (formData.get("apple_music_url") as string)?.trim();
   const youtube_url = (formData.get("youtube_url") as string)?.trim();
 
   const photoFile = formData.get("photo_file") as File;
@@ -32,11 +33,12 @@ export async function createArtist(formData: FormData) {
   const { error } = await supabase.from("artists").insert({
     name,
     slug,
-    tagline_es,
+    role,
     photo_url,
     bio_es,
     instagram_url,
     spotify_url,
+    apple_music_url,
     youtube_url,
     is_active: true,
   });
@@ -60,10 +62,11 @@ export async function updateArtist(id: string, formData: FormData) {
 
   const name = (formData.get("name") as string)?.trim();
   const slug = (formData.get("slug") as string)?.trim();
-  const tagline_es = (formData.get("tagline_es") as string)?.trim();
+  const role = (formData.get("role") as string)?.trim();
   const bio_es = (formData.get("bio_es") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
   const spotify_url = (formData.get("spotify_url") as string)?.trim();
+  const apple_music_url = (formData.get("apple_music_url") as string)?.trim();
   const youtube_url = (formData.get("youtube_url") as string)?.trim();
   const is_active = formData.get("is_active") === "on";
 
@@ -84,10 +87,11 @@ export async function updateArtist(id: string, formData: FormData) {
   const updateData: any = {
     name,
     slug,
-    tagline_es,
+    role,
     bio_es,
     instagram_url,
     spotify_url,
+    apple_music_url,
     youtube_url,
     is_active,
   };

@@ -22,7 +22,7 @@ export default function CreateNewsForm() {
       // Redirect to list
       setTimeout(() => {
         router.push("/admin/news");
-      }, 1000);
+      }, 500);
     } else {
       toast.error(result.message);
     }

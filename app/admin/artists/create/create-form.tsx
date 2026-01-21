@@ -6,29 +6,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function CreateArtistForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState<{
-    type: "success" | "error";
-    text: string;
-  } | null>(null);
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
-    setMessage(null);
 
     const result = await createArtist(formData);
 
     if (result.success) {
-      setMessage({ type: "success", text: result.message });
+      toast.success(result.message);
       // Redirect to list after success
       setTimeout(() => {
         router.push("/admin/artists");
-      }, 1000);
+      }, 500);
     } else {
-      setMessage({ type: "error", text: result.message });
+      toast.error(result.message);
     }
     setLoading(false);
   }
@@ -37,7 +33,7 @@ export default function CreateArtistForm() {
     <div className="max-w-4xl mx-auto py-10 px-4">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-white">
-          Nuevo Artista
+          Nuevo Miembro
         </h1>
         <Button
           variant="outline"
@@ -54,7 +50,7 @@ export default function CreateArtistForm() {
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
-                Nombre del Artista <span className="text-red-500">*</span>
+                Nombre <span className="text-red-500">*</span>
               </label>
               <Input
                 name="name"
@@ -76,16 +72,16 @@ export default function CreateArtistForm() {
               />
             </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-300">
-                Tagline (Rol)
-              </label>
-              <Input
-                name="tagline_es"
-                placeholder="Ej: ARTISTA EXCLUSIVO"
-                className="bg-neutral-900 border-neutral-800 text-white"
-              />
-            </div>
+            <label className="text-sm font-medium text-neutral-300">Rol</label>
+            <select
+              name="role"
+              defaultValue="Artista"
+              className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <option value="Artista">Artista</option>
+              <option value="DJ">DJ</option>
+              <option value="Productor">Productor</option>
+            </select>
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">
@@ -140,6 +136,16 @@ export default function CreateArtistForm() {
               </div>
               <div className="space-y-2">
                 <label className="text-xs font-medium text-neutral-400">
+                  Apple Music URL
+                </label>
+                <Input
+                  name="apple_music_url"
+                  className="bg-neutral-900 border-neutral-800 text-white"
+                  placeholder="https://music.apple.com/..."
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-xs font-medium text-neutral-400">
                   YouTube URL
                 </label>
                 <Input
@@ -151,18 +157,6 @@ export default function CreateArtistForm() {
             </div>
           </div>
         </div>
-
-        {message && (
-          <div
-            className={`p-4 rounded-md border ${
-              message.type === "success"
-                ? "bg-green-500/10 border-green-500/20 text-green-500"
-                : "bg-red-500/10 border-red-500/20 text-red-500"
-            }`}
-          >
-            {message.text}
-          </div>
-        )}
 
         <div className="flex justify-end pt-6 border-t border-neutral-800">
           <Button
@@ -176,7 +170,7 @@ export default function CreateArtistForm() {
                 Creando...
               </>
             ) : (
-              "Crear Artista"
+              "Crear Miembro"
             )}
           </Button>
         </div>

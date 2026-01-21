@@ -21,7 +21,7 @@ export default async function AdminArtistsPage() {
             </Link>
           </Button>
           <h1 className="text-3xl font-black text-white uppercase tracking-tighter">
-            Artistas
+            Equipo
           </h1>
         </div>
         <Button
@@ -29,7 +29,7 @@ export default async function AdminArtistsPage() {
           className="bg-primary text-black hover:bg-primary/90 font-bold"
         >
           <Link href="/admin/artists/create">
-            <Plus className="mr-2 h-4 w-4" /> Nuevo Artista
+            <Plus className="mr-2 h-4 w-4" /> Nuevo Miembro
           </Link>
         </Button>
       </div>
@@ -38,7 +38,7 @@ export default async function AdminArtistsPage() {
         <table className="w-full text-left text-sm">
           <thead className="bg-black text-neutral-400 font-medium border-b border-white/10">
             <tr>
-              <th className="p-4">Artista</th>
+              <th className="p-4">Nombre</th>
               <th className="p-4 hidden md:table-cell">Slug</th>
               <th className="p-4 hidden md:table-cell">Estado</th>
               <th className="p-4 text-right">Acciones</th>
@@ -108,7 +108,7 @@ export default async function AdminArtistsPage() {
             {(!artists || artists.length === 0) && (
               <tr>
                 <td colSpan={4} className="p-8 text-center text-neutral-500">
-                  No hay artistas registrados.
+                  No hay miembros registrados.
                 </td>
               </tr>
             )}

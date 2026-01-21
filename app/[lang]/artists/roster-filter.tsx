@@ -124,7 +124,7 @@ export default function RosterFilter({
                     <img
                       src={artist.photo_url}
                       alt={artist.name}
-                      className="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"
+                      className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300 ease-out group-hover:scale-105"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono">
@@ -132,15 +132,15 @@ export default function RosterFilter({
                     </div>
                   )}
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-primary/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
-                    <span className="text-black font-black text-2xl uppercase tracking-tighter flex items-center gap-2">
-                      {dict.view_profile} <ArrowRight className="h-6 w-6" />
+                  {/* Hover Overlay - Minimalist View Profile Button */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <span className="bg-primary text-black font-bold text-sm uppercase px-6 py-2 rounded-full tracking-widest hover:scale-110 transition-transform">
+                      {dict.view_profile}
                     </span>
                   </div>
 
-                  {/* Info Badge */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 group-hover:opacity-0 transition-opacity duration-300">
+                  {/* Info Badge - Always visible but darker on hover? No, let's keep it clean */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300 group-hover:translate-y-2 group-hover:opacity-0">
                     <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-1">
                       {artist.name}
                     </h3>

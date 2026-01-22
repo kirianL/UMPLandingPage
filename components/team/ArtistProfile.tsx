@@ -33,7 +33,7 @@ export default function ArtistProfile({
         {/* Dither Background */}
         <div className="absolute inset-0 z-0 opacity-40">
           <Dither
-            waveColor={[0.1, 0.3, 0.18]}
+            waveColor={[0.09, 0.58, 0.23]}
             disableAnimation
             enableMouseInteraction={false}
             mouseRadius={0.3}
@@ -62,7 +62,7 @@ export default function ArtistProfile({
             className="absolute inset-0 w-full h-full"
             style={{
               background:
-                "radial-gradient(circle at 50% -45%, rgba(26, 77, 46, 0.45) 0%, transparent 70%)",
+                "radial-gradient(circle at 50% -45%, rgba(24, 148, 58, 0.45) 0%, transparent 70%)",
             }}
           />
         </div>

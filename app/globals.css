@@ -13,7 +13,7 @@
     --popover: 0 0% 5%;
     --popover-foreground: 0 0% 94%;
 
-    --primary: 145 48% 20%; /* Verde bosque oscuro #1a4d2e */
+    --primary: 136 72% 34%; /* Verde claro #18943A */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 20%; /* #333333 */
@@ -22,7 +22,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 64%;
 
-    --accent: 145 48% 20%; /* Verde bosque oscuro */
+    --accent: 136 72% 34%; /* Verde claro */
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -30,8 +30,7 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 145 48% 20%; /* Verde bosque oscuro */
-
+    --ring: 136 72% 34%; /* Verde claro */
     --radius: 0rem; /* Sharp edges for "Underground/Brutalist" feel, or 0.25rem */
   }
 

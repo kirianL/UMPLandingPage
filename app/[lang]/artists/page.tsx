@@ -57,7 +57,7 @@ export default async function ArtistsPage({
             >
               {dict.artists.title_sub}
               <br />
-              <span className="text-[#1b4b2f]">{dict.artists.title_main}</span>
+              <span className="text-[#18943a]">{dict.artists.title_main}</span>
             </span>
           </h1>
           <p className="text-neutral-400 max-w-2xl text-lg font-mono pt-4">

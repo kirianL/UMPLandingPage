@@ -65,7 +65,7 @@
     "admin": "Admin"
   },
   "components": {
-    "news_card": {
+    "news_card": {  
       "no_image": "SIN IMAGEN",
       "read_article": "Leer Artículo"
     },

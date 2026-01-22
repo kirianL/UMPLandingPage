@@ -21,7 +21,9 @@ export default async function Layout({
   return (
     <LanguageProvider>
       <Navbar />
-      <main className="flex-1 min-h-screen flex flex-col">{children}</main>
+      <main className="flex-1 min-h-screen flex flex-col pt-20">
+        {children}
+      </main>
       <Footer dict={dict.footer} lang={lang} />
     </LanguageProvider>
   );

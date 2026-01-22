@@ -35,7 +35,7 @@ export default async function NewsPage({
             <span style={{ fontStretch: "condensed" }}>
               {dict.news.title_sub}
               <br />
-              <span className="text-[#1b4b2f]">{dict.news.title_main}</span>
+              <span className="text-[#18943a]">{dict.news.title_main}</span>
             </span>
           </h1>
           <p className="text-base md:text-xl text-neutral-400 max-w-2xl leading-relaxed font-mono">

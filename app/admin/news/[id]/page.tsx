@@ -11,7 +11,7 @@ export default async function EditNewsPage({
   const supabase = await createClient();
   const { data: newsItem } = await supabase
     .from("news")
-    .select("*")
+    .select("*, title:title_es, excerpt:excerpt_es, content:content_es")
     .eq("id", id)
     .single();
 

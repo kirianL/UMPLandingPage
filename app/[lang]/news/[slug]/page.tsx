@@ -33,7 +33,7 @@ const getNewsItem = cache(async (slug: string) => {
   const { data: newsItem } = await supabase
     .from("news")
     .select(
-      "id, title, title_en, slug, image_url, published_at, excerpt, excerpt_en, content, content_en",
+      "id, title:title_es, title_en, slug, image_url, published_at, excerpt:excerpt_es, excerpt_en, content:content_es, content_en",
     )
     .eq("slug", slug)
     .eq("is_published", true)

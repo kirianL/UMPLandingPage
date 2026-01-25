@@ -16,7 +16,7 @@ export default async function NewsPage({
   const { data: news } = await supabase
     .from("news")
     .select(
-      "id, title, title_en, slug, published_at, image_url, excerpt, excerpt_en",
+      "id, title:title_es, title_en, slug, published_at, image_url, excerpt:excerpt_es, excerpt_en",
     )
     .eq("is_published", true)
     .order("published_at", { ascending: false });

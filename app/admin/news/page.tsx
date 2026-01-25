@@ -7,7 +7,7 @@ export default async function AdminNewsPage() {
   const supabase = await createClient();
   const { data: news } = await supabase
     .from("news")
-    .select("*")
+    .select("id, title:title_es, slug, image_url, published_at, is_published")
     .order("published_at", { ascending: false });
 
   return (

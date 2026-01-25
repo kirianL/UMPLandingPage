@@ -69,7 +69,9 @@ export default async function AdminNewsPage() {
                   {item.slug}
                 </td>
                 <td className="p-4 hidden md:table-cell text-neutral-400 font-mono">
-                  {new Date(item.published_at).toLocaleDateString()}
+                  {new Date(item.published_at).toLocaleDateString("es-ES", {
+                    timeZone: "America/Costa_Rica",
+                  })}
                 </td>
                 <td className="p-4 hidden md:table-cell">
                   <span

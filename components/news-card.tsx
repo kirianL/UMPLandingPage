@@ -64,6 +64,7 @@ export default function NewsCard({
                 year: "numeric",
                 month: "short",
                 day: "numeric",
+                timeZone: "America/Costa_Rica",
               },
             )}
           </time>

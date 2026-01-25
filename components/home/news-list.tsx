@@ -103,6 +103,7 @@ export function NewsList({
                         day: "2-digit",
                         month: "long",
                         year: "numeric",
+                        timeZone: "America/Costa_Rica",
                       },
                     )}
                   </time>

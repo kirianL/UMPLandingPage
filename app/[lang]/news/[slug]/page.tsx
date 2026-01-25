@@ -108,6 +108,7 @@ export default async function NewsDetailPage({
                     year: "numeric",
                     month: "long",
                     day: "numeric",
+                    timeZone: "America/Costa_Rica",
                   },
                 )}
               </time>

@@ -27,6 +27,9 @@ create table releases (
   release_date date,
   cover_url text,
   link text, -- Smart Link
+  spotify_url text,
+  apple_music_url text,
+  youtube_url text,
   type text check (type in ('single', 'album', 'ep', 'mixtape')),
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );

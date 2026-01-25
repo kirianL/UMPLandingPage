@@ -31,10 +31,10 @@ export async function createNews(formData: FormData) {
   }
 
   const { error } = await supabase.from("news").insert({
-    title,
+    title_es: title,
     slug,
-    excerpt,
-    content,
+    excerpt_es: excerpt,
+    content_es: content,
     title_en,
     excerpt_en,
     content_en,
@@ -84,10 +84,10 @@ export async function updateNews(id: string, formData: FormData) {
   }
 
   const updateData: any = {
-    title,
+    title_es: title,
     slug,
-    excerpt,
-    content,
+    excerpt_es: excerpt,
+    content_es: content,
     title_en,
     excerpt_en,
     content_en,

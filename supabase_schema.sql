@@ -39,6 +39,8 @@ create table news (
   slug text unique not null,
   title_es text not null,
   title_en text not null,
+  excerpt_es text,
+  excerpt_en text,
   content_es text, -- Markdown or HTML
   content_en text,
   cover_image text,

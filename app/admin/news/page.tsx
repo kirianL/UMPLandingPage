@@ -7,8 +7,10 @@ export default async function AdminNewsPage() {
   const supabase = await createClient();
   const { data: news } = await supabase
     .from("news")
-    .select("id, title:title_es, slug, image_url, published_at, is_published")
-    .order("published_at", { ascending: false });
+    .select(
+      "id, title:title_es, slug, image_url, published_at, created_at, is_published",
+    )
+    .order("created_at", { ascending: false });
 
   return (
     <div className="max-w-5xl mx-auto space-y-8">
@@ -69,9 +71,16 @@ export default async function AdminNewsPage() {
                   {item.slug}
                 </td>
                 <td className="p-4 hidden md:table-cell text-neutral-400 font-mono">
-                  {new Date(item.published_at).toLocaleDateString("es-ES", {
-                    timeZone: "America/Costa_Rica",
-                  })}
+                  <time suppressHydrationWarning>
+                    {new Date(
+                      item.published_at || item.created_at,
+                    ).toLocaleDateString("es-ES", {
+                      timeZone: "America/Costa_Rica",
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </time>
                 </td>
                 <td className="p-4 hidden md:table-cell">
                   <span

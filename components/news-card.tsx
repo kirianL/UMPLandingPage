@@ -18,6 +18,7 @@ export default function NewsCard({
     | "slug"
     | "image_url"
     | "published_at"
+    | "created_at"
     | "excerpt"
     | "title_en"
     | "excerpt_en"
@@ -54,11 +55,11 @@ export default function NewsCard({
         {/* Date Badge */}
         <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md border border-white/10 px-3 py-1">
           <time
-            dateTime={news.published_at}
+            dateTime={news.published_at || news.created_at}
             className="text-[10px] font-mono text-white uppercase tracking-wider"
             suppressHydrationWarning
           >
-            {new Date(news.published_at).toLocaleDateString(
+            {new Date(news.published_at || news.created_at).toLocaleDateString(
               lang === "en" ? "en-US" : "es-ES",
               {
                 year: "numeric",

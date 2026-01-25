@@ -83,6 +83,13 @@ export async function updateNews(id: string, formData: FormData) {
     }
   }
 
+  // Check current state to handle published_at logic
+  const { data: currentNews } = await supabase
+    .from("news")
+    .select("published_at")
+    .eq("id", id)
+    .single();
+
   const updateData: any = {
     title_es: title,
     slug,
@@ -93,6 +100,11 @@ export async function updateNews(id: string, formData: FormData) {
     content_en,
     is_published,
   };
+
+  // Set published_at if publishing for the first time (or if it was null)
+  if (is_published && !currentNews?.published_at) {
+    updateData.published_at = new Date().toISOString();
+  }
 
   if (image_url) {
     updateData.image_url = image_url;

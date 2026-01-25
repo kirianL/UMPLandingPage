@@ -11,7 +11,8 @@ interface NewsItem {
   title_en?: string | null;
   slug: string;
   image_url: string | null;
-  published_at: string;
+  published_at: string | null;
+  created_at: string;
 }
 
 export function NewsList({
@@ -93,19 +94,18 @@ export function NewsList({
 
                 <div className="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
                   <time
-                    dateTime={item.published_at}
+                    dateTime={item.published_at || item.created_at}
                     className="text-primary font-mono text-[8px] md:text-xs uppercase tracking-widest block mb-1 md:mb-2"
                     suppressHydrationWarning
                   >
-                    {new Date(item.published_at).toLocaleDateString(
-                      lang === "es" ? "es-ES" : "en-US",
-                      {
-                        day: "2-digit",
-                        month: "long",
-                        year: "numeric",
-                        timeZone: "America/Costa_Rica",
-                      },
-                    )}
+                    {new Date(
+                      item.published_at || item.created_at,
+                    ).toLocaleDateString(lang === "es" ? "es-ES" : "en-US", {
+                      day: "2-digit",
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "America/Costa_Rica",
+                    })}
                   </time>
                   <h3 className="text-lg md:text-3xl font-bold font-quilon text-white uppercase leading-none md:leading-tight line-clamp-3 group-hover:text-white transition-colors">
                     {lang === "en" && item.title_en

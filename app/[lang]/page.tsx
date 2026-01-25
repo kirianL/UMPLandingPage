@@ -35,7 +35,7 @@ async function getLatestNews() {
     const { data: news, error } = await supabase
       .from("news")
       .select(
-        "id, title:title_es, title_en, slug, image_url, published_at, excerpt:excerpt_es, excerpt_en",
+        "id, title:title_es, title_en, slug, image_url, published_at, created_at, excerpt:excerpt_es, excerpt_en",
       )
       .eq("is_published", true)
       .order("published_at", { ascending: false })

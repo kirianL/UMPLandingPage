@@ -33,7 +33,7 @@ const getNewsItem = cache(async (slug: string) => {
   const { data: newsItem } = await supabase
     .from("news")
     .select(
-      "id, title:title_es, title_en, slug, image_url, published_at, excerpt:excerpt_es, excerpt_en, content:content_es, content_en",
+      "id, title:title_es, title_en, slug, image_url, published_at, created_at, excerpt:excerpt_es, excerpt_en, content:content_es, content_en",
     )
     .eq("slug", slug)
     .eq("is_published", true)
@@ -74,6 +74,8 @@ export default async function NewsDetailPage({
     notFound();
   }
 
+  const displayDate = newsItem.published_at || newsItem.created_at;
+
   const contentParagraphs = (
     isEn && newsItem.content_en ? newsItem.content_en : newsItem.content
   )?.split("\n");
@@ -101,8 +103,8 @@ export default async function NewsDetailPage({
           <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-8 text-xs md:text-sm">
             <div className="flex items-center gap-2 text-primary font-mono font-bold">
               <Calendar className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              <time dateTime={newsItem.published_at}>
-                {new Date(newsItem.published_at).toLocaleDateString(
+              <time dateTime={displayDate} suppressHydrationWarning>
+                {new Date(displayDate).toLocaleDateString(
                   lang === "en" ? "en-US" : "es-ES",
                   {
                     year: "numeric",

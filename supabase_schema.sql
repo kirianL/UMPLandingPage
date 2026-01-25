@@ -7,6 +7,8 @@ create table artists (
   name text not null,
   tagline_es text,
   tagline_en text,
+  role text,
+  role_en text,
   bio_es text,
   bio_en text,
   photo_url text, -- Storage path

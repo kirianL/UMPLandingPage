@@ -53,9 +53,20 @@ export default function NewsCard({
 
         {/* Date Badge */}
         <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md border border-white/10 px-3 py-1">
-          <span className="text-[10px] font-mono text-white uppercase tracking-wider">
-            {new Date(news.published_at).toLocaleDateString()}
-          </span>
+          <time
+            dateTime={news.published_at}
+            className="text-[10px] font-mono text-white uppercase tracking-wider"
+            suppressHydrationWarning
+          >
+            {new Date(news.published_at).toLocaleDateString(
+              lang === "en" ? "en-US" : "es-ES",
+              {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              },
+            )}
+          </time>
         </div>
       </div>
 

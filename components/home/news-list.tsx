@@ -92,7 +92,11 @@ export function NewsList({
                 </div>
 
                 <div className="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
-                  <span className="text-primary font-mono text-[8px] md:text-xs uppercase tracking-widest block mb-1 md:mb-2">
+                  <time
+                    dateTime={item.published_at}
+                    className="text-primary font-mono text-[8px] md:text-xs uppercase tracking-widest block mb-1 md:mb-2"
+                    suppressHydrationWarning
+                  >
                     {new Date(item.published_at).toLocaleDateString(
                       lang === "es" ? "es-ES" : "en-US",
                       {
@@ -101,7 +105,7 @@ export function NewsList({
                         year: "numeric",
                       },
                     )}
-                  </span>
+                  </time>
                   <h3 className="text-lg md:text-3xl font-bold font-quilon text-white uppercase leading-none md:leading-tight line-clamp-3 group-hover:text-white transition-colors">
                     {lang === "en" && item.title_en
                       ? item.title_en

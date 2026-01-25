@@ -44,6 +44,7 @@ create table news (
   cover_image text,
   is_published boolean default false,
   published_at timestamp with time zone default timezone('utc'::text, now()),
+  author_id uuid references auth.users(id),
   created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
 

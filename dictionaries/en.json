@@ -38,7 +38,12 @@
   },
   "about": {
     "title": "About Us",
-    "wip_message": "This page is under construction."
+    "wip_message": "This page is under construction.",
+    "h1_title": "ABOUT US",
+    "hero_subtitle": "THE SOUND OF LIMON",
+    "intro_p1": "We are more than a record label; we are the vibrant pulse of the Costa Rican Caribbean.",
+    "intro_p2": "Our mission is to amplify the authentic voices of Limon, taking our unique rhythm to global stages. We fuse tradition with innovation, creating a platform where local talent shines with world-class quality.",
+    "videos_title": "PRODUCTIONS"
   },
   "contact": {
     "title": "Contact",

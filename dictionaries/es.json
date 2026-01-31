@@ -38,7 +38,12 @@
   },
   "about": {
     "title": "Sobre Nosotros",
-    "wip_message": "Esta página está en construcción."
+    "wip_message": "Esta página está en construcción.",
+    "h1_title": "NOSOTROS",
+    "hero_subtitle": "EL SONIDO DE LIMÓN",
+    "intro_p1": "Somos más que un sello discográfico; somos el pulso vibrante del Caribe costarricense.",
+    "intro_p2": "Nuestra misión es amplificar las voces auténticas de Limón, llevando nuestro ritmo único a escenarios globales. Fusionamos tradición con innovación, creando una plataforma donde el talento local brilla con calidad de clase mundial.",
+    "videos_title": "PRODUCCIONES"
   },
   "contact": {
     "title": "Contacto",

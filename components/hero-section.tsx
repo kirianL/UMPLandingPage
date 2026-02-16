@@ -106,7 +106,7 @@ export function HeroSection({ dict }: { dict: any }) {
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/50 to-black/10" />
 
       {/* ── CONTENT ── */}
-      <div className="relative z-10 h-full flex flex-col justify-end px-5 sm:px-8 md:px-12 lg:px-16 pb-6 sm:pb-8 md:pb-10">
+      <div className="relative z-10 h-full flex flex-col justify-end px-5 sm:px-8 md:px-12 lg:px-16 pb-24 sm:pb-32 md:pb-40">
         {/* ── HEADLINE ── */}
         <div className="mb-3 sm:mb-4">
           <h1>

@@ -1,132 +1,198 @@
 "use client";
 
-import { useRef } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
-import Image from "next/image";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import { Volume2, VolumeX, ArrowDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/providers/language-provider";
+import { cn } from "@/lib/utils";
 
-export function HeroSection({
-  dict,
+/* ═══ EASING ═══ */
+const ease = [0.16, 1, 0.3, 1] as const;
+
+/* ═══ CHARACTER-BY-CHARACTER REVEAL ═══ */
+function CharReveal({
+  text,
+  delay = 0,
+  className,
 }: {
-  dict: {
-    location_line1: string;
-    location_line2: string;
-    location_line3: string;
-    established: string;
-  };
+  text: string;
+  delay?: number;
+  className?: string;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  return (
+    <span className={cn("inline-flex flex-wrap", className)}>
+      {text.split("").map((ch, i) => (
+        <span key={i} className="overflow-hidden inline-block">
+          <motion.span
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: "0%", opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              delay: delay + i * 0.03,
+              ease,
+            }}
+            className="inline-block"
+          >
+            {ch === " " ? "\u00A0" : ch}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/* ═══ HERO SECTION ═══ */
+export function HeroSection({ dict }: { dict: any }) {
+  const ref = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const { language } = useLanguage();
+
+  /* Parallax */
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: ref,
     offset: ["start start", "end start"],
   });
+  const vidScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  useEffect(() => {
+    videoRef.current
+      ?.play()
+      .then(() => setReady(true))
+      .catch(() => setReady(true));
+  }, []);
+
+  /* Texts */
+  const t = dict?.brutalist || {};
+  const sub =
+    t.subtext_1 ||
+    (language === "es"
+      ? "Definiendo el sonido de Limón."
+      : "Defining the sound of Limón.");
+  const sub2 =
+    t.subtext_2 ||
+    (language === "es" ? "Operando globalmente." : "Operating globally.");
+  const cta =
+    t.cta_roster || (language === "es" ? "Explorar Roster" : "Explore Roster");
 
   return (
-    <div
-      ref={containerRef}
-      className="relative h-screen w-full overflow-hidden bg-[#050505] flex items-center justify-center"
+    <section
+      ref={ref}
+      className="relative w-full h-[100dvh] bg-black text-white overflow-hidden font-quilon"
     >
-      {/* 
-        LCP OPTIMIZATION: 
-        Moved Background Image OUT of motion.div.
-        It is now a static layer to ensure fast FCP/LCP. 
-        Parallax effect on background is disabled for maximum performance.
-      */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-neutral-950" />
+      {/* ── VIDEO ── */}
+      <motion.div style={{ scale: vidScale }} className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onLoadedData={() => setReady(true)}
+          className={cn(
+            "w-full h-full object-cover transition-opacity duration-1000",
+            ready ? "opacity-100" : "opacity-0",
+          )}
+        >
+          <source src="/assets/home/mille%20v2.MP4" type="video/mp4" />
+        </video>
+      </motion.div>
 
-        {/* User Requested Background Image - Optimized with next/image for Mobile LCP */}
-        <div className="relative w-full h-full">
-          <Image
-            src="/assets/home/Home.jpeg"
-            alt="Limon Aesthetic"
-            fill
-            priority
-            sizes="100vw"
-            quality={85}
-            className="object-cover opacity-75 mix-blend-overlay"
-          />
+      {/* ── OVERLAY — heavy bottom, light top ── */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black via-black/50 to-black/10" />
+
+      {/* ── CONTENT ── */}
+      <div className="relative z-10 h-full flex flex-col justify-end px-5 sm:px-8 md:px-12 lg:px-16 pb-6 sm:pb-8 md:pb-10">
+        {/* ── HEADLINE ── */}
+        <div className="mb-3 sm:mb-4">
+          <h1>
+            <CharReveal
+              text="EL SONIDO"
+              delay={0.3}
+              className="text-[clamp(2.6rem,9vw,8rem)] font-black uppercase tracking-[-0.04em] leading-[0.88] text-white block"
+            />
+            <CharReveal
+              text="DE LIMÓN"
+              delay={0.6}
+              className="text-[clamp(2.6rem,9vw,8rem)] font-black uppercase tracking-[-0.04em] leading-[0.88] text-[#18943A] block"
+            />
+          </h1>
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/5 to-[#050505]" />
+        {/* ── GREEN ACCENT LINE + SUBTEXT ── */}
+        <div className="flex items-start gap-3 mb-4 sm:mb-5">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 1, ease }}
+            className="w-8 sm:w-10 h-[2px] bg-[#18943A] mt-[9px] origin-left shrink-0"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1, ease }}
+            className="text-[12px] sm:text-[13px] md:text-sm text-white/40 leading-relaxed max-w-xs"
+          >
+            {sub} <span className="text-white/65 font-medium">{sub2}</span>
+          </motion.p>
+        </div>
 
-        {/* Texture Overlay */}
-        <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
-      </div>
-
-      {/* Cinematic Pulse Effect - Separated from LCP Image */}
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 z-0 pointer-events-none"
-      >
-        {/* Subtle dynamic light - Clean, no grunge */}
-        <div className="absolute top-1/4 left-1/4 w-[50vw] h-[50vw] bg-neutral-800/10 rounded-full blur-[100px] animate-pulse-slow mix-blend-screen" />
-      </motion.div>
-
-      {/* Main Content */}
-      <div className="relative z-10 container px-4 flex flex-col items-center justify-center h-full">
+        {/* ── CTA + MUTE ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="relative w-full max-w-6xl flex flex-col items-center gap-8 md:gap-12"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.2, ease }}
+          className="flex items-center gap-4 mb-5 sm:mb-6"
         >
-          {/* Main Logo - Forced White & Optimized */}
-          <div className="relative w-full aspect-[3/1] max-w-[800px]">
-            <Image
-              src="/assets/LOGO-UMP.webp"
-              alt="UMP Music"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
-              className="object-contain brightness-0 invert opacity-100 drop-shadow-2xl"
-            />
-          </div>
+          <Link href={`/${language}/artists`}>
+            <Button className="bg-[#18943A] hover:bg-[#147a30] text-white font-bold tracking-[0.12em] uppercase h-10 sm:h-11 px-6 sm:px-8 text-[10px] sm:text-[11px] transition-all hover:scale-[1.02] active:scale-[0.98]">
+              {cta}
+            </Button>
+          </Link>
+          <button
+            onClick={() => {
+              if (videoRef.current) {
+                videoRef.current.muted = !muted;
+                setMuted(!muted);
+              }
+            }}
+            className="h-10 w-10 flex items-center justify-center text-white/30 hover:text-white/70 transition-colors"
+            aria-label={muted ? "Unmute" : "Mute"}
+          >
+            {muted ? (
+              <VolumeX className="w-4 h-4" />
+            ) : (
+              <Volume2 className="w-4 h-4" />
+            )}
+          </button>
+        </motion.div>
 
-          {/* Location Emphasis - Requested "Remarcar que es de Limón" */}
-          <div className="flex flex-col items-center gap-2">
-            <h2 className="text-2xl md:text-5xl font-black font-quilon text-white uppercase tracking-[-0.02em] text-center leading-tight">
-              {dict.location_line1}{" "}
-              <span className="text-primary">{dict.location_line2}</span>{" "}
-              <br className="md:hidden" /> {dict.location_line3}
-            </h2>
-            <div className="h-1 w-24 bg-primary rounded-full mt-4" />
-          </div>
-
-          {/* Minimalist tagline / Badge */}
-          <div className="flex items-center gap-4 mt-8 opacity-60">
-            <span className="text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em]">
-              {dict.established}
-            </span>
-          </div>
+        {/* ── SCROLL INDICATOR ── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 0.6 }}
+          className="flex items-center gap-2"
+        >
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <ArrowDown className="w-3 h-3 text-white/20" />
+          </motion.div>
+          <span className="text-[8px] uppercase tracking-[0.25em] text-white/20 font-bold">
+            Scroll
+          </span>
         </motion.div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-      >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
-      </motion.div>
-
-      <style jsx global>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.2;
-          }
-          50% {
-            opacity: 0.4;
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 6s infinite ease-in-out;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 }

@@ -57,7 +57,17 @@
     "location_line1": "Desde",
     "location_line2": "Limón",
     "location_line3": "para el mundo",
-    "established": "EST 2025 • Costa Rica"
+    "established": "EST 2025 • Costa Rica",
+    "brutalist": {
+        "headline_1": "UMP",
+        "headline_2": "MUSIC",
+        "subtext_1": "Definiendo el sonido de Limón.",
+        "subtext_2": "Operando Globalmente.",
+        "subtext_3": "Est. 2025",
+        "cta_roster": "Explorar Roster",
+        "cta_contact": "Iniciar Proyecto",
+        "marquee": "LA NUEVA OLA DE LIMÓN"
+    }
   },
   "footer": {
     "description": "Sello discográfico independiente de Puerto Limón, Costa Rica. Representando la cultura real y el sonido del Caribe.",

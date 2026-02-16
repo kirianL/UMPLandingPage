@@ -62,7 +62,7 @@ export function NewsList({
             <Link
               key={item.id}
               href={`/${lang}/news/${item.slug}`}
-              className="group relative aspect-[4/5] md:aspect-[3/4] overflow-hidden bg-neutral-900 border border-white/5"
+              className="group relative aspect-video overflow-hidden bg-neutral-900 border border-white/5"
             >
               {/* Image with Zoom Effect */}
               {item.image_url ? (

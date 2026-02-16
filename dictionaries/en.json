@@ -57,7 +57,17 @@
     "location_line1": "From",
     "location_line2": "Limón",
     "location_line3": "to the world",
-    "established": "EST 2025 • Costa Rica"
+    "established": "EST 2025 • Costa Rica",
+    "brutalist": {
+        "headline_1": "UMP",
+        "headline_2": "MUSIC",
+        "subtext_1": "Defining the sound of Limón.",
+        "subtext_2": "Operating Globally.",
+        "subtext_3": "Est. 2025",
+        "cta_roster": "Explore Roster",
+        "cta_contact": "Start Project",
+        "marquee": "THE NEW WAVE OF LIMON"
+    }
   },
   "footer": {
     "description": "Independent record label from Puerto Limón, Costa Rica. Representing real culture and the Caribbean sound.",

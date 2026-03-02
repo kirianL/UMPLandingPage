@@ -94,7 +94,12 @@ export default function CreateArtistForm() {
               </div>
             </div>
 
-            {selectedRole === "Asesores" && (
+            {[
+              "Asesores",
+              "Audiovisual",
+              "Administrativo",
+              "Marketing",
+            ].includes(selectedRole) && (
               <div className="space-y-2">
                 <label className="text-sm font-medium text-neutral-300">
                   Cargo / Rol Específico

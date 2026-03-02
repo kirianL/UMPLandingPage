@@ -72,6 +72,7 @@ export default function MarketingProfile({
           <div className="flex justify-between items-center py-3 md:py-4 border-b border-white/10 text-[9px] sm:text-[10px] md:text-xs font-mono uppercase tracking-widest text-neutral-500 relative">
             <span>
               {(
+                (lang === "en" ? artist.tagline_en : artist.tagline_es) ||
                 (lang === "en" && artist.role_en) ||
                 artist.role ||
                 dict.role_marketing ||

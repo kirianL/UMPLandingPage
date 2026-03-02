@@ -251,11 +251,6 @@ export default function DJProfile({
               <div className="absolute top-4 left-4 z-30">
                 <div className="h-2 w-12 bg-purple-500/80" />
               </div>
-              <div className="absolute bottom-4 right-4 z-30 bg-black/80 backdrop-blur-sm px-3 py-1 border border-white/10">
-                <span className="text-[10px] font-mono uppercase text-white tracking-widest">
-                  {dict.fig_profile.replace("PERFIL", "DJ")}
-                </span>
-              </div>
             </div>
           </div>
         </div>

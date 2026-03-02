@@ -1,7 +1,6 @@
 "use client";
 
 import { Artist, Release } from "@/lib/types";
-import Image from "next/image";
 import { ArrowRight, Disc } from "lucide-react";
 import { FaInstagram, FaSpotify, FaApple, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
@@ -120,10 +119,11 @@ export default function AdminProfile({
                 className="inline-flex items-center gap-2 border-l-2 border-yellow-500 pl-3"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                  {(lang === "en" && artist.role_en) ||
+                  {(lang === "en" ? artist.tagline_en : artist.tagline_es) ||
+                    (lang === "en" && artist.role_en) ||
                     artist.role ||
-                    dict.role_audiovisual ||
-                    "AUDIOVISUAL"}
+                    dict.role_admin ||
+                    "ADMINISTRATIVO"}
                 </span>
               </motion.div>
 
@@ -224,13 +224,10 @@ export default function AdminProfile({
                 transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               >
                 {artist.photo_url ? (
-                  <Image
+                  <img
                     src={artist.photo_url}
                     alt={artist.name}
-                    fill
-                    className="object-cover transition-all duration-700"
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="w-full h-full object-cover transition-all duration-700"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-neutral-800">

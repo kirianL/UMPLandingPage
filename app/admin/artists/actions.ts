@@ -70,7 +70,8 @@ export async function createArtist(formData: FormData) {
     };
   }
 
-  revalidatePath("/artists");
+  revalidatePath("/[lang]/artists", "page");
+  revalidatePath("/[lang]/artists/[slug]", "page");
   revalidatePath("/admin/artists");
 
   return { success: true, message: "Artista creado correctamente" };
@@ -153,8 +154,8 @@ export async function updateArtist(id: string, formData: FormData) {
     };
   }
 
-  revalidatePath("/artists");
-  revalidatePath(`/artists/${slug}`);
+  revalidatePath("/[lang]/artists", "page");
+  revalidatePath("/[lang]/artists/[slug]", "page");
   revalidatePath("/admin/artists");
 
   return { success: true, message: "Artista actualizado correctamente" };

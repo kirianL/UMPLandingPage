@@ -173,8 +173,13 @@ export default function RosterFilter({
                       {artist.name}
                     </h3>
                     <p className="text-xs sm:text-sm text-primary font-bold font-mono uppercase tracking-[0.1em] sm:tracking-widest line-clamp-2">
-                      {artist.role?.toLowerCase() === "asesores" ||
-                      artist.role?.toLowerCase() === "staff"
+                      {[
+                        "asesores",
+                        "staff",
+                        "audiovisual",
+                        "administrativo",
+                        "marketing",
+                      ].includes(artist.role?.toLowerCase() || "")
                         ? (lang === "en" && artist.tagline_en
                             ? artist.tagline_en
                             : artist.tagline_es) ||

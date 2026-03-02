@@ -55,7 +55,7 @@ export default function CreateArtistForm() {
               <Input
                 name="name"
                 required
-                placeholder="Ej: Xeuz"
+                placeholder=""
                 className="bg-neutral-900 border-neutral-800 text-white"
               />
             </div>
@@ -67,7 +67,7 @@ export default function CreateArtistForm() {
               <Input
                 name="slug"
                 required
-                placeholder="Ej: xeuz"
+                placeholder=""
                 className="bg-neutral-900 border-neutral-800 text-white"
               />
             </div>
@@ -101,7 +101,7 @@ export default function CreateArtistForm() {
                 </label>
                 <Input
                   name="tagline_es"
-                  placeholder="Ej: Consultor Legal, Manager, etc."
+                  placeholder=""
                   className="bg-neutral-900 border-neutral-800 text-white"
                 />
               </div>

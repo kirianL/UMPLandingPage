@@ -168,11 +168,11 @@ export default function RosterFilter({
                   )}
 
                   {/* Info Badge */}
-                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300">
-                    <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-1">
+                  <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300">
+                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase italic tracking-tighter mb-1 line-clamp-2 break-words">
                       {artist.name}
                     </h3>
-                    <p className="text-sm text-primary font-bold font-mono uppercase tracking-widest">
+                    <p className="text-xs sm:text-sm text-primary font-bold font-mono uppercase tracking-[0.1em] sm:tracking-widest line-clamp-2">
                       {artist.role?.toLowerCase() === "asesores" ||
                       artist.role?.toLowerCase() === "staff"
                         ? (lang === "en" && artist.tagline_en

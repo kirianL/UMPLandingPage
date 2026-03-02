@@ -94,9 +94,11 @@
       "artists": "Artists",
       "djs": "DJs",
       "producers": "Producers",
+      "staff": "Staff",
       "role_artist": "Artist",
       "role_dj": "DJ",
       "role_producer": "Producer",
+      "role_staff": "Staff",
       "photo_placeholder": "PHOTO",
       "view_profile": "View Profile",
       "role_default": "UMP Artist",
@@ -143,7 +145,8 @@
       "career_style": "Career // Style",
       "live_label": "Live",
       "role_producer": "PRODUCER",
-      "role_resident_dj": "RESIDENT DJ"
+      "role_resident_dj": "RESIDENT DJ",
+      "role_staff": "STAFF"
     },
     "share_button": {
       "share_text_prefix": "Read this news on UMP Music: ",

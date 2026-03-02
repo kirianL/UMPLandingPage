@@ -61,8 +61,8 @@
     "brutalist": {
         "headline_1": "UMP",
         "headline_2": "MUSIC",
-        "subtext_1": "Definiendo el sonido de Limón.",
-        "subtext_2": "Operando Globalmente.",
+        "subtext_1": "Del town para el mundo",
+        "subtext_2": "",
         "subtext_3": "Est. 2025",
         "cta_roster": "Explorar Roster",
         "cta_contact": "Iniciar Proyecto",
@@ -94,9 +94,11 @@
       "artists": "Artistas",
       "djs": "DJs",
       "producers": "Productores",
+      "staff": "Staff",
       "role_artist": "Artista",
       "role_dj": "DJ",
       "role_producer": "Productor",
+      "role_staff": "Staff",
       "photo_placeholder": "FOTO",
       "view_profile": "Ver Perfil",
       "role_default": "Artista UMP",
@@ -143,7 +145,8 @@
       "career_style": "Trayectoria // Estilo",
       "live_label": "En Vivo",
       "role_producer": "PRODUCTOR",
-      "role_resident_dj": "DJ RESIDENTE"
+      "role_resident_dj": "DJ RESIDENTE",
+      "role_staff": "STAFF"
     },
     "share_button": {
       "share_text_prefix": "Lee esta noticia en UMP Music: ",

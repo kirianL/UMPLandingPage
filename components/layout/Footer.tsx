@@ -30,7 +30,7 @@ export default function Footer({
             <Link href={`/${lang}`} className="flex items-center gap-2 mb-4">
               <div className="relative h-14 w-40">
                 <Image
-                  src="/assets/LOGO-UMP.webp"
+                  src="/assets/"
                   alt="UMP Music Logo"
                   fill
                   className="object-contain object-left invert brightness-0"

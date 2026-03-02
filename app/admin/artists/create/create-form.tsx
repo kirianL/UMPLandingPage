@@ -84,6 +84,7 @@ export default function CreateArtistForm() {
                   <option value="Artista">Artista</option>
                   <option value="DJ">DJ</option>
                   <option value="Productor">Productor</option>
+                  <option value="Staff">Staff</option>
                 </select>
               </div>
             </div>

@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { Artist } from "@/lib/types";
 import Link from "next/link";
-import { ArrowRight, Disc, Mic2, Music } from "lucide-react";
+import { ArrowRight, Disc, Mic2, Music, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type FilterType = "all" | "artista" | "dj" | "productor";
+type FilterType = "all" | "artista" | "dj" | "productor" | "staff";
 
 import { useParams } from "next/navigation";
 
@@ -22,9 +22,11 @@ export default function RosterFilter({
     artists: string;
     djs: string;
     producers: string;
+    staff: string;
     role_artist: string;
     role_dj: string;
     role_producer: string;
+    role_staff: string;
     photo_placeholder: string;
     view_profile: string;
     role_default: string;
@@ -41,6 +43,8 @@ export default function RosterFilter({
     if (r.includes("productor") || r.includes("producer"))
       return dict.role_producer;
     if (r.includes("dj")) return dict.role_dj;
+    if (r.includes("staff") || r.includes("equipo") || r.includes("manager"))
+      return dict.role_staff;
     return dict.role_artist;
   };
 
@@ -55,6 +59,7 @@ export default function RosterFilter({
     { id: "artista", label: dict.artists, icon: Mic2 },
     { id: "dj", label: dict.djs, icon: Disc },
     { id: "productor", label: dict.producers, icon: Music },
+    { id: "staff", label: dict.staff, icon: Briefcase },
   ];
 
   return (

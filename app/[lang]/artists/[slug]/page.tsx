@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ArtistProfile from "@/components/team/ArtistProfile";
 import DJProfile from "@/components/team/DJProfile";
 import ProducerProfile from "@/components/team/ProducerProfile";
+import StaffProfile from "@/components/team/StaffProfile";
 import { getDictionary } from "@/lib/dictionaries";
 
 interface ArtistWithReleases extends Artist {
@@ -108,6 +109,21 @@ export default async function ArtistDetailPage({
   ) {
     return (
       <ProducerProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
+  }
+
+  if (
+    role.includes("staff") ||
+    role.includes("equipo") ||
+    role.includes("manager") ||
+    role.includes("director")
+  ) {
+    return (
+      <StaffProfile
         artist={artist}
         lang={lang}
         dict={dict.components.artist_profile}

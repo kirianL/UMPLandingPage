@@ -70,11 +70,9 @@ export function HeroSection({ dict }: { dict: any }) {
   const sub =
     t.subtext_1 ||
     (language === "es"
-      ? "Definiendo el sonido de Limón."
-      : "Defining the sound of Limón.");
-  const sub2 =
-    t.subtext_2 ||
-    (language === "es" ? "Operando globalmente." : "Operating globally.");
+      ? "Del town para el mundo"
+      : "From the town to the world");
+  const sub2 = t.subtext_2 || "";
   const cta =
     t.cta_roster || (language === "es" ? "Explorar Roster" : "Explore Roster");
 
@@ -137,7 +135,8 @@ export function HeroSection({ dict }: { dict: any }) {
             transition={{ duration: 0.5, delay: 1, ease }}
             className="text-[12px] sm:text-[13px] md:text-sm text-white/40 leading-relaxed max-w-xs"
           >
-            {sub} <span className="text-white/65 font-medium">{sub2}</span>
+            {sub}{" "}
+            {sub2 && <span className="text-white/65 font-medium">{sub2}</span>}
           </motion.p>
         </div>
 

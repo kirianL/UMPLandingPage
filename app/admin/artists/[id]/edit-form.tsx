@@ -121,6 +121,7 @@ export default function EditArtistForm({ artist }: { artist: any }) {
                   <option value="Artista">Artista</option>
                   <option value="DJ">DJ</option>
                   <option value="Productor">Productor</option>
+                  <option value="Staff">Staff</option>
                 </select>
               </div>
             </div>

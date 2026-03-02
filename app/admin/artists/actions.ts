@@ -17,6 +17,9 @@ export async function createArtist(formData: FormData) {
     DJ: "DJ",
     Productor: "Producer",
     Asesores: "Advisor",
+    Audiovisual: "Audiovisual",
+    Administrativo: "Administrative",
+    Marketing: "Marketing",
   };
   const role_en = roleMap[role] || role; // Fallback to same value if not in map
   const tagline_es = (formData.get("tagline_es") as string)?.trim();
@@ -86,6 +89,9 @@ export async function updateArtist(id: string, formData: FormData) {
     DJ: "DJ",
     Productor: "Producer",
     Asesores: "Advisor",
+    Audiovisual: "Audiovisual",
+    Administrativo: "Administrative",
+    Marketing: "Marketing",
   };
   const role_en = roleMap[role] || role;
   const tagline_es = (formData.get("tagline_es") as string)?.trim();

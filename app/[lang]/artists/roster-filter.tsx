@@ -3,11 +3,28 @@
 import { useState } from "react";
 import { Artist } from "@/lib/types";
 import Link from "next/link";
-import { ArrowRight, Disc, Mic2, Music, Briefcase } from "lucide-react";
+import {
+  ArrowRight,
+  Disc,
+  Mic2,
+  Music,
+  Briefcase,
+  Video,
+  ClipboardList,
+  Megaphone,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type FilterType = "all" | "artista" | "dj" | "productor" | "asesores";
+type FilterType =
+  | "all"
+  | "artista"
+  | "dj"
+  | "productor"
+  | "asesores"
+  | "audiovisual"
+  | "administrativo"
+  | "marketing";
 
 import { useParams } from "next/navigation";
 
@@ -23,10 +40,16 @@ export default function RosterFilter({
     djs: string;
     producers: string;
     staff: string;
+    audiovisual: string;
+    administrative: string;
+    marketing: string;
     role_artist: string;
     role_dj: string;
     role_producer: string;
     role_staff: string;
+    role_audiovisual: string;
+    role_admin: string;
+    role_marketing: string;
     photo_placeholder: string;
     view_profile: string;
     role_default: string;
@@ -45,6 +68,10 @@ export default function RosterFilter({
     if (r.includes("dj")) return dict.role_dj;
     if (r.includes("asesores") || r.includes("asesor") || r.includes("staff"))
       return dict.role_staff;
+    if (r.includes("audiovisual")) return dict.role_audiovisual;
+    if (r.includes("administrativo") || r.includes("administrative"))
+      return dict.role_admin;
+    if (r.includes("marketing")) return dict.role_marketing;
     return dict.role_artist;
   };
 
@@ -60,6 +87,9 @@ export default function RosterFilter({
     { id: "dj", label: dict.djs, icon: Disc },
     { id: "productor", label: dict.producers, icon: Music },
     { id: "asesores", label: dict.staff, icon: Briefcase },
+    { id: "audiovisual", label: dict.audiovisual, icon: Video },
+    { id: "administrativo", label: dict.administrative, icon: ClipboardList },
+    { id: "marketing", label: dict.marketing, icon: Megaphone },
   ];
 
   return (

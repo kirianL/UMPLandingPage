@@ -6,6 +6,9 @@ import ArtistProfile from "@/components/team/ArtistProfile";
 import DJProfile from "@/components/team/DJProfile";
 import ProducerProfile from "@/components/team/ProducerProfile";
 import StaffProfile from "@/components/team/StaffProfile";
+import AudiovisualProfile from "@/components/team/AudiovisualProfile";
+import AdminProfile from "@/components/team/AdminProfile";
+import MarketingProfile from "@/components/team/MarketingProfile";
 import { getDictionary } from "@/lib/dictionaries";
 
 interface ArtistWithReleases extends Artist {
@@ -109,6 +112,36 @@ export default async function ArtistDetailPage({
   ) {
     return (
       <ProducerProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
+  }
+
+  if (role.includes("audiovisual")) {
+    return (
+      <AudiovisualProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
+  }
+
+  if (role.includes("administrativo") || role.includes("administrative")) {
+    return (
+      <AdminProfile
+        artist={artist}
+        lang={lang}
+        dict={dict.components.artist_profile}
+      />
+    );
+  }
+
+  if (role.includes("marketing")) {
+    return (
+      <MarketingProfile
         artist={artist}
         lang={lang}
         dict={dict.components.artist_profile}

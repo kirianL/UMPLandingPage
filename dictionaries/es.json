@@ -95,6 +95,9 @@
       "djs": "DJ's",
       "producers": "Productores",
       "staff": "Asesores",
+      "audiovisual": "Audiovisual",
+      "administrative": "Administrativo",
+      "marketing": "Marketing",
       "role_artist": "Artista",
       "role_dj": "DJ",
       "role_producer": "Productor",
@@ -146,7 +149,10 @@
       "live_label": "En Vivo",
       "role_producer": "Productor",
       "role_resident_dj": "DJ",
-      "role_staff": "Asesor"
+      "role_staff": "Asesor",
+      "role_audiovisual": "Audiovisual",
+      "role_admin": "Administrativo",
+      "role_marketing": "Marketing"
     },
     "share_button": {
       "share_text_prefix": "Lee esta noticia en UMP Music: ",

@@ -70,7 +70,16 @@ export default function StaffProfile({
         {/* Header Bar */}
         <div className="container mx-auto px-4 z-10">
           <div className="flex justify-between items-center py-3 md:py-4 border-b border-white/10 text-[9px] sm:text-[10px] md:text-xs font-mono uppercase tracking-widest text-neutral-500 relative">
-            <span>STAFF // {artist.name}</span>
+            <span>
+              {(
+                (lang === "en" ? artist.tagline_en : artist.tagline_es) ||
+                (lang === "en" && artist.role_en) ||
+                artist.role ||
+                dict.role_staff ||
+                "STAFF"
+              ).toUpperCase()}{" "}
+              // {artist.name}
+            </span>
             <span className="hidden md:inline absolute left-1/2 -translate-x-1/2">
               EST // {startYear}
             </span>
@@ -111,7 +120,8 @@ export default function StaffProfile({
                 className="inline-flex items-center gap-2 border-l-2 border-red-500 pl-3"
               >
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
-                  {(lang === "en" && artist.role_en) ||
+                  {(lang === "en" ? artist.tagline_en : artist.tagline_es) ||
+                    (lang === "en" && artist.role_en) ||
                     artist.role ||
                     dict.role_staff ||
                     "STAFF"}

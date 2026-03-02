@@ -117,6 +117,8 @@ export default async function ArtistDetailPage({
   }
 
   if (
+    role.includes("asesores") ||
+    role.includes("asesor") ||
     role.includes("staff") ||
     role.includes("equipo") ||
     role.includes("manager") ||

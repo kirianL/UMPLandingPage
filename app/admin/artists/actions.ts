@@ -16,8 +16,11 @@ export async function createArtist(formData: FormData) {
     Artista: "Artist",
     DJ: "DJ",
     Productor: "Producer",
+    Asesores: "Advisor",
   };
   const role_en = roleMap[role] || role; // Fallback to same value if not in map
+  const tagline_es = (formData.get("tagline_es") as string)?.trim();
+  const tagline_en = (formData.get("tagline_en") as string)?.trim();
   const bio_es = (formData.get("bio_es") as string)?.trim();
   const bio_en = (formData.get("bio_en") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
@@ -44,6 +47,8 @@ export async function createArtist(formData: FormData) {
     slug,
     role,
     role_en,
+    tagline_es,
+    tagline_en,
     photo_url,
     bio_es,
     bio_en,
@@ -80,8 +85,11 @@ export async function updateArtist(id: string, formData: FormData) {
     Artista: "Artist",
     DJ: "DJ",
     Productor: "Producer",
+    Asesores: "Advisor",
   };
   const role_en = roleMap[role] || role;
+  const tagline_es = (formData.get("tagline_es") as string)?.trim();
+  const tagline_en = (formData.get("tagline_en") as string)?.trim();
   const bio_es = (formData.get("bio_es") as string)?.trim();
   const bio_en = (formData.get("bio_en") as string)?.trim();
   const instagram_url = (formData.get("instagram_url") as string)?.trim();
@@ -109,6 +117,8 @@ export async function updateArtist(id: string, formData: FormData) {
     slug,
     role,
     role_en,
+    tagline_es,
+    tagline_en,
     bio_es,
     bio_en,
     instagram_url,

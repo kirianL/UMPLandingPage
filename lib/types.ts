@@ -2,6 +2,8 @@ export type Artist = {
   id: string;
   slug: string;
   name: string;
+  tagline_es: string | null;
+  tagline_en: string | null;
   role: string | null;
   role_en: string | null;
   bio_es: string | null;

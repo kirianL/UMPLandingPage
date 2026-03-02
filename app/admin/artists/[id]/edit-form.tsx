@@ -12,6 +12,7 @@ import { toast } from "sonner"; // Assuming sonner based on typical shadcn setup
 export default function EditArtistForm({ artist }: { artist: any }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [selectedRole, setSelectedRole] = useState(artist.role || "Artista");
 
   async function handleSubmit(formData: FormData) {
     setLoading(true);
@@ -115,16 +116,31 @@ export default function EditArtistForm({ artist }: { artist: any }) {
                 </label>
                 <select
                   name="role"
-                  defaultValue={artist.role || "Artista"}
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
                   className="flex h-10 w-full rounded-md border border-neutral-800 bg-neutral-900 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="Artista">Artista</option>
                   <option value="DJ">DJ</option>
                   <option value="Productor">Productor</option>
-                  <option value="Staff">Staff</option>
+                  <option value="Asesores">Asesores</option>
                 </select>
               </div>
             </div>
+
+            {selectedRole === "Asesores" && (
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-neutral-300">
+                  Cargo / Rol Específico
+                </label>
+                <Input
+                  name="tagline_es"
+                  defaultValue={artist.tagline_es || ""}
+                  placeholder="Ej: Consultor Legal, Manager, etc."
+                  className="bg-neutral-900 border-neutral-800 text-white"
+                />
+              </div>
+            )}
 
             <div className="space-y-2">
               <label className="text-sm font-medium text-neutral-300">

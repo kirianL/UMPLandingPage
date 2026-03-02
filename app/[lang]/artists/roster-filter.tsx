@@ -7,7 +7,7 @@ import { ArrowRight, Disc, Mic2, Music, Briefcase } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-type FilterType = "all" | "artista" | "dj" | "productor" | "staff";
+type FilterType = "all" | "artista" | "dj" | "productor" | "asesores";
 
 import { useParams } from "next/navigation";
 
@@ -43,7 +43,7 @@ export default function RosterFilter({
     if (r.includes("productor") || r.includes("producer"))
       return dict.role_producer;
     if (r.includes("dj")) return dict.role_dj;
-    if (r.includes("staff") || r.includes("equipo") || r.includes("manager"))
+    if (r.includes("asesores") || r.includes("asesor") || r.includes("staff"))
       return dict.role_staff;
     return dict.role_artist;
   };
@@ -59,7 +59,7 @@ export default function RosterFilter({
     { id: "artista", label: dict.artists, icon: Mic2 },
     { id: "dj", label: dict.djs, icon: Disc },
     { id: "productor", label: dict.producers, icon: Music },
-    { id: "staff", label: dict.staff, icon: Briefcase },
+    { id: "asesores", label: dict.staff, icon: Briefcase },
   ];
 
   return (
@@ -143,7 +143,13 @@ export default function RosterFilter({
                       {artist.name}
                     </h3>
                     <p className="text-sm text-primary font-bold font-mono uppercase tracking-widest">
-                      {getTranslatedRole(artist.role)}
+                      {artist.role?.toLowerCase() === "asesores" ||
+                      artist.role?.toLowerCase() === "staff"
+                        ? (lang === "en" && artist.tagline_en
+                            ? artist.tagline_en
+                            : artist.tagline_es) ||
+                          getTranslatedRole(artist.role)
+                        : getTranslatedRole(artist.role)}
                     </p>
                   </div>
                 </div>

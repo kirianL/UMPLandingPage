@@ -23,17 +23,17 @@ export default function Footer({
   lang: string;
 }) {
   return (
-    <footer className="w-full bg-black border-t border-white/10 py-10">
+    <footer className="w-full bg-background border-t border-border py-10">
       <div className="container px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
             <Link href={`/${lang}`} className="flex items-center gap-2 mb-4">
               <div className="relative h-14 w-40">
                 <Image
-                  src="/assets/"
+                  src="/assets/UMP LOGO NEGATIVO.webp"
                   alt="UMP Music Logo"
                   fill
-                  className="object-contain object-left invert brightness-0"
+                  className="object-contain object-left brightness-0 dark:invert"
                   sizes="(max-width: 768px) 120px, 160px"
                 />
               </div>
@@ -44,7 +44,7 @@ export default function Footer({
           </div>
 
           <div>
-            <h3 className="font-bold text-white mb-4 tracking-wider">
+            <h3 className="font-bold text-foreground mb-4 tracking-wider">
               {dict.explore}
             </h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -84,7 +84,7 @@ export default function Footer({
           </div>
 
           <div>
-            <h3 className="font-bold text-white mb-4 tracking-wider">
+            <h3 className="font-bold text-foreground mb-4 tracking-wider">
               {dict.contact}
             </h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -124,7 +124,7 @@ export default function Footer({
           </div>
         </div>
 
-        <Separator className="bg-white/10 mb-8" />
+        <Separator className="bg-border mb-8" />
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>
@@ -137,16 +137,16 @@ export default function Footer({
                 href="https://kirian.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-white transition-colors underline"
+                className="hover:text-foreground transition-colors underline"
               >
                 kirian.dev
               </a>{" "}
               de UMP
             </span>
-            <Separator orientation="vertical" className="h-4 bg-white/10" />
+            <Separator orientation="vertical" className="h-4 bg-border" />
             <Link
               href={`/${lang}/login`}
-              className="hover:text-white transition-colors"
+              className="hover:text-foreground transition-colors"
             >
               {dict.admin}
             </Link>

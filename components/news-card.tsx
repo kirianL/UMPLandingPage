@@ -12,7 +12,6 @@ export default function NewsCard({
 }: {
   news: Pick<
     News,
-    // Add new optional fields to Pick
     | "id"
     | "title"
     | "slug"
@@ -35,7 +34,7 @@ export default function NewsCard({
       className="group block"
       prefetch={true}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-neutral-900 border border-white/10 mb-4">
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted border border-border mb-4">
         {news.image_url ? (
           <Image
             src={news.image_url}
@@ -45,18 +44,18 @@ export default function NewsCard({
             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-neutral-900">
-            <span className="font-mono text-xs text-neutral-600 uppercase tracking-widest">
+          <div className="w-full h-full flex items-center justify-center bg-muted">
+            <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
               {dict.no_image}
             </span>
           </div>
         )}
 
         {/* Date Badge */}
-        <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md border border-white/10 px-3 py-1">
+        <div className="absolute top-4 left-4 bg-background/80 backdrop-blur-md border border-border px-3 py-1">
           <time
             dateTime={news.published_at || news.created_at}
-            className="text-[10px] font-mono text-white uppercase tracking-wider"
+            className="text-[10px] font-mono text-foreground uppercase tracking-wider"
             suppressHydrationWarning
           >
             {new Date(news.published_at || news.created_at).toLocaleDateString(
@@ -73,17 +72,17 @@ export default function NewsCard({
       </div>
 
       <div className="space-y-3">
-        <h3 className="text-xl font-bold text-white uppercase leading-tight group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="text-xl font-bold text-foreground uppercase leading-tight group-hover:text-primary transition-colors line-clamp-2">
           {lang === "en" && news.title_en ? news.title_en : news.title}
         </h3>
         {(lang === "en" && news.excerpt_en
           ? news.excerpt_en
           : news.excerpt) && (
-          <p className="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
             {lang === "en" && news.excerpt_en ? news.excerpt_en : news.excerpt}
           </p>
         )}
-        <div className="flex items-center gap-2 text-xs font-mono text-neutral-500 uppercase tracking-widest group-hover:text-white transition-colors">
+        <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground uppercase tracking-widest group-hover:text-foreground transition-colors">
           <span>{dict.read_article}</span>
           <ArrowUpRight className="h-3 w-3" />
         </div>

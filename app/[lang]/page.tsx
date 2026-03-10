@@ -12,10 +12,12 @@ export const revalidate = 60; // Revalidate every 60 seconds
 async function getFeaturedArtists() {
   const supabase = await createClient();
   try {
+    const featuredSlugs = ["milletck", "Kenyari", "jdhustle", "julyandrick"];
     const { data: artists, error } = await supabase
       .from("artists")
       .select("id, name, slug, photo_url, role")
       .eq("is_active", true)
+      .in("slug", featuredSlugs)
       .limit(4);
 
     if (error) {
@@ -39,7 +41,7 @@ async function getLatestNews() {
       )
       .eq("is_published", true)
       .order("published_at", { ascending: false })
-      .limit(5); // Increased limit for list view
+      .limit(5);
 
     if (error) {
       console.error("Error fetching news:", error);
@@ -66,33 +68,34 @@ export default async function Home({
   const hasArtists = artists && artists.length > 0;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#050505]">
+    <div className="flex flex-col min-h-screen bg-background">
       {/* Hero Section */}
       <HeroSection dict={dict.hero} />
 
       {/* FEATURED ARTISTS - MASONRY / EDITORIAL STYLE */}
-      <section className="py-12 md:py-20 bg-[#050505] relative z-20">
+      <section className="py-12 md:py-20 bg-background relative z-20">
         <div className="container px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-8">
             <div className="space-y-4">
               <span className="text-primary font-mono text-xs uppercase tracking-[0.2em]">
                 {dict.home.featured_subtitle}
               </span>
-              <h2 className="text-4xl md:text-6xl font-black font-quilon text-white tracking-[-0.02em] uppercase leading-[0.9]">
+              <h2 className="text-4xl md:text-6xl font-black font-quilon text-foreground tracking-[-0.02em] uppercase leading-[0.9]">
                 {lang === "es" ? (
                   <>
-                    Nuestras <span className="text-neutral-600">Estrellas</span>
+                    Nuestras{" "}
+                    <span className="text-muted-foreground">Estrellas</span>
                   </>
                 ) : (
                   <>
-                    Our <span className="text-neutral-600">Stars</span>
+                    Our <span className="text-muted-foreground">Stars</span>
                   </>
                 )}
               </h2>
             </div>
             <Button
               variant="outline"
-              className="rounded-full border-white/20 text-white hover:bg-white hover:text-black font-mono text-xs uppercase tracking-widest px-8 hidden md:inline-flex"
+              className="rounded-full border-border text-foreground hover:bg-foreground hover:text-background font-mono text-xs uppercase tracking-widest px-8 hidden md:inline-flex"
               asChild
             >
               <Link href={`/${lang}/artists`}>{dict.home.view_all_team}</Link>
@@ -110,7 +113,7 @@ export default async function Home({
                     idx === 1 ? "" : ""
                   }`}
                 >
-                  <div className="absolute inset-0 bg-neutral-900" />
+                  <div className="absolute inset-0 bg-muted" />
                   {artist.photo_url ? (
                     <Image
                       src={artist.photo_url}
@@ -120,12 +123,12 @@ export default async function Home({
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-neutral-800 font-mono text-xs border border-white/10">
+                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs border border-border">
                       {dict.home.no_image}
                     </div>
                   )}
 
-                  {/* Overlay Info - Adjusted for Mobile readability */}
+                  {/* Overlay Info - Always dark for readability over images */}
                   <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/20 to-transparent">
                     <span className="text-primary font-mono text-[8px] md:text-[10px] uppercase tracking-widest mb-1 md:mb-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-500 delay-100">
                       {artist.role || (lang === "es" ? "Artista" : "Artist")}
@@ -137,8 +140,8 @@ export default async function Home({
                 </Link>
               ))
             ) : (
-              <div className="col-span-3 py-20 text-center border border-dashed border-white/10 rounded-lg">
-                <p className="text-neutral-500 font-mono">
+              <div className="col-span-3 py-20 text-center border border-dashed border-border rounded-lg">
+                <p className="text-muted-foreground font-mono">
                   {dict.home.no_artists}
                 </p>
               </div>
@@ -161,7 +164,7 @@ export default async function Home({
       />
 
       {/* SOCIAL CONNECT */}
-      <section className="py-24 md:py-32 bg-black text-white text-center border-t border-white/10">
+      <section className="py-24 md:py-32 bg-background text-foreground text-center border-t border-border">
         <div className="container px-4 max-w-4xl mx-auto space-y-12">
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-quilon uppercase tracking-tighter leading-[0.9]">
             {lang === "es" ? (
@@ -182,7 +185,7 @@ export default async function Home({
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2"
             >
-              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-foreground text-background flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -200,7 +203,7 @@ export default async function Home({
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
                 </svg>
               </div>
-              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-white transition-all">
+              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-foreground transition-all">
                 Instagram
               </span>
             </a>
@@ -211,7 +214,7 @@ export default async function Home({
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2"
             >
-              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-foreground text-background flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -228,7 +231,7 @@ export default async function Home({
                   <path d="m10 15 5-3-5-3z" />
                 </svg>
               </div>
-              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-white transition-all">
+              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-foreground transition-all">
                 YouTube
               </span>
             </a>
@@ -239,7 +242,7 @@ export default async function Home({
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-4 transition-all hover:-translate-y-2"
             >
-              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-white text-black flex items-center justify-center group-hover:bg-primary group-hover:text-black transition-colors">
+              <div className="h-16 w-16 md:h-20 md:w-20 rounded-full bg-foreground text-background flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -258,7 +261,7 @@ export default async function Home({
                   <path d="M6 8.5c4-2 8-2 12 0" />
                 </svg>
               </div>
-              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-white transition-all">
+              <span className="font-mono text-sm uppercase tracking-widest border-b border-transparent group-hover:border-foreground transition-all">
                 Spotify
               </span>
             </a>

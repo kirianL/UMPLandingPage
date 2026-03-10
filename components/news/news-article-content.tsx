@@ -8,7 +8,7 @@ export default function NewsArticleContent({
   paragraphs,
 }: NewsArticleContentProps) {
   return (
-    <article className="md:col-span-10 prose prose-invert prose-base md:prose-lg max-w-none">
+    <article className="md:col-span-10 prose prose-neutral dark:prose-invert prose-base md:prose-lg max-w-none">
       <style jsx global>{`
         article p:first-of-type::first-letter {
           float: left;
@@ -29,7 +29,7 @@ export default function NewsArticleContent({
         }
 
         article p {
-          color: rgb(212 212 212);
+          color: hsl(var(--foreground) / 0.8);
           line-height: 1.8;
           margin-bottom: 1.5rem;
           font-size: 1.0625rem;
@@ -83,12 +83,12 @@ export default function NewsArticleContent({
         }
 
         article a:hover {
-          color: white;
-          border-bottom-color: white;
+          color: hsl(var(--foreground));
+          border-bottom-color: hsl(var(--foreground));
         }
 
         article strong {
-          color: white;
+          color: hsl(var(--foreground));
           font-weight: 700;
         }
 
@@ -102,7 +102,7 @@ export default function NewsArticleContent({
         }
 
         article blockquote p {
-          color: rgb(229 229 229);
+          color: hsl(var(--foreground) / 0.9);
           font-size: 1.125rem;
         }
 
@@ -113,7 +113,7 @@ export default function NewsArticleContent({
         }
 
         article li {
-          color: rgb(212 212 212);
+          color: hsl(var(--foreground) / 0.8);
           margin-bottom: 0.75rem;
           line-height: 1.8;
         }
@@ -124,7 +124,7 @@ export default function NewsArticleContent({
 
         article img {
           border-radius: 0.5rem;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid hsl(var(--border));
           margin: 2rem 0;
         }
       `}</style>

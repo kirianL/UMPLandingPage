@@ -94,9 +94,9 @@ export default function RosterFilter({
 
   return (
     <div className="space-y-8 md:space-y-12">
-      {/* Filter Tabs - New Style */}
-      <div className="flex flex-wrap items-center gap-6 pb-4 border-b border-white/10">
-        <span className="text-xs font-mono text-neutral-500 uppercase tracking-widest mr-2">
+      {/* Filter Tabs */}
+      <div className="flex flex-wrap items-center gap-6 pb-4 border-b border-border">
+        <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest mr-2">
           {dict.filter_by}
         </span>
         <div className="flex flex-wrap gap-2">
@@ -107,8 +107,8 @@ export default function RosterFilter({
               className={cn(
                 "relative px-4 py-1.5 text-sm font-bold uppercase tracking-wider transition-colors duration-300",
                 filter === tab.id
-                  ? "text-black"
-                  : "text-neutral-400 hover:text-white",
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {filter === tab.id && (
@@ -123,7 +123,9 @@ export default function RosterFilter({
                 <span
                   className={cn(
                     "text-[10px] align-top",
-                    filter === tab.id ? "text-black/60" : "text-neutral-600",
+                    filter === tab.id
+                      ? "text-primary-foreground/60"
+                      : "text-muted-foreground",
                   )}
                 >
                   {tab.id === "all"
@@ -154,7 +156,7 @@ export default function RosterFilter({
                 href={`/${lang}/artists/${artist.slug}`}
                 className="group block h-full"
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 border border-white/5 transition-colors group-hover:border-primary/50 h-full">
+                <div className="relative aspect-[4/5] overflow-hidden bg-muted border border-border transition-colors group-hover:border-primary/50 h-full">
                   {artist.photo_url ? (
                     <img
                       src={artist.photo_url}
@@ -162,12 +164,12 @@ export default function RosterFilter({
                       className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300 ease-out group-hover:scale-105"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-neutral-700 font-mono">
+                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono">
                       [ {dict.photo_placeholder} {artist.name.toUpperCase()} ]
                     </div>
                   )}
 
-                  {/* Info Badge */}
+                  {/* Info Badge - Always dark overlay for readability */}
                   <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 bg-gradient-to-t from-black via-black/80 to-transparent z-0 transition-all duration-300">
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white uppercase italic tracking-tighter mb-1 line-clamp-2 break-words">
                       {artist.name}
@@ -197,9 +199,9 @@ export default function RosterFilter({
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="col-span-full py-20 text-center border border-dashed border-neutral-800 rounded-lg"
+            className="col-span-full py-20 text-center border border-dashed border-border rounded-lg"
           >
-            <p className="text-neutral-500 font-mono">{dict.no_results}</p>
+            <p className="text-muted-foreground font-mono">{dict.no_results}</p>
           </motion.div>
         )}
       </div>

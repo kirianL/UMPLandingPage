@@ -50,7 +50,7 @@ export default function ShareButton({ title, url, dict }: ShareButtonProps) {
       variant="ghost"
       size="icon"
       onClick={handleShare}
-      className="h-8 w-8 hover:bg-white/10 hover:text-primary rounded-full transition-colors"
+      className="h-8 w-8 hover:bg-foreground/10 hover:text-primary rounded-full transition-colors"
       title={dict.button_title}
     >
       {copied ? <Check className="h-4 w-4" /> : <Share2 className="h-4 w-4" />}

@@ -92,8 +92,25 @@
     "videos_title": "PRODUCTIONS"
   },
   "contact": {
-    "title": "Contact",
-    "wip_message": "Contact form and booking coming soon."
+    "header_sub": "[ BOOKINGS & INQUIRIES ]",
+    "title_1": "LET'S",
+    "title_2": "TALK",
+    "hero_desc": "Whether it's for bookings, distribution, or press, our team is ready to analyze and propel your next big project.",
+    "form_name": "FULL NAME",
+    "form_email": "EMAIL ADDRESS",
+    "form_subject": "SUBJECT",
+    "form_subject_opt1": "Booking / Contracting",
+    "form_subject_opt2": "Press / PR",
+    "form_subject_opt3": "Music Distribution",
+    "form_subject_opt4": "General / Other",
+    "form_message": "YOUR MESSAGE",
+    "form_submit": "SEND MESSAGE",
+    "info_title": "DIRECT CONTACT",
+    "info_email_label": "EMAIL / BOOKING",
+    "info_email_val": "info@umpmusic.com",
+    "info_hq_label": "HEADQUARTERS",
+    "info_hq_val": "Limón, Costa Rica",
+    "info_social_label": "SOCIAL MEDIA"
   },
   "hero": {
     "location_line1": "From",

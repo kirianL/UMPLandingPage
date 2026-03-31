@@ -92,8 +92,25 @@
     "videos_title": "PRODUCCIONES"
   },
   "contact": {
-    "title": "Contacto",
-    "wip_message": "Formulario de contacto y booking próximamente."
+    "header_sub": "[ BOOKINGS & INQUIRIES ]",
+    "title_1": "HABLEMOS",
+    "title_2": "",
+    "hero_desc": "Ya sea para contrataciones, distribución o prensa, nuestro equipo está listo para analizar y potenciar el siguiente gran proyecto.",
+    "form_name": "NOMBRE COMPLETO",
+    "form_email": "CORREO ELECTRÓNICO",
+    "form_subject": "ASUNTO",
+    "form_subject_opt1": "Booking / Contratación",
+    "form_subject_opt2": "Prensa / PR",
+    "form_subject_opt3": "Distribución Musical",
+    "form_subject_opt4": "General / Otro",
+    "form_message": "TU MENSAJE",
+    "form_submit": "ENVIAR MENSAJE",
+    "info_title": "CONTACTO DIRECTO",
+    "info_email_label": "EMAIL / BOOKING",
+    "info_email_val": "info@umpmusic.com",
+    "info_hq_label": "BASE DE OPERACIONES",
+    "info_hq_val": "Limón, Costa Rica",
+    "info_social_label": "REDES SOCIALES"
   },
   "hero": {
     "location_line1": "Desde",

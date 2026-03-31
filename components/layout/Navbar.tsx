@@ -54,11 +54,9 @@ export default function Navbar() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-700 ease-out font-quilon",
-        !mounted
-          ? "opacity-0 -translate-y-3"
-          : scrolled
-            ? "opacity-100 translate-y-0 bg-background/60 backdrop-blur-md py-3 border-b border-border"
-            : "opacity-100 translate-y-0 bg-transparent py-5",
+        scrolled
+          ? "bg-background/60 backdrop-blur-md py-3 border-b border-border"
+          : "bg-transparent py-5",
       )}
     >
       <div className="container flex items-center justify-between px-6 md:px-12">

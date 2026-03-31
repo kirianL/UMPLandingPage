@@ -36,7 +36,7 @@ export default function NewsContent({ news, dict, lang }: NewsContentProps) {
             className="text-[14vw] sm:text-[12vw] md:text-[9vw] leading-[0.85] font-black font-quilon uppercase tracking-tighter text-foreground text-center sm:text-left drop-shadow-sm flex flex-col items-center sm:items-start"
           >
             <span className="block text-primary">{dict.news.title_1}</span>
-            <span className="block">{dict.news.title_2}</span>
+            {dict.news.title_2 && <span className="block">{dict.news.title_2}</span>}
           </motion.h1>
           
           <div className="mt-12 md:mt-20 flex justify-center sm:justify-start">

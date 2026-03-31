@@ -26,15 +26,17 @@
     "breadcrumb": "Roster / 2026"
   },
   "news": {
-    "title_main": "News",
-    "title_sub": "Latest",
-    "subtitle": "Stay up to date with the latest releases, announcements, and exclusive events from Ultimate Media Production.",
+    "header_archive": "[ ARCHIVE 2026 ]",
+    "header_sub": "[ LATEST RELEASES & EVENTS ]",
+    "title_1": "LATEST",
+    "title_2": "NEWS",
+    "hero_desc": "Stay up to date with the latest releases, announcements and exclusive events from Ultimate Media Production.",
     "breadcrumb": "News / 2026",
-    "no_news": "No news published at the moment.",
+    "no_news": "There are no news published at this time.",
     "back_to_news": "Back to News",
     "featured_image": "Featured Image",
     "share_label": "Share",
-    "read_all_news": "Read All News"
+    "read_all_news": "View All News"
   },
   "about": {
     "title": "About Us",

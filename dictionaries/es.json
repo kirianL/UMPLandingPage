@@ -26,9 +26,11 @@
     "breadcrumb": "Equipo / 2026"
   },
   "news": {
-    "title_main": "Noticias",
-    "title_sub": "Últimas",
-    "subtitle": "Mantente al día con los últimos lanzamientos, anuncios y eventos exclusivos de Ultimate Media Production.",
+    "header_archive": "[ ARCHIVO 2026 ]",
+    "header_sub": "[ LATEST RELEASES & EVENTS ]",
+    "title_1": "NOTI",
+    "title_2": "CIAS",
+    "hero_desc": "Mantente al día con los últimos lanzamientos, anuncios y eventos exclusivos de Ultimate Media Production.",
     "breadcrumb": "Noticias / 2026",
     "no_news": "No hay noticias publicadas en este momento.",
     "back_to_news": "Volver a Noticias",

@@ -28,9 +28,9 @@ export default function StaffProfile({
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_staff || "STAFF");
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
+    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans">
       {/* HERO SECTION */}
-      <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-hidden">
+      <section className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/backgrounds/Backgroud_blue.png"
@@ -60,7 +60,7 @@ export default function StaffProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85svh] flex justify-center pointer-events-none">
+        <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0 }}

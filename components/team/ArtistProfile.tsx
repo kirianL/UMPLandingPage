@@ -36,9 +36,9 @@ export default function ArtistProfile({
   const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : "group-hover:${themeText}";
 
   return (
-    <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>
+    <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans`}>
       {/* HERO SECTION */}
-      <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-hidden">
+      <section className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -71,7 +71,7 @@ export default function ArtistProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85svh] flex justify-center pointer-events-none">
+        <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0 }}

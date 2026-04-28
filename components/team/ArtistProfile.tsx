@@ -38,7 +38,7 @@ export default function ArtistProfile({
   return (
     <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>
       {/* HERO SECTION */}
-      <section className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden">
+      <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -57,7 +57,7 @@ export default function ArtistProfile({
 
 
         {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[25vh] md:pb-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[25svh] md:pb-0">
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -71,7 +71,7 @@ export default function ArtistProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-[15vh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55vh] md:h-[85vh] flex justify-center pointer-events-none">
+        <div className="absolute bottom-[15svh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55svh] md:h-[85svh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0 }}

@@ -93,8 +93,6 @@
     scrollbar-gutter: stable;
     /* Force GPU compositing for the whole page */
     -webkit-backface-visibility: hidden;
-    /* Prevent mobile browser address bar from causing layout jumps */
-    overflow-anchor: none;
   }
   body {
     @apply bg-background text-foreground;

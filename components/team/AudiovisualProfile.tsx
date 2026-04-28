@@ -28,9 +28,9 @@ export default function AudiovisualProfile({
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_audiovisual || "AUDIOVISUAL");
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans">
+    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
       {/* HERO SECTION */}
-      <section className="relative w-full h-screen flex flex-col items-center justify-end overflow-hidden">
+      <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-x-clip overflow-y-visible">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/backgrounds/Backgroud_blue.png"

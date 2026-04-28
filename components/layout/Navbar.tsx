@@ -89,7 +89,7 @@ export default function Navbar() {
               href={link.path}
               prefetch={true}
               className={cn(
-                "text-sm font-bold uppercase tracking-widest transition-all duration-300 relative group",
+                "text-sm font-bold uppercase tracking-widest transition-all duration-300 relative group inline-block hover:-rotate-3 hover:scale-110",
                 isActive(link.path)
                   ? isProfilePage ? "text-[#bbdbfa]" : "text-primary"
                   : isProfilePage ? "text-white/70 hover:text-white" : "text-foreground/70 hover:text-foreground",

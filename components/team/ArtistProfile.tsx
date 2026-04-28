@@ -26,6 +26,10 @@ export default function ArtistProfile({
 
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
 
+  const bgImage = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille")
+    ? "/assets/backgrounds/Background_purple.png"
+    : "/assets/backgrounds/Backgroud_blue.png";
+
   return (
     <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
       {/* HERO SECTION */}
@@ -33,7 +37,7 @@ export default function ArtistProfile({
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/backgrounds/Backgroud_blue.png"
+            src={bgImage}
             alt="Atmospheric Background"
             fill
             className="object-cover opacity-80"

@@ -26,7 +26,7 @@ export default function DJProfile({
 
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
 
-  const bgImage = artist.name.toLowerCase().includes("mille")
+  const bgImage = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille")
     ? "/assets/backgrounds/Background_purple.png"
     : "/assets/backgrounds/Backgroud_blue.png";
 

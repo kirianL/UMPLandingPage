@@ -47,8 +47,8 @@ export default function ArtistProfile({
         {/* Top Header */}
 
 
-        {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none">
+        {/* Huge Text (Mobile: Front, Desktop: Behind) */}
+        <div className="absolute inset-0 z-20 md:z-10 flex items-center justify-center overflow-hidden pointer-events-none">
           <motion.h1 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -59,8 +59,8 @@ export default function ArtistProfile({
           </motion.h1>
         </div>
 
-        {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[75vh] md:h-[85vh] flex justify-center pointer-events-none">
+        {/* Artist Image (Mobile: Behind, Desktop: Front) */}
+        <div className="absolute bottom-0 z-10 md:z-20 w-full max-w-[90%] md:max-w-3xl h-[75vh] md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0, y: 100 }}
@@ -89,15 +89,15 @@ export default function ArtistProfile({
         </div>
 
         {/* Bottom Hero Info */}
-        <div className="relative z-30 w-full container mx-auto px-6 md:px-12 pb-8 md:pb-12 flex flex-col md:flex-row justify-between items-end gap-6 md:gap-8 border-b border-white/5 md:border-none mb-8 md:mb-0">
+        <div className="relative z-30 w-full container mx-auto px-6 md:px-12 pb-8 md:pb-12 flex flex-col items-center md:flex-row md:justify-between md:items-end gap-6 md:gap-8 border-b border-white/5 md:border-none mb-8 md:mb-0">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col gap-3 max-w-md w-full md:w-1/2 pb-6 md:pb-0"
+            className="flex flex-col items-center md:items-start text-center md:text-left gap-3 max-w-md w-full md:w-1/2 pb-6 md:pb-0"
           >
-            <div className="flex items-center gap-3">
-              <div className="h-px w-6 bg-[#bbdbfa]/60"></div>
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="hidden md:block h-px w-6 bg-[#bbdbfa]/60"></div>
               <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
                 {artist.role || dict.role_default || "ARTISTA"}
               </span>
@@ -111,7 +111,7 @@ export default function ArtistProfile({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase w-full md:w-auto justify-start md:justify-end"
+            className="flex flex-wrap gap-x-6 gap-y-2 text-[10px] md:text-xs font-mono tracking-[0.2em] uppercase w-full md:w-auto justify-center md:justify-end"
           >
             {artist.spotify_url && (
               <a href={artist.spotify_url} target="_blank" rel="noreferrer" className="hover:text-white text-[#bbdbfa] transition-colors">

@@ -60,7 +60,7 @@ export default function StaffProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-[20vh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55vh] md:h-[85vh] flex justify-center pointer-events-none">
+        <div className="absolute bottom-[15vh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55vh] md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0, y: 100 }}

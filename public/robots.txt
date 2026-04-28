@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block admin and auth routes from indexing
+Disallow: /admin/
+Disallow: /auth/
+Disallow: /api/
+Disallow: /es/login
+Disallow: /en/login
+
+# Sitemap
+Sitemap: https://umpmusic.com/sitemap.xml
+
+# Crawl delay to respect server resources
+Crawl-delay: 5

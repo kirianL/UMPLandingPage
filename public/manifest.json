@@ -1,0 +1,21 @@
+{
+  "name": "UMPmusic",
+  "short_name": "UMPmusic",
+  "description": "Sello discográfico independiente de Limón, Costa Rica.",
+  "start_url": "/es",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#18943A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "lang": "es-CR",
+  "scope": "/"
+}

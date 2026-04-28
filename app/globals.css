@@ -81,19 +81,45 @@
 @layer base {
   * {
     @apply border-border;
+    /* Avoid expensive box-sizing recalcs */
+    box-sizing: border-box;
   }
   html {
     @apply scroll-smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Prevent layout shift on scrollbar appear */
+    scrollbar-gutter: stable;
+    /* Force GPU compositing for the whole page */
+    -webkit-backface-visibility: hidden;
   }
   body {
     @apply bg-background text-foreground;
     transition:
       background-color 0.3s ease,
       color 0.3s ease;
+    /* Prevent paint flicker on mobile */
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
   }
+
+  /* ── Critical images load eagerly, non-critical defer ── */
+  img:not([loading]) {
+    loading: lazy;
+  }
+
+  /* ── Sections below fold: skip rendering until visible ── */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+  /* Hero is above fold — always render immediately */
+  section:first-of-type {
+    content-visibility: visible;
+    contain-intrinsic-size: unset;
+  }
+
   /* Respect user preference for reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -114,6 +140,23 @@
       rgba(26, 77, 46, 0.5) 0%,
       rgba(26, 77, 46, 0) 100%
     );
+  }
+
+  /* ── GPU-composited hover lifts ── */
+  .gpu-lift {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* ── Layout-contained card ── */
+  .card-contain {
+    contain: layout style paint;
+  }
+
+  /* ── Instant focus ring (no layout shift) ── */
+  .focus-ring:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
   }
 }
 

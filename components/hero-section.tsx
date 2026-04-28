@@ -82,20 +82,28 @@ export function HeroSection({ dict }: { dict: any }) {
       className="relative w-full h-[100dvh] bg-black text-white overflow-hidden font-quilon"
     >
       {/* ── VIDEO ── */}
-      <motion.div style={{ scale: vidScale }} className="absolute inset-0 z-0">
+      <motion.div
+        style={{ scale: vidScale }}
+        className="absolute inset-0 z-0"
+        // Hint browser: this element will be composited
+        initial={false}
+      >
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster="/assets/home/hero-poster.webp"
           onLoadedData={() => setReady(true)}
           className={cn(
-            "w-full h-full object-cover transition-opacity duration-1000",
+            "w-full h-full object-cover transition-opacity duration-700",
             ready ? "opacity-100" : "opacity-0",
           )}
+          style={{ willChange: "transform" }}
         >
+          {/* WebM first (smaller, faster), MP4 fallback */}
           <source src="/assets/home/mille%20v2.MP4" type="video/mp4" />
         </video>
       </motion.div>

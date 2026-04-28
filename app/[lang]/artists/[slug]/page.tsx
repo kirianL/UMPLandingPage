@@ -15,7 +15,7 @@ interface ArtistWithReleases extends Artist {
   releases: Release[];
 }
 
-export const revalidate = 60;
+export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
@@ -35,15 +35,39 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; lang: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, lang } = await params;
   const artist = await getArtist(slug);
   if (!artist) return { title: "Artista no encontrado" };
+  const isEn = lang === "en";
 
   return {
-    title: `${artist.name} | UMPmusic`,
-    description: artist.role || `Perfil oficial de ${artist.name} en UMPmusic.`,
+    title: artist.name,
+    description:
+      artist.role ||
+      (isEn
+        ? `Official profile of ${artist.name} at UMPmusic.`
+        : `Perfil oficial de ${artist.name} en UMPmusic.`),
+    openGraph: artist.photo_url
+      ? {
+          images: [
+            {
+              url: artist.photo_url,
+              width: 800,
+              height: 1000,
+              alt: `${artist.name} | UMPmusic`,
+            },
+          ],
+        }
+      : undefined,
+    alternates: {
+      canonical: `/${lang}/artists/${slug}`,
+      languages: {
+        es: `/es/artists/${slug}`,
+        en: `/en/artists/${slug}`,
+      },
+    },
   };
 }
 

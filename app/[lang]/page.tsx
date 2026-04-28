@@ -7,7 +7,7 @@ import Image from "next/image";
 import { HeroSection } from "@/components/hero-section";
 import { NewsList } from "@/components/home/news-list";
 
-export const revalidate = 60; // Revalidate every 60 seconds
+export const revalidate = 300; // Revalidate every 5 minutes — less DB calls, faster TTL
 
 async function getFeaturedArtists() {
   const supabase = await createClient();
@@ -117,10 +117,11 @@ export default async function Home({
                   {artist.photo_url ? (
                     <Image
                       src={artist.photo_url}
-                      alt={artist.name}
+                      alt={`${artist.name} — ${artist.role || "Artista"} | UMPmusic`}
                       fill
-                      sizes="(max-width: 768px) 50vw, 33vw"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono text-xs border border-border">

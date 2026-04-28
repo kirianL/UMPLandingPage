@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface NewsItem {
   id: string;
@@ -66,9 +65,11 @@ export function NewsList({
               {item.image_url ? (
                 <Image
                   src={item.image_url}
-                  alt={item.title}
+                  alt={`${lang === "en" && item.title_en ? item.title_en : item.title} | UMPmusic News`}
                   fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
                   className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
+                  loading="lazy"
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-muted">

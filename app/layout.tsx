@@ -5,11 +5,13 @@ import "./globals.css";
 import ScrollReset from "@/components/layout/ScrollReset";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   preload: true,
+  variable: "--font-inter",
 });
 
 const quilon = localFont({
@@ -38,6 +40,7 @@ const quilon = localFont({
   variable: "--font-quilon",
   display: "swap",
   preload: true,
+  fallback: ["system-ui", "sans-serif"],
 });
 
 /* ═══ SEO: Viewport ═══ */
@@ -67,6 +70,9 @@ export const metadata: Metadata = {
     "artistas caribeños",
     "productores musicales",
     "independent record label",
+    "UMPmusic",
+    "música Limón",
+    "Caribbean music",
   ],
   authors: [{ name: "UMPmusic" }],
   creator: "UMPmusic",
@@ -88,6 +94,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: "UMPmusic — El Sonido de Limón",
+        type: "image/webp",
       },
     ],
   },
@@ -109,9 +116,35 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+    ],
     apple: "/icon.png",
+    shortcut: "/icon.png",
   },
+  manifest: "/manifest.json",
+  category: "music",
+};
+
+/* ═══ JSON-LD Structured Data ═══ */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  name: "UMPmusic",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://umpmusic.com",
+  logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://umpmusic.com"}/assets/UMP LOGO NEGATIVO.webp`,
+  description:
+    "Sello discográfico independiente de Limón, Costa Rica. Artistas, DJs y productores del Caribe costarricense.",
+  foundingLocation: {
+    "@type": "Place",
+    name: "Limón, Costa Rica",
+  },
+  genre: ["Reggae", "Dancehall", "Latin", "Urban", "Caribbean"],
+  sameAs: [
+    "https://instagram.com",
+    "https://youtube.com",
+    "https://spotify.com",
+  ],
 };
 
 export default function RootLayout({
@@ -121,9 +154,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        {/* ── Resource Hints ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {process.env.NEXT_PUBLIC_SUPABASE_URL && (
+          <link rel="preconnect" href={process.env.NEXT_PUBLIC_SUPABASE_URL} />
+        )}
+        <link rel="dns-prefetch" href="https://instagram.com" />
+        <link rel="dns-prefetch" href="https://youtube.com" />
+        <link rel="dns-prefetch" href="https://spotify.com" />
+      </head>
       <body
-        className={`${inter.className} ${quilon.variable} min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-black`}
+        className={`${inter.variable} ${quilon.variable} font-sans min-h-screen bg-background text-foreground antialiased selection:bg-primary selection:text-black`}
       >
+        {/* ── JSON-LD Structured Data ── */}
+        <Script
+          id="json-ld-musicgroup"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          strategy="beforeInteractive"
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

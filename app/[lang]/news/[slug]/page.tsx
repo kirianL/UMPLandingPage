@@ -9,7 +9,7 @@ import { getDictionary } from "@/lib/dictionaries";
 import NewsBackground from "@/components/news/news-background";
 import NewsArticleContent from "@/components/news/news-article-content";
 
-export const revalidate = 60;
+export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
@@ -52,10 +52,34 @@ export async function generateMetadata({
 
   if (!news) return { title: "Noticia no encontrada" };
   const isEn = lang === "en";
+  const title = isEn && news.title_en ? news.title_en : news.title;
+  const description = isEn && news.excerpt_en ? news.excerpt_en : news.excerpt;
 
   return {
-    title: `${isEn && news.title_en ? news.title_en : news.title} | UMP News`,
-    description: isEn && news.excerpt_en ? news.excerpt_en : news.excerpt,
+    title,
+    description,
+    openGraph: {
+      title,
+      description: description || undefined,
+      images: news.image_url
+        ? [{ url: news.image_url, width: 1200, height: 630, alt: title }]
+        : [{ url: "/assets/og-image.webp", width: 1200, height: 630 }],
+      type: "article",
+      publishedTime: news.published_at || news.created_at,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: description || undefined,
+      images: news.image_url ? [news.image_url] : ["/assets/og-image.webp"],
+    },
+    alternates: {
+      canonical: `/${lang}/news/${slug}`,
+      languages: {
+        es: `/es/news/${slug}`,
+        en: `/en/news/${slug}`,
+      },
+    },
   };
 }
 

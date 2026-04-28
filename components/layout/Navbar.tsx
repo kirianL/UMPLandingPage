@@ -52,14 +52,10 @@ export default function Navbar() {
 
   const isDark = theme === "dark";
 
-  // VISIBLE ON ALL PAGES NOW
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-700 ease-out font-quilon backdrop-blur-md py-3 border-b",
-        isProfilePage
-          ? "bg-[#010314]/80 border-white/10"
-          : "bg-background/80 border-border"
+        "absolute top-0 z-50 w-full transition-all duration-700 ease-out font-quilon bg-transparent py-5 border-none"
       )}
     >
       <div className="container flex items-center justify-between px-6 md:px-12">

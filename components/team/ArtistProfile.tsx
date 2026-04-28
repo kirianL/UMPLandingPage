@@ -29,11 +29,14 @@ export default function ArtistProfile({
   const bgImage = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille")
     ? "/assets/backgrounds/Background_purple.png"
     : "/assets/backgrounds/Backgroud_blue.png";
+  const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
+  const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
+  const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
   const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
-  const themeText = isPurple ? "text-[#d8b4fe]" : "${themeText}";
-  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : "${themeBg60}";
-  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : "${themeSelection}";
-  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : "group-hover:${themeText}";
+  const themeText = isPurple ? "text-[#d8b4fe]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : "group-hover:text-[#bbdbfa]";
 
   return (
     <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>
@@ -62,7 +65,7 @@ export default function ArtistProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className={`text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
+            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>

@@ -27,6 +27,10 @@ export default function MarketingProfile({
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_marketing || "MARKETING");
 
+  const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
+  const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
+  const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
+
   return (
     <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
       {/* HERO SECTION */}
@@ -51,7 +55,7 @@ export default function MarketingProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none"
+            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>
@@ -101,7 +105,7 @@ export default function MarketingProfile({
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#bbbbbb] uppercase tracking-widest leading-relaxed">
-              {isEn && artist.tagline_en ? artist.tagline_en : (artist.tagline_es || "BEHIND THE SCENES")}
+              {artist.name}
             </p>
           </motion.div>
 

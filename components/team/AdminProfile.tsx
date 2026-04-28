@@ -109,7 +109,7 @@ export default function AdminProfile({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 pointer-events-auto"
+            className="flex flex-wrap justify-center md:flex-col md:items-end gap-x-6 gap-y-2 md:gap-y-4 pointer-events-auto"
           >
             {artist.instagram_url && (
               <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">

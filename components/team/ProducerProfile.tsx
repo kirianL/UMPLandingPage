@@ -117,21 +117,36 @@ export default function ProducerProfile({
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 pointer-events-auto"
+            className="flex flex-wrap justify-center md:flex-col md:items-end gap-x-6 gap-y-2 md:gap-y-4 pointer-events-auto"
           >
             {artist.instagram_url && (
-              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
-                [ INSTAGRAM ]
+              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className={`group relative overflow-hidden flex text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} uppercase`}>
+                <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                  [ INSTAGRAM ]
+                </span>
+                <span className="absolute left-0 top-full inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-white">
+                  [ INSTAGRAM ]
+                </span>
               </a>
             )}
             {artist.spotify_url && (
-              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
-                [ SPOTIFY ]
+              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className={`group relative overflow-hidden flex text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} uppercase`}>
+                <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                  [ SPOTIFY ]
+                </span>
+                <span className="absolute left-0 top-full inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-white">
+                  [ SPOTIFY ]
+                </span>
               </a>
             )}
             {artist.youtube_url && (
-              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
-                [ YOUTUBE ]
+              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className={`group relative overflow-hidden flex text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} uppercase`}>
+                <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full">
+                  [ YOUTUBE ]
+                </span>
+                <span className="absolute left-0 top-full inline-block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full text-white">
+                  [ YOUTUBE ]
+                </span>
               </a>
             )}
           </motion.div>

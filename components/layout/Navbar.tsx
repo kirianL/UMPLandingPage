@@ -56,12 +56,10 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-700 ease-out font-quilon",
-        scrolled
-          ? isProfilePage
-            ? "bg-[#010314]/80 backdrop-blur-md py-3 border-b border-white/10"
-            : "bg-background/60 backdrop-blur-md py-3 border-b border-border"
-          : "bg-transparent py-5",
+        "fixed top-0 z-50 w-full transition-all duration-700 ease-out font-quilon backdrop-blur-md py-3 border-b",
+        isProfilePage
+          ? "bg-[#010314]/80 border-white/10"
+          : "bg-background/80 border-border"
       )}
     >
       <div className="container flex items-center justify-between px-6 md:px-12">

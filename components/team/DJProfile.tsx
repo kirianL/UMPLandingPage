@@ -56,7 +56,7 @@ export default function DJProfile({
 
 
         {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[15vh] md:pb-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[25vh] md:pb-0">
           <motion.h1 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

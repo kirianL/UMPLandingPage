@@ -29,9 +29,14 @@ export default function ProducerProfile({
   const bgImage = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille")
     ? "/assets/backgrounds/Background_purple.png"
     : "/assets/backgrounds/Backgroud_blue.png";
+  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
+  const themeText = isPurple ? "text-[#d8b4fe]" : "${themeText}";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : "${themeBg60}";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : "${themeSelection}";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : "group-hover:${themeText}";
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
+    <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>
       {/* HERO SECTION */}
       <section className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -54,7 +59,7 @@ export default function ProducerProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none"
+            className={`text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>
@@ -98,8 +103,8 @@ export default function ProducerProfile({
             className="flex flex-col items-center md:items-start text-center md:text-left gap-3 pointer-events-auto"
           >
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="hidden md:block h-px w-6 bg-[#bbdbfa]/60"></div>
-              <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
+              <div className={`hidden md:block h-px w-6 ${themeBg60}`}></div>
+              <span className={`text-[10px] font-mono tracking-[0.2em] ${themeText} uppercase`}>
                 {artist.role || dict.role_producer || "PRODUCTOR"}
               </span>
             </div>
@@ -115,17 +120,17 @@ export default function ProducerProfile({
             className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 pointer-events-auto"
           >
             {artist.instagram_url && (
-              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ INSTAGRAM ]
               </a>
             )}
             {artist.spotify_url && (
-              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ SPOTIFY ]
               </a>
             )}
             {artist.youtube_url && (
-              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ YOUTUBE ]
               </a>
             )}
@@ -231,7 +236,7 @@ export default function ProducerProfile({
                     </div>
                   </div>
                   <div className="flex justify-between items-start gap-4">
-                    <h3 className="font-bold text-lg uppercase leading-tight group-hover:text-[#bbdbfa] transition-colors">{release.title}</h3>
+                    <h3 className={`font-bold text-lg uppercase leading-tight group-hover:${themeText} transition-colors`}>{release.title}</h3>
                     <span className="font-mono text-[10px] text-[#bbbbbb] border border-white/20 px-2 py-1 rounded-sm">
                       {new Date(release.release_date || Date.now()).getFullYear()}
                     </span>

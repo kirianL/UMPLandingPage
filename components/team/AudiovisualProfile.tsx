@@ -46,7 +46,7 @@ export default function AudiovisualProfile({
 
 
         {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[25svh] md:pb-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-0">
           <motion.h1 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -60,7 +60,7 @@ export default function AudiovisualProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="absolute bottom-[15svh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55svh] md:h-[85svh] flex justify-center pointer-events-none">
+        <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85svh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0 }}

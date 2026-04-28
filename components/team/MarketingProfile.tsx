@@ -48,8 +48,8 @@ export default function MarketingProfile({
         {/* Huge Text (Behind Image) */}
         <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-0">
           <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none"
           >
@@ -63,8 +63,8 @@ export default function MarketingProfile({
         <div className="absolute bottom-[120px] md:bottom-0 z-20 w-[90%] max-w-[400px] md:w-full md:max-w-3xl aspect-[4/5] md:aspect-auto md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 80 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full h-full [mask-image:linear-gradient(to_top,transparent,black_15%)]"
             >
@@ -89,8 +89,8 @@ export default function MarketingProfile({
 
         <div className="absolute inset-x-0 bottom-8 md:bottom-12 z-30 w-full px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 pointer-events-none">
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col items-center md:items-start text-center md:text-left gap-3 pointer-events-auto"
           >
@@ -106,8 +106,8 @@ export default function MarketingProfile({
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 pointer-events-auto"
           >

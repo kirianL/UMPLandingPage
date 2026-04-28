@@ -46,6 +46,9 @@ export default function Navbar() {
   };
 
   const isActive = (path: string) => pathname === path;
+  
+  // Check if we are on a profile page (e.g., /es/artists/ery)
+  const isProfilePage = pathname.includes("/artists/") && pathname.split("/").filter(Boolean).length === 3;
 
   const isDark = theme === "dark";
 
@@ -55,7 +58,9 @@ export default function Navbar() {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-700 ease-out font-quilon",
         scrolled
-          ? "bg-background/60 backdrop-blur-md py-3 border-b border-border"
+          ? isProfilePage
+            ? "bg-[#010314]/80 backdrop-blur-md py-3 border-b border-white/10"
+            : "bg-background/60 backdrop-blur-md py-3 border-b border-border"
           : "bg-transparent py-5",
       )}
     >
@@ -67,7 +72,10 @@ export default function Navbar() {
               src="/assets/UMP LOGO NEGATIVO.webp"
               alt="UMP Music Logo"
               fill
-              className="object-contain transition-all duration-300 brightness-0 dark:invert"
+              className={cn(
+                "object-contain transition-all duration-300",
+                isProfilePage ? "invert" : "brightness-0 dark:invert"
+              )}
               priority
               sizes="(max-width: 768px) 96px, 112px"
             />
@@ -89,14 +97,15 @@ export default function Navbar() {
               className={cn(
                 "text-sm font-bold uppercase tracking-widest transition-all duration-300 relative group",
                 isActive(link.path)
-                  ? "text-primary"
-                  : "text-foreground/70 hover:text-foreground",
+                  ? isProfilePage ? "text-[#bbdbfa]" : "text-primary"
+                  : isProfilePage ? "text-white/70 hover:text-white" : "text-foreground/70 hover:text-foreground",
               )}
             >
               {link.name}
               <span
                 className={cn(
-                  "absolute -bottom-1 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full",
+                  "absolute -bottom-1 left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full",
+                  isProfilePage ? "bg-[#bbdbfa]" : "bg-primary",
                   isActive(link.path) && "w-full",
                 )}
               />
@@ -110,7 +119,12 @@ export default function Navbar() {
           {mounted && (
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
-              className="h-9 w-9 flex items-center justify-center rounded-full border border-border text-foreground/60 hover:text-foreground hover:bg-muted transition-all duration-300 hover:scale-105 active:scale-95"
+              className={cn(
+                "h-9 w-9 flex items-center justify-center rounded-full border transition-all duration-300 hover:scale-105 active:scale-95",
+                isProfilePage
+                  ? "border-white/20 text-white/60 hover:text-white hover:bg-white/10"
+                  : "border-border text-foreground/60 hover:text-foreground hover:bg-muted"
+              )}
               aria-label={
                 isDark ? "Switch to light mode" : "Switch to dark mode"
               }
@@ -128,12 +142,12 @@ export default function Navbar() {
             onClick={toggleLanguage}
             className={cn(
               "hidden sm:flex text-xs font-bold cursor-pointer transition-colors uppercase gap-1 items-center tracking-wider",
-              "text-foreground/70 hover:text-foreground",
+              isProfilePage ? "text-white/70 hover:text-white" : "text-foreground/70 hover:text-foreground",
             )}
           >
-            <span className={language === "es" ? "text-primary" : ""}>ES</span>
-            <span className="text-foreground/20">/</span>
-            <span className={language === "en" ? "text-primary" : ""}>EN</span>
+            <span className={language === "es" ? (isProfilePage ? "text-[#bbdbfa]" : "text-primary") : ""}>ES</span>
+            <span className={isProfilePage ? "text-white/20" : "text-foreground/20"}>/</span>
+            <span className={language === "en" ? (isProfilePage ? "text-[#bbdbfa]" : "text-primary") : ""}>EN</span>
           </button>
 
           <Sheet open={open} onOpenChange={setOpen}>
@@ -142,8 +156,8 @@ export default function Navbar() {
                 variant="ghost"
                 size="icon"
                 className={cn(
-                  "md:hidden hover:bg-foreground/10 transition-transform active:scale-95",
-                  "text-foreground hover:text-primary",
+                  "md:hidden transition-transform active:scale-95",
+                  isProfilePage ? "text-white hover:bg-white/10 hover:text-[#bbdbfa]" : "hover:bg-foreground/10 text-foreground hover:text-primary",
                 )}
               >
                 <Menu className="h-8 w-8" strokeWidth={1.5} />

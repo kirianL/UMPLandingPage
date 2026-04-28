@@ -42,14 +42,7 @@ export default function ProducerProfile({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010314]/60 to-[#010314]" />
         </div>
 
-        <div className="absolute top-0 left-0 w-full z-40 p-6 md:p-12 flex justify-between items-center pointer-events-none">
-          <div className="font-bold tracking-[0.2em] text-xs md:text-sm uppercase text-white/90">
-            UMP MUSIC
-          </div>
-          <div className="text-[10px] md:text-xs tracking-[0.2em] uppercase text-white/60">
-            {artist.role || dict.role_producer || "PRODUCTOR"}
-          </div>
-        </div>
+
 
         {/* Huge Text (Behind Image) */}
         <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none">
@@ -91,13 +84,19 @@ export default function ProducerProfile({
           )}
         </div>
 
-        <div className="relative z-30 w-full container mx-auto px-6 md:px-12 pb-12 flex flex-col md:flex-row justify-between items-end gap-8">
+        <div className="relative z-30 w-full container mx-auto px-6 md:px-12 pb-8 md:pb-12 flex flex-col md:flex-row justify-between items-end gap-6 md:gap-8 border-b border-white/5 md:border-none mb-8 md:mb-0">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="max-w-md w-full md:w-1/2"
+            className="flex flex-col gap-3 max-w-md w-full md:w-1/2 pb-6 md:pb-0"
           >
+            <div className="flex items-center gap-3">
+              <div className="h-px w-6 bg-[#bbdbfa]/60"></div>
+              <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
+                {artist.role || dict.role_producer || "PRODUCTOR"}
+              </span>
+            </div>
             <p className="text-xs md:text-sm text-[#bbbbbb] uppercase tracking-widest leading-relaxed">
               {isEn && artist.tagline_en ? artist.tagline_en : (artist.tagline_es || "THE SOUND OF THE CARIBBEAN")}
             </p>

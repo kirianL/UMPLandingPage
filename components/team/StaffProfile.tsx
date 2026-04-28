@@ -30,7 +30,7 @@ export default function StaffProfile({
   return (
     <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
       {/* HERO SECTION */}
-      <section className="relative w-full min-h-[100dvh] flex flex-col justify-end overflow-hidden pt-32 pb-8 md:pb-0 md:items-center">
+      <section className="relative w-full h-[100dvh] flex flex-col items-center justify-end overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/assets/backgrounds/Backgroud_blue.png"
@@ -60,13 +60,13 @@ export default function StaffProfile({
         </div>
 
         {/* Artist Image (In Front of Text) */}
-        <div className="relative md:absolute md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55vh] md:h-[85vh] mx-auto mt-auto flex justify-center pointer-events-none">
+        <div className="absolute bottom-[20vh] md:bottom-0 z-20 w-full max-w-[90%] md:max-w-3xl h-[55vh] md:h-[85vh] flex justify-center pointer-events-none">
           {artist.photo_url ? (
             <motion.div
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full h-full"
+              className="relative w-full h-full [mask-image:linear-gradient(to_top,transparent,black_15%)]"
             >
               <Image
                 src={artist.photo_url}
@@ -76,7 +76,7 @@ export default function StaffProfile({
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#010314] to-transparent" />
+              
             </motion.div>
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-end pb-32">
@@ -87,7 +87,7 @@ export default function StaffProfile({
           )}
         </div>
 
-        <div className="relative md:absolute md:left-6 md:right-6 lg:left-12 lg:right-12 md:bottom-12 z-30 w-full px-6 md:px-0 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 mt-8 md:mt-0 pointer-events-none">
+        <div className="absolute inset-x-0 bottom-8 md:bottom-12 z-30 w-full px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}

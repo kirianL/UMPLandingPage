@@ -26,6 +26,10 @@ export default function DJProfile({
 
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
 
+  const bgImage = artist.name.toLowerCase().includes("mille")
+    ? "/assets/backgrounds/Background_purple.png"
+    : "/assets/backgrounds/Backgroud_blue.png";
+
   return (
     <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
       {/* HERO SECTION */}
@@ -33,7 +37,7 @@ export default function DJProfile({
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/backgrounds/Backgroud_blue.png"
+            src={bgImage}
             alt="Atmospheric Background"
             fill
             className="object-cover opacity-80"
@@ -52,9 +56,11 @@ export default function DJProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[25vw] md:text-[20vw] font-black uppercase tracking-tighter leading-none text-[#bbdbfa] whitespace-nowrap opacity-90 select-none"
+            className="text-[28vw] md:text-[20vw] font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none"
           >
-            {artist.name}
+            {artist.name.split(' ').map((word, i) => (
+              <span key={i} className="block">{word}</span>
+            ))}
           </motion.h1>
         </div>
 
@@ -87,15 +93,15 @@ export default function DJProfile({
         </div>
 
         {/* Bottom Hero Info */}
-        <div className="absolute left-6 md:left-12 bottom-16 md:bottom-20 z-30 flex flex-col gap-3 max-w-[70%] md:max-w-sm pointer-events-none">
+        <div className="absolute left-6 md:left-12 right-6 md:right-12 bottom-8 md:bottom-12 z-30 flex flex-col md:flex-row items-center md:items-end justify-between gap-6 pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col gap-3 pointer-events-auto"
+            className="flex flex-col items-center md:items-start text-center md:text-left gap-3 pointer-events-auto"
           >
-            <div className="flex items-center gap-3">
-              <div className="h-px w-6 bg-[#bbdbfa]/60"></div>
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <div className="hidden md:block h-px w-6 bg-[#bbdbfa]/60"></div>
               <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
                 {artist.role || dict.role_resident_dj || "DJ"}
               </span>
@@ -104,28 +110,26 @@ export default function DJProfile({
               {isEn && artist.tagline_en ? artist.tagline_en : (artist.tagline_es || "THE SOUND OF THE CARIBBEAN")}
             </p>
           </motion.div>
-        </div>
 
-        <div className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 z-30 flex flex-col items-center gap-8 pointer-events-none">
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col gap-8 pointer-events-auto"
+            className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 pointer-events-auto"
           >
             {artist.instagram_url && (
-              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] font-mono tracking-[0.3em] text-[#bbdbfa] hover:text-white uppercase transition-colors" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                INSTAGRAM
+              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+                [ INSTAGRAM ]
               </a>
             )}
             {artist.spotify_url && (
-              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className="text-[10px] font-mono tracking-[0.3em] text-[#bbdbfa] hover:text-white uppercase transition-colors" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                SPOTIFY
+              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+                [ SPOTIFY ]
               </a>
             )}
             {artist.youtube_url && (
-              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className="text-[10px] font-mono tracking-[0.3em] text-[#bbdbfa] hover:text-white uppercase transition-colors" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
-                YOUTUBE
+              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+                [ YOUTUBE ]
               </a>
             )}
           </motion.div>

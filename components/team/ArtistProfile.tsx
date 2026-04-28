@@ -114,7 +114,7 @@ export default function ArtistProfile({
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#bbbbbb] uppercase tracking-widest leading-relaxed">
-              {isEn && artist.tagline_en ? artist.tagline_en : (artist.tagline_es || "THE SOUND OF THE CARIBBEAN")}
+              {artist.name}
             </p>
           </motion.div>
 

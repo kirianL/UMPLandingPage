@@ -54,6 +54,7 @@ export default function Navbar() {
 
   return (
     <header
+      suppressHydrationWarning
       className={cn(
         "absolute top-0 z-50 w-full transition-all duration-700 ease-out font-quilon bg-transparent py-5 border-none"
       )}
@@ -149,6 +150,7 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
+                suppressHydrationWarning
                 className={cn(
                   "md:hidden transition-transform active:scale-95",
                   isProfilePage ? "text-white hover:bg-white/10 hover:text-[#bbdbfa]" : "hover:bg-foreground/10 text-foreground hover:text-primary",

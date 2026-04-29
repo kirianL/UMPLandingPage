@@ -13,6 +13,8 @@ interface NewsItem {
   image_url: string | null;
   published_at: string | null;
   created_at: string;
+  excerpt?: string | null;
+  excerpt_en?: string | null;
 }
 
 export function NewsList({

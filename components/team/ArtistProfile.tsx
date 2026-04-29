@@ -34,8 +34,10 @@ export default function ArtistProfile({
   const isLightBlue =
     artist.slug.toLowerCase() === "Eymar" ||
     artist.name.toLowerCase().includes("Eymar") ||
-    artist.slug.toLowerCase() === "eymar" ||
-    artist.name.toLowerCase().includes("eymar");
+    artist.slug.toLowerCase() === "Eymar" ||
+    artist.name.toLowerCase().includes("Eymar") ||
+    artist.slug.toLowerCase() === "Eymar" ||
+    artist.name.toLowerCase().includes("Eymar");
 
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
@@ -384,7 +386,7 @@ export default function ArtistProfile({
                   </div>
                   <div className="flex justify-between items-start gap-4">
                     <h3
-                      className={`font-bold text-lg uppercase leading-tight group-hover:${themeText} transition-colors`}
+                      className={`font-bold text-lg uppercase leading-tight ${themeGroupHoverText} transition-colors`}
                     >
                       {release.title}
                     </h3>

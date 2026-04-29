@@ -29,21 +29,24 @@ export default function AudiovisualProfile({
   
   const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
   const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  const isLightBlue = artist.slug === "Eymar" || artist.slug.toLowerCase() === "eymar" || artist.name.toLowerCase().includes("eymar");
   
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
     : isRed
     ? "/assets/backgrounds/Background_red.png"
+    : isLightBlue
+    ? "/assets/backgrounds/Background_lightBlue.png"
     : "/assets/backgrounds/Backgroud_blue.png";
 
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
 
-  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : "text-[#bbdbfa]";
-  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : "bg-[#bbdbfa]/60";
-  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : "selection:bg-[#bbdbfa]";
-  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : "group-hover:text-[#bbdbfa]";
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isLightBlue ? "text-[#7dd3fc]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isLightBlue ? "bg-[#7dd3fc]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : isLightBlue ? "selection:bg-[#7dd3fc]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : isLightBlue ? "group-hover:text-[#7dd3fc]" : "group-hover:text-[#bbdbfa]";
 
   return (
     <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} font-sans -mt-20`}>
@@ -69,7 +72,7 @@ export default function AudiovisualProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none`}
+            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>
@@ -113,8 +116,8 @@ export default function AudiovisualProfile({
             className="flex flex-col items-center md:items-start text-center md:text-left gap-3 pointer-events-auto"
           >
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="hidden md:block h-px w-6 bg-[#bbdbfa]/60"></div>
-              <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
+              <div className={`hidden md:block h-px w-6 ${themeBg60}`}></div>
+              <span className={`text-[10px] font-mono tracking-[0.2em] ${themeText} uppercase`}>
                 {roleDisplay}
               </span>
             </div>
@@ -130,12 +133,12 @@ export default function AudiovisualProfile({
             className="flex flex-wrap justify-center md:flex-col md:items-end gap-x-6 gap-y-2 md:gap-y-4 pointer-events-auto"
           >
             {artist.instagram_url && (
-              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ INSTAGRAM ]
               </a>
             )}
             {artist.youtube_url && (
-              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ YOUTUBE ]
               </a>
             )}

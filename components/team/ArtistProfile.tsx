@@ -104,9 +104,20 @@ export default function ArtistProfile({
           ? "group-hover:text-[#4ade80]"
           : "group-hover:text-[#bbdbfa]";
 
+  // Theme-aware colors: system bg (black/white) for all
+  const bgMain = "bg-background";
+  const bgAlt = "bg-muted";
+  const textMain = "text-foreground";
+  const textMuted = "text-muted-foreground";
+  const borderClr = "border-border";
+  const selectionBg = "selection:text-background";
+  const gradientVia = "via-background/60";
+  const gradientTo = "to-background";
+  const proseClasses = "prose prose-lg md:prose-2xl max-w-4xl prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:font-light prose-strong:text-foreground";
+
   return (
     <div
-      className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}
+      className={`min-h-screen ${bgMain} ${textMain} ${themeSelection} ${selectionBg} font-sans -mt-20`}
     >
       {/* HERO SECTION */}
       <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-x-clip overflow-y-visible">
@@ -121,7 +132,7 @@ export default function ArtistProfile({
             sizes="100vw"
           />
           {/* Gradient overlay to blend into the next section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010314]/60 to-[#010314]" />
+          <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${gradientVia} ${gradientTo}`} />
         </div>
 
         {/* Top Header */}
@@ -192,7 +203,7 @@ export default function ArtistProfile({
                 {artist.role || dict.role_default || "ARTISTA"}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#bbbbbb] uppercase tracking-widest leading-relaxed">
+            <p className={`text-xs md:text-sm ${textMuted} uppercase tracking-widest leading-relaxed`}>
               {artist.name}
             </p>
           </motion.div>
@@ -268,21 +279,21 @@ export default function ArtistProfile({
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="bg-[#010314] py-24 md:py-32 relative z-10">
+      <section className={`${bgMain} py-24 md:py-32 relative z-10`}>
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
           <div className="md:col-span-4 lg:col-span-3">
             <div className="sticky top-32">
-              <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-[#bbbbbb] block mb-4">
+              <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] ${textMuted} block mb-4`}>
                 ABOUT YOUR HOST
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-white mb-8">
+              <h2 className={`text-3xl md:text-4xl font-bold uppercase tracking-tight ${textMain} mb-8`}>
                 {dict.the_story || "THE STORY"}
               </h2>
 
               {/* Stats */}
-              <div className="space-y-6 pt-8 border-t border-white/10">
+              <div className={`space-y-6 pt-8 border-t ${borderClr}`}>
                 <div>
-                  <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">
+                  <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>
                     {dict.years_active || "YEARS ACTIVE"}
                   </p>
                   <p className="text-2xl font-bold">
@@ -290,7 +301,7 @@ export default function ArtistProfile({
                   </p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">
+                  <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>
                     {dict.releases_label || "RELEASES"}
                   </p>
                   <p className="text-2xl font-bold">
@@ -303,8 +314,8 @@ export default function ArtistProfile({
 
           <div className="md:col-span-8 lg:col-span-9">
             {bioContent ? (
-              <div className="prose prose-invert prose-lg md:prose-2xl max-w-4xl prose-p:text-[#bbbbbb] prose-p:leading-relaxed prose-p:font-light prose-strong:text-white">
-                <p className="text-2xl md:text-4xl text-white font-medium leading-tight mb-8">
+              <div className={proseClasses}>
+                <p className={`text-2xl md:text-4xl ${textMain} font-medium leading-tight mb-8`}>
                   {bioContent.split("\n")[0]}
                 </p>
                 {bioContent
@@ -317,8 +328,8 @@ export default function ArtistProfile({
                   ))}
               </div>
             ) : (
-              <div className="py-20 border border-white/10 flex justify-center items-center rounded-sm">
-                <p className="font-mono text-sm text-[#bbbbbb] uppercase tracking-widest">
+              <div className={`py-20 border ${borderClr} flex justify-center items-center rounded-sm`}>
+                <p className={`font-mono text-sm ${textMuted} uppercase tracking-widest`}>
                   {dict.bio_unavailable || "[ BIO UNAVAILABLE ]"}
                 </p>
               </div>
@@ -329,14 +340,14 @@ export default function ArtistProfile({
 
       {/* DISCOGRAPHY SECTION */}
       {artist.releases && artist.releases.length > 0 && (
-        <section className="bg-[#000000] py-24 md:py-32">
+        <section className={`${bgAlt} py-24 md:py-32`}>
           <div className="container mx-auto px-6 md:px-12">
             <div className="mb-16 flex flex-col md:flex-row justify-between items-baseline gap-6">
               <div>
-                <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-[#bbbbbb] block mb-4">
+                <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] ${textMuted} block mb-4`}>
                   {dict.sonic_archive || "SONIC ARCHIVE"}
                 </span>
-                <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white">
+                <h2 className={`text-4xl md:text-6xl font-bold uppercase tracking-tight ${textMain}`}>
                   {dict.latest_gems || "LATEST RELEASES"}
                 </h2>
               </div>
@@ -345,7 +356,7 @@ export default function ArtistProfile({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {artist.releases.map((release, index) => (
                 <div key={release.id} className="group cursor-pointer">
-                  <div className="relative aspect-square bg-[#010314] overflow-hidden mb-4 rounded-sm border border-white/5 group-hover:border-white/20 transition-colors">
+                  <div className={`relative aspect-square ${bgMain} overflow-hidden mb-4 rounded-sm border border-border group-hover:border-foreground/20 transition-colors`}>
                     {release.cover_url ? (
                       <Image
                         src={release.cover_url}
@@ -400,13 +411,13 @@ export default function ArtistProfile({
                     >
                       {release.title}
                     </h3>
-                    <span className="font-mono text-[10px] text-[#bbbbbb] border border-white/20 px-2 py-1 rounded-sm">
+                    <span className={`font-mono text-[10px] ${textMuted} border border-border px-2 py-1 rounded-sm`}>
                       {new Date(
                         release.release_date || Date.now(),
                       ).getFullYear()}
                     </span>
                   </div>
-                  <p className="text-xs text-[#bbbbbb] font-mono mt-1 uppercase tracking-wider">
+                  <p className={`text-xs ${textMuted} font-mono mt-1 uppercase tracking-wider`}>
                     {release.type || "SINGLE"}
                   </p>
                 </div>
@@ -417,15 +428,15 @@ export default function ArtistProfile({
       )}
 
       {/* FOOTER NAV */}
-      <div className="border-t border-white/10 bg-[#010314] py-16 md:py-24 text-center">
+      <div className={`border-t ${borderClr} ${bgMain} py-16 md:py-24 text-center`}>
         <Link
           href={`/${lang}/artists`}
           className="group inline-flex flex-col items-center gap-6"
         >
-          <span className="text-xs font-mono text-[#bbbbbb] uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+          <span className={`text-xs font-mono ${textMuted} uppercase tracking-[0.2em] group-hover:${textMain} transition-colors`}>
             {dict.back_to_team || "VOLVER AL EQUIPO"}
           </span>
-          <div className="h-16 w-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300">
+          <div className={`h-16 w-16 rounded-full border border-border flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300`}>
             <ArrowRight className="h-6 w-6 rotate-180 group-hover:-translate-x-2 transition-transform" />
           </div>
         </Link>

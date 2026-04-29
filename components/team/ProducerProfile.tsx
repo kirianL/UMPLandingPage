@@ -44,18 +44,16 @@ export default function ProducerProfile({
   const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : "selection:bg-[#bbdbfa]";
   const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : "group-hover:text-[#bbdbfa]";
 
-  // Theme-aware colors: kidOffi uses system bg (black/white), others use hardcoded dark
-  const bgMain = isRed ? "bg-background" : "bg-[#010314]";
-  const bgAlt = isRed ? "bg-muted" : "bg-[#000000]";
-  const textMain = isRed ? "text-foreground" : "text-white";
-  const textMuted = isRed ? "text-muted-foreground" : "text-[#bbbbbb]";
-  const borderClr = isRed ? "border-border" : "border-white/10";
-  const selectionBg = isRed ? "selection:text-background" : "selection:text-[#010314]";
-  const gradientVia = isRed ? "via-background/60" : "via-[#010314]/60";
-  const gradientTo = isRed ? "to-background" : "to-[#010314]";
-  const proseClasses = isRed
-    ? "prose prose-lg md:prose-2xl max-w-4xl prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:font-light prose-strong:text-foreground"
-    : "prose prose-invert prose-lg md:prose-2xl max-w-4xl prose-p:text-[#bbbbbb] prose-p:leading-relaxed prose-p:font-light prose-strong:text-white";
+  // Theme-aware colors: system bg (black/white) for all
+  const bgMain = "bg-background";
+  const bgAlt = "bg-muted";
+  const textMain = "text-foreground";
+  const textMuted = "text-muted-foreground";
+  const borderClr = "border-border";
+  const selectionBg = "selection:text-background";
+  const gradientVia = "via-background/60";
+  const gradientTo = "to-background";
+  const proseClasses = "prose prose-lg md:prose-2xl max-w-4xl prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:font-light prose-strong:text-foreground";
 
   return (
     <div className={`min-h-screen ${bgMain} ${textMain} ${themeSelection} ${selectionBg} font-sans -mt-20`}>

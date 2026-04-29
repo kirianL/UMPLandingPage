@@ -32,6 +32,25 @@ export async function generateStaticParams() {
   return artists?.map(({ slug }) => ({ slug })) || [];
 }
 
+import { Viewport } from "next";
+
+export async function generateViewport({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Viewport> {
+  const { slug } = await params;
+  const isPurple = slug === "milletck" || slug.includes("mille");
+  const isRed = slug.toLowerCase() === "kidoffi";
+
+  // Dark colors that match the top of their respective backgrounds
+  const topColor = isPurple ? "#1a0b2e" : isRed ? "#450a0a" : "#010314";
+
+  return {
+    themeColor: topColor,
+  };
+}
+
 export async function generateMetadata({
   params,
 }: {

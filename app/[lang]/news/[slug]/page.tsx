@@ -97,6 +97,16 @@ export default async function NewsDetailPage({
   if (!newsItem) {
     notFound();
   }
+  
+  // Fetch latest 3 news items for the showcase
+  const supabase = await createServerClient();
+  const { data: latestNews } = await supabase
+    .from("news")
+    .select("id, title:title_es, title_en, slug, image_url, published_at, created_at, excerpt:excerpt_es, excerpt_en")
+    .eq("is_published", true)
+    .neq("id", newsItem.id) // exclude current
+    .order("published_at", { ascending: false })
+    .limit(3);
 
   const displayDate = newsItem.published_at || newsItem.created_at;
 
@@ -106,88 +116,92 @@ export default async function NewsDetailPage({
 
   return (
     <div className="relative min-h-screen bg-background text-foreground selection:bg-primary selection:text-black overflow-x-hidden">
-      <NewsBackground />
+      {/* We removed NewsBackground to have a clean dark modern look */}
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 max-w-4xl pt-20 md:pt-28 pb-16 md:pb-24">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 md:px-12 pt-20 md:pt-32 pb-16 md:pb-24 max-w-[1400px]">
+        
         {/* Back Navigation */}
         <Link
           href={`/${lang}/news`}
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-all duration-300 mb-8 md:mb-12 font-mono text-[10px] md:text-xs uppercase tracking-[0.15em] group"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 mb-16 md:mb-24 font-mono text-[10px] md:text-xs uppercase tracking-[0.15em] group"
         >
           <ArrowLeft className="h-3 w-3 group-hover:-translate-x-1 transition-transform" />
-          <span>{dict.news.back_to_news}</span>
+          <span>{dict.news.back_to_news || "BACK TO NEWS"}</span>
         </Link>
 
-        {/* Header Section */}
-        <header className="mb-12 md:mb-16">
-          {/* Green Accent Bar */}
-          <div className="w-16 h-1 bg-primary mb-6 md:mb-8" />
-
-          {/* Metadata */}
-          <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-6 md:mb-8 text-xs md:text-sm">
-            <div className="flex items-center gap-2 text-primary font-mono font-bold">
-              <Calendar className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              <time dateTime={displayDate} suppressHydrationWarning>
+        {/* Header Section - Modern Editorial Layout */}
+        <header className="flex flex-col md:flex-row gap-12 md:gap-24 mb-20 md:mb-32">
+          
+          {/* Left Column - Small Meta */}
+          <div className="w-full md:w-1/4 flex flex-col gap-6">
+            <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-foreground">
+              ABOUT THIS ARTICLE
+            </span>
+            
+            {/* Metadata */}
+            <div className="flex flex-col gap-3 text-xs md:text-sm text-muted-foreground">
+              <time dateTime={displayDate} className="font-mono uppercase tracking-widest text-foreground" suppressHydrationWarning>
                 {new Date(displayDate).toLocaleDateString(
                   lang === "en" ? "en-US" : "es-ES",
-                  {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    timeZone: "America/Costa_Rica",
-                  },
+                  { year: "numeric", month: "long", day: "numeric", timeZone: "America/Costa_Rica" }
                 )}
               </time>
+              <div className="flex items-center gap-2 font-mono uppercase tracking-widest text-foreground">
+                <Clock className="h-3 w-3" />
+                <span>
+                  {Math.ceil((contentParagraphs?.join(" ").length || 0) / 1000)} MIN READ
+                </span>
+              </div>
             </div>
-            <span className="text-muted-foreground">•</span>
-            <div className="flex items-center gap-2 text-muted-foreground font-mono">
-              <Clock className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              <span>
-                {Math.ceil((contentParagraphs?.join(" ").length || 0) / 1000)}{" "}
-                min
+
+            {/* Share Button - Desktop */}
+            <div className="hidden md:block mt-8">
+              <span className="block text-[10px] text-muted-foreground font-mono uppercase tracking-widest mb-4">
+                {dict.news.share_label || "SHARE"}
               </span>
+              <ShareButton title={newsItem.title} dict={dict.components?.share_button || {}} />
             </div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-quilon text-foreground uppercase tracking-[-0.02em] leading-[0.85] mb-6 md:mb-8">
-            {isEn && newsItem.title_en ? newsItem.title_en : newsItem.title}
-          </h1>
+          {/* Right Column - Massive Text & Image */}
+          <div className="w-full md:w-3/4 flex flex-col">
+            {/* Title */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-black font-quilon text-foreground uppercase tracking-tighter leading-[0.85] mb-12">
+              {isEn && newsItem.title_en ? newsItem.title_en : newsItem.title}
+            </h1>
 
-          {/* Excerpt */}
-          {(isEn && newsItem.excerpt_en
-            ? newsItem.excerpt_en
-            : newsItem.excerpt) && (
-            <p className="text-base md:text-xl text-muted-foreground font-light leading-relaxed max-w-3xl border-l-2 border-primary/50 pl-4 md:pl-6">
-              {isEn && newsItem.excerpt_en
-                ? newsItem.excerpt_en
-                : newsItem.excerpt}
-            </p>
-          )}
+            {/* Featured Image */}
+            {newsItem.image_url && (
+              <div className="mb-12 relative w-full md:w-2/3 aspect-[4/3] overflow-hidden bg-muted">
+                <Image
+                  src={newsItem.image_url}
+                  alt={newsItem.title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 896px"
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
+            )}
 
-          {/* Share Button - Mobile */}
-          <div className="mt-6 md:hidden">
-            <ShareButton
-              title={newsItem.title}
-              dict={dict.components.share_button}
-            />
+            {/* Excerpt */}
+            {(isEn && newsItem.excerpt_en ? newsItem.excerpt_en : newsItem.excerpt) && (
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-[10px] text-foreground uppercase tracking-[0.2em]">
+                  [ OVERVIEW ]
+                </span>
+                <p className="text-sm md:text-base text-muted-foreground font-mono uppercase tracking-widest leading-relaxed max-w-xl">
+                  {isEn && newsItem.excerpt_en ? newsItem.excerpt_en : newsItem.excerpt}
+                </p>
+              </div>
+            )}
+            
+            {/* Share Button - Mobile */}
+            <div className="mt-12 md:hidden">
+              <ShareButton title={newsItem.title} dict={dict.components?.share_button || {}} />
+            </div>
           </div>
         </header>
-
-        {/* Featured Image */}
-        {newsItem.image_url && (
-          <div className="mb-12 md:mb-16 relative w-full aspect-video md:aspect-[21/9] overflow-hidden border border-border bg-muted">
-            <Image
-              src={newsItem.image_url}
-              alt={newsItem.title}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 896px"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-          </div>
-        )}
 
         {/* Article Content */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
@@ -207,18 +221,68 @@ export default async function NewsDetailPage({
           <NewsArticleContent paragraphs={contentParagraphs || []} />
         </div>
 
+        {/* LATEST NEWS SHOWCASE */}
+        {latestNews && latestNews.length > 0 && (
+          <section className="mt-32 pt-16 border-t border-border">
+            <div className="mb-12">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground block mb-2">
+                PORTFOLIO
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black font-quilon uppercase tracking-tighter text-foreground mb-2">
+                {dict.news.latest_news_showcase || "LATEST EPISODES SHOWCASE"}
+              </h2>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                DISCOVER CAPTIVATING STORIES AND INSIGHTS.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-border border-t border-b border-border">
+              {latestNews.map((item) => (
+                <Link
+                  href={`/${lang}/news/${item.slug}`}
+                  key={item.id}
+                  className="group flex flex-col md:flex-row bg-transparent overflow-hidden hover:bg-muted/50 transition-colors"
+                >
+                  <div className="p-6 md:p-8 flex flex-col justify-center flex-1">
+                    <h3 className="text-xl md:text-2xl font-black font-quilon uppercase leading-tight text-foreground mb-4 group-hover:text-primary transition-colors">
+                      {lang === "en" && item.title_en ? item.title_en : item.title}
+                    </h3>
+                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider line-clamp-3 mb-8 leading-relaxed opacity-70">
+                      {lang === "en" && item.excerpt_en ? item.excerpt_en : item.excerpt}
+                    </p>
+                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground mt-auto">
+                      [ VIEW MORE ]
+                    </span>
+                  </div>
+                  <div className="relative aspect-square md:aspect-auto md:w-1/2 lg:w-[45%] md:shrink-0 bg-muted">
+                    {item.image_url ? (
+                      <Image
+                        src={item.image_url}
+                        alt={item.title}
+                        fill
+                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-muted-foreground">
+                        NO IMAGE
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Footer Navigation */}
-        <footer className="mt-20 md:mt-32 pt-12 md:pt-16 border-t border-border">
+        <footer className="mt-20 pt-12 border-t border-border flex justify-center">
           <Link
             href={`/${lang}/news`}
-            className="group inline-flex flex-col gap-2 hover:gap-3 transition-all"
+            className="group inline-flex items-center gap-4 hover:gap-6 transition-all"
           >
-            <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-widest group-hover:text-primary transition-colors">
-              {dict.news.back_to_news}
-            </span>
-            <span className="text-2xl md:text-3xl font-black font-quilon text-foreground uppercase tracking-tight group-hover:text-primary transition-colors flex items-center gap-3">
-              {dict.news.read_all_news}
-              <ArrowLeft className="h-6 w-6 rotate-180 group-hover:translate-x-2 transition-transform" />
+            <ArrowLeft className="h-4 w-4 text-foreground transition-transform" />
+            <span className="text-sm font-mono text-foreground uppercase tracking-widest transition-colors">
+              {dict.news.back_to_news || "BACK TO ALL NEWS"}
             </span>
           </Link>
         </footer>

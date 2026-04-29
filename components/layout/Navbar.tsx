@@ -19,10 +19,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Delayed entrance — navbar fuses with hero on first load
+  // Needed to avoid SSR hydration mismatch for theme detection
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 1200);
-    return () => clearTimeout(timer);
+    setMounted(true);
   }, []);
 
   // Handle scroll effect for navbar — throttled with rAF for 60fps

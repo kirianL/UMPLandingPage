@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import NewsStackCard from "@/components/news-stack-card";
 
 interface NewsItem {
   id: string;
@@ -53,67 +54,17 @@ export function NewsList({
           </Link>
         </div>
 
-        {/* Grid Layout - Visual Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+        {/* Stacking Layout - Editorial Visuals */}
+        <div className="flex flex-col relative w-full pt-4">
           {displayNews.map((item, index) => (
-            <Link
+            <NewsStackCard
               key={item.id}
-              href={`/${lang}/news/${item.slug}`}
-              className="group relative aspect-video overflow-hidden bg-muted border border-border"
-            >
-              {/* Image with Zoom Effect */}
-              {item.image_url ? (
-                <Image
-                  src={item.image_url}
-                  alt={`${lang === "en" && item.title_en ? item.title_en : item.title} | UMPmusic News`}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
-                  className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                  <span className="text-muted-foreground font-mono text-xs">
-                    [ {dict.no_image} ]
-                  </span>
-                </div>
-              )}
-
-              {/* Overlay Gradient - Always dark for readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-
-              {/* Content */}
-              <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-between">
-                <div className="flex justify-between items-start">
-                  <span className="inline-block px-2 py-0.5 md:px-3 md:py-1 bg-white text-black text-[8px] md:text-[10px] font-bold uppercase tracking-wider rounded-sm opacity-80">
-                    {dict.news_badge}
-                  </span>
-                  <ArrowUpRight className="text-white w-4 h-4 md:w-6 md:h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-
-                <div className="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
-                  <time
-                    dateTime={item.published_at || item.created_at}
-                    className="text-primary font-mono text-[8px] md:text-xs uppercase tracking-widest block mb-1 md:mb-2"
-                    suppressHydrationWarning
-                  >
-                    {new Date(
-                      item.published_at || item.created_at,
-                    ).toLocaleDateString(lang === "es" ? "es-ES" : "en-US", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                      timeZone: "America/Costa_Rica",
-                    })}
-                  </time>
-                  <h3 className="text-lg md:text-3xl font-bold font-quilon text-white uppercase leading-none md:leading-tight line-clamp-3 group-hover:text-white transition-colors">
-                    {lang === "en" && item.title_en
-                      ? item.title_en
-                      : item.title}
-                  </h3>
-                </div>
-              </div>
-            </Link>
+              news={item}
+              dict={dict}
+              lang={lang}
+              index={index}
+              total={displayNews.length}
+            />
           ))}
         </div>
       </div>

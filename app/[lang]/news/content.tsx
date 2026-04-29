@@ -1,7 +1,7 @@
 "use client";
 
 import * as motion from "framer-motion/client";
-import NewsCard from "@/components/news-card";
+import NewsStackCard from "@/components/news-stack-card";
 import { News } from "@/lib/types";
 
 interface NewsContentProps {
@@ -52,21 +52,16 @@ export default function NewsContent({ news, dict, lang }: NewsContentProps) {
         {/* GRID DE NOTICIAS */}
         <section className="py-20 md:py-32">
           {news && news.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+            <div className="flex flex-col relative w-full pt-10">
               {news.map((item, index) => (
-                <motion.div 
+                <NewsStackCard
                   key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <NewsCard
-                    news={item}
-                    dict={dict.components.news_card}
-                    lang={lang}
-                  />
-                </motion.div>
+                  news={item}
+                  dict={dict.components.news_card}
+                  lang={lang}
+                  index={index}
+                  total={news.length}
+                />
               ))}
             </div>
           ) : (

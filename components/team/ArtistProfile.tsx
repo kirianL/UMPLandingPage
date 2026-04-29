@@ -28,21 +28,24 @@ export default function ArtistProfile({
 
   const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
   const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  const isLightBlue = artist.slug.toLowerCase() === "ery" || artist.name.toLowerCase().includes("ery");
   
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
     : isRed
     ? "/assets/backgrounds/Background_red.png"
+    : isLightBlue
+    ? "/assets/backgrounds/Background_lightBlue.png"
     : "/assets/backgrounds/Backgroud_blue.png";
     
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
   
-  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : "text-[#bbdbfa]";
-  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : "bg-[#bbdbfa]/60";
-  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : "selection:bg-[#bbdbfa]";
-  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : "group-hover:text-[#bbdbfa]";
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isLightBlue ? "text-[#7dd3fc]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isLightBlue ? "bg-[#7dd3fc]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : isLightBlue ? "selection:bg-[#7dd3fc]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : isLightBlue ? "group-hover:text-[#7dd3fc]" : "group-hover:text-[#bbdbfa]";
 
   return (
     <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>

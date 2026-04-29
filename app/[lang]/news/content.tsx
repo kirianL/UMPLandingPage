@@ -29,30 +29,62 @@ export default function NewsContent({ news, dict, lang }: NewsContentProps) {
           <span>{dict.news.header_sub}</span>
         </motion.div>
 
-        {/* HERO SECTION - TIPOGRAFÍA EXTREMA (Mobile First) */}
-        <section className="relative py-12 md:py-24 border-b border-border">
-          <motion.h1
-            initial="hidden" animate="visible" variants={revealUp}
-            className="text-[14vw] sm:text-[12vw] md:text-[9vw] leading-[0.85] font-black font-quilon uppercase tracking-tighter text-foreground text-center sm:text-left drop-shadow-sm flex flex-col items-center sm:items-start"
+        {/* HERO SECTION - TIPOGRAFÍA EXTREMA */}
+        <section className="relative py-8 md:py-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="block text-primary">{dict.news.title_1}</span>
-            {dict.news.title_2 && <span className="block">{dict.news.title_2}</span>}
-          </motion.h1>
-          
-          <div className="mt-12 md:mt-20 flex justify-center sm:justify-start">
-            <motion.p 
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
-              className="font-mono text-sm md:text-base uppercase max-w-sm text-center md:text-left text-muted-foreground"
+            {/* Title with staggered word reveal */}
+            <motion.h1
+              className="text-[14vw] sm:text-[12vw] md:text-[9vw] leading-[0.85] font-black font-quilon uppercase tracking-tighter text-foreground text-center sm:text-left drop-shadow-sm flex flex-col items-center sm:items-start overflow-hidden"
             >
+              <motion.span 
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                className="block text-primary"
+              >
+                {dict.news.title_1}
+              </motion.span>
+              {dict.news.title_2 && (
+                <motion.span 
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+                  className="block"
+                >
+                  {dict.news.title_2}
+                </motion.span>
+              )}
+            </motion.h1>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+            className="mt-6 md:mt-10 flex justify-center sm:justify-start"
+          >
+            <p className="font-mono text-sm md:text-base uppercase max-w-sm text-center md:text-left text-muted-foreground">
               {dict.news.hero_desc}
-            </motion.p>
-          </div>
+            </p>
+          </motion.div>
+
+          {/* Animated divider line */}
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+            className="h-px bg-border mt-8 md:mt-12 origin-left"
+          />
         </section>
 
         {/* GRID DE NOTICIAS */}
-        <section className="py-20 md:py-32">
+        <section className="pt-0 pb-16">
           {news && news.length > 0 ? (
-            <div className="flex flex-col relative w-full pt-10">
+            <div className="flex flex-col relative w-full">
               {news.map((item, index) => (
                 <NewsStackCard
                   key={item.id}

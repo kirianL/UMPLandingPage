@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Newspaper, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import DeleteNewsButton from "./delete-button";
 
 export default async function AdminNewsPage() {
   const supabase = await createClient();
@@ -90,16 +91,19 @@ export default async function AdminNewsPage() {
                   </span>
                 </td>
                 <td className="p-4 text-right">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-blue-400 hover:text-blue-300 hover:bg-blue-950"
-                    asChild
-                  >
-                    <Link href={`/admin/news/${item.id}`}>
-                      <Edit className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <div className="flex items-center justify-end gap-1">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-blue-400 hover:text-blue-300 hover:bg-blue-950"
+                      asChild
+                    >
+                      <Link href={`/admin/news/${item.id}`}>
+                        <Edit className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <DeleteNewsButton newsId={item.id} newsTitle={item.title} />
+                  </div>
                 </td>
               </tr>
             ))}

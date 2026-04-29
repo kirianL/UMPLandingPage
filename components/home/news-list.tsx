@@ -8,13 +8,13 @@ import NewsStackCard from "@/components/news-stack-card";
 interface NewsItem {
   id: string;
   title: string;
-  title_en?: string | null;
+  title_en: string | null;
   slug: string;
   image_url: string | null;
   published_at: string;
   created_at: string;
-  excerpt?: string | null;
-  excerpt_en?: string | null;
+  excerpt: string | null;
+  excerpt_en: string | null;
 }
 
 export function NewsList({

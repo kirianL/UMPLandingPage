@@ -27,7 +27,7 @@
   },
   "news": {
     "header_archive": "[ ARCHIVO 2026 ]",
-    "header_sub": "[ LATEST RELEASES & EVENTS ]",
+    "header_sub": "[ ÚLTIMOS LANZAMIENTOS Y EVENTOS ]",
     "title_1": "NOTICIAS",
     "title_2": "",
     "hero_desc": "Mantente al día con los últimos lanzamientos, anuncios y eventos exclusivos de Ultimate Media Production.",
@@ -36,7 +36,13 @@
     "back_to_news": "Volver a Noticias",
     "featured_image": "Imagen Destacada",
     "share_label": "Compartir",
-    "read_all_news": "Ver Todas las Noticias"
+    "read_all_news": "Ver Todas las Noticias",
+    "about_article": "SOBRE ESTE ARTÍCULO",
+    "min_read": "MIN DE LECTURA",
+    "overview": "[ RESUMEN ]",
+    "portfolio": "PORTAFOLIO",
+    "latest_news_showcase": "SHOWCASE DE NOTICIAS",
+    "discover_stories": "DESCUBRE HISTORIAS CAUTIVADORAS E INSIGHTS."
   },
   "about": {
     "title": "Sobre Nosotros",

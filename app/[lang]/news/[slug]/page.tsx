@@ -135,7 +135,7 @@ export default async function NewsDetailPage({
           {/* Left Column - Small Meta */}
           <div className="w-full md:w-1/4 flex flex-col gap-6">
             <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-foreground">
-              ABOUT THIS ARTICLE
+              {dict.news.about_article || "ABOUT THIS ARTICLE"}
             </span>
             
             {/* Metadata */}
@@ -149,7 +149,7 @@ export default async function NewsDetailPage({
               <div className="flex items-center gap-2 font-mono uppercase tracking-widest text-foreground">
                 <Clock className="h-3 w-3" />
                 <span>
-                  {Math.ceil((contentParagraphs?.join(" ").length || 0) / 1000)} MIN READ
+                  {Math.ceil((contentParagraphs?.join(" ").length || 0) / 1000)} {dict.news.min_read || "MIN READ"}
                 </span>
               </div>
             </div>
@@ -187,8 +187,8 @@ export default async function NewsDetailPage({
             {/* Excerpt */}
             {(isEn && newsItem.excerpt_en ? newsItem.excerpt_en : newsItem.excerpt) && (
               <div className="flex items-center gap-4">
-                <span className="font-mono text-[10px] text-foreground uppercase tracking-[0.2em]">
-                  [ OVERVIEW ]
+                <span className="font-mono text-[10px] text-foreground uppercase tracking-[0.2em] shrink-0">
+                  {dict.news.overview || "[ OVERVIEW ]"}
                 </span>
                 <p className="text-sm md:text-base text-muted-foreground font-mono uppercase tracking-widest leading-relaxed max-w-xl">
                   {isEn && newsItem.excerpt_en ? newsItem.excerpt_en : newsItem.excerpt}
@@ -226,13 +226,13 @@ export default async function NewsDetailPage({
           <section className="mt-32 pt-16 border-t border-border">
             <div className="mb-12">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground block mb-2">
-                PORTFOLIO
+                {dict.news.portfolio || "PORTFOLIO"}
               </span>
               <h2 className="text-4xl md:text-5xl font-black font-quilon uppercase tracking-tighter text-foreground mb-2">
                 {dict.news.latest_news_showcase || "LATEST EPISODES SHOWCASE"}
               </h2>
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                DISCOVER CAPTIVATING STORIES AND INSIGHTS.
+                {dict.news.discover_stories || "DISCOVER CAPTIVATING STORIES AND INSIGHTS."}
               </p>
             </div>
 
@@ -251,7 +251,7 @@ export default async function NewsDetailPage({
                       {lang === "en" && item.excerpt_en ? item.excerpt_en : item.excerpt}
                     </p>
                     <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground mt-auto">
-                      [ VIEW MORE ]
+                      [ {dict.components?.news_card?.read_article || (isEn ? "VIEW MORE" : "VER MÁS")} ]
                     </span>
                   </div>
                   <div className="relative aspect-square md:aspect-auto md:w-1/2 lg:w-[45%] md:shrink-0 bg-muted">
@@ -264,7 +264,7 @@ export default async function NewsDetailPage({
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-muted-foreground">
-                        NO IMAGE
+                        {dict.components?.news_card?.no_image || "NO IMAGE"}
                       </div>
                     )}
                   </div>

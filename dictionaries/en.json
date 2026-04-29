@@ -36,7 +36,13 @@
     "back_to_news": "Back to News",
     "featured_image": "Featured Image",
     "share_label": "Share",
-    "read_all_news": "View All News"
+    "read_all_news": "View All News",
+    "about_article": "ABOUT THIS ARTICLE",
+    "min_read": "MIN READ",
+    "overview": "[ OVERVIEW ]",
+    "portfolio": "PORTFOLIO",
+    "latest_news_showcase": "LATEST EPISODES SHOWCASE",
+    "discover_stories": "DISCOVER CAPTIVATING STORIES AND INSIGHTS."
   },
   "about": {
     "title": "About Us",

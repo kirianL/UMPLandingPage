@@ -26,20 +26,39 @@ export default function ProducerProfile({
 
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
 
-  const bgImage = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille")
+  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
+  const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  
+  const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
+    : isRed
+    ? "/assets/backgrounds/Background_red.png"
     : "/assets/backgrounds/Backgroud_blue.png";
+    
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
-  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
-  const themeText = isPurple ? "text-[#d8b4fe]" : "text-[#bbdbfa]";
-  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : "bg-[#bbdbfa]/60";
-  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : "selection:bg-[#bbdbfa]";
-  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : "group-hover:text-[#bbdbfa]";
+  
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : "group-hover:text-[#bbdbfa]";
+
+  // Theme-aware colors: kidOffi uses system bg (black/white), others use hardcoded dark
+  const bgMain = isRed ? "bg-background" : "bg-[#010314]";
+  const bgAlt = isRed ? "bg-muted" : "bg-[#000000]";
+  const textMain = isRed ? "text-foreground" : "text-white";
+  const textMuted = isRed ? "text-muted-foreground" : "text-[#bbbbbb]";
+  const borderClr = isRed ? "border-border" : "border-white/10";
+  const selectionBg = isRed ? "selection:text-background" : "selection:text-[#010314]";
+  const gradientVia = isRed ? "via-background/60" : "via-[#010314]/60";
+  const gradientTo = isRed ? "to-background" : "to-[#010314]";
+  const proseClasses = isRed
+    ? "prose prose-lg md:prose-2xl max-w-4xl prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:font-light prose-strong:text-foreground"
+    : "prose prose-invert prose-lg md:prose-2xl max-w-4xl prose-p:text-[#bbbbbb] prose-p:leading-relaxed prose-p:font-light prose-strong:text-white";
 
   return (
-    <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} selection:text-[#010314] font-sans -mt-20`}>
+    <div className={`min-h-screen ${bgMain} ${textMain} ${themeSelection} ${selectionBg} font-sans -mt-20`}>
       {/* HERO SECTION */}
       <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-x-clip overflow-y-visible">
         <div className="absolute inset-0 z-0">
@@ -51,7 +70,7 @@ export default function ProducerProfile({
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010314]/60 to-[#010314]" />
+          <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${gradientVia} ${gradientTo}`} />
         </div>
 
 
@@ -111,7 +130,7 @@ export default function ProducerProfile({
                 {artist.role || dict.role_producer || "PRODUCTOR"}
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#bbbbbb] uppercase tracking-widest leading-relaxed">
+            <p className={`text-xs md:text-sm ${textMuted} uppercase tracking-widest leading-relaxed`}>
               {artist.name}
             </p>
           </motion.div>
@@ -157,24 +176,24 @@ export default function ProducerProfile({
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="bg-[#010314] py-24 md:py-32 relative z-10">
+      <section className={`${bgMain} py-24 md:py-32 relative z-10`}>
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
           <div className="md:col-span-4 lg:col-span-3">
              <div className="sticky top-32">
-               <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-[#bbbbbb] block mb-4">
+               <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] ${textMuted} block mb-4`}>
                  {dict.technique_vision || "TÉCNICA // VISIÓN"}
                </span>
-               <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-white mb-8">
+               <h2 className={`text-3xl md:text-4xl font-bold uppercase tracking-tight ${textMain} mb-8`}>
                  {dict.the_sound || "EL SONIDO"}
                </h2>
                
-               <div className="space-y-6 pt-8 border-t border-white/10">
+               <div className={`space-y-6 pt-8 border-t ${borderClr}`}>
                  <div>
-                   <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">{dict.years_active || "AÑOS ACTIVO"}</p>
+                   <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>{dict.years_active || "AÑOS ACTIVO"}</p>
                    <p className="text-2xl font-bold">{currentYear - startYear}+</p>
                  </div>
                  <div>
-                   <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">{dict.productions_label || "PRODUCCIONES"}</p>
+                   <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>{dict.productions_label || "PRODUCCIONES"}</p>
                    <p className="text-2xl font-bold">{artist.releases?.length || 0}</p>
                  </div>
                </div>
@@ -183,8 +202,8 @@ export default function ProducerProfile({
           
           <div className="md:col-span-8 lg:col-span-9">
              {bioContent ? (
-                <div className="prose prose-invert prose-lg md:prose-2xl max-w-4xl prose-p:text-[#bbbbbb] prose-p:leading-relaxed prose-p:font-light prose-strong:text-white">
-                  <p className="text-2xl md:text-4xl text-white font-medium leading-tight mb-8">
+                <div className={proseClasses}>
+                  <p className={`text-2xl md:text-4xl ${textMain} font-medium leading-tight mb-8`}>
                     {bioContent.split("\n")[0]}
                   </p>
                   {bioContent
@@ -197,8 +216,8 @@ export default function ProducerProfile({
                     ))}
                 </div>
               ) : (
-                <div className="py-20 border border-white/10 flex justify-center items-center rounded-sm">
-                   <p className="font-mono text-sm text-[#bbbbbb] uppercase tracking-widest">
+                <div className={`py-20 border ${borderClr} flex justify-center items-center rounded-sm`}>
+                   <p className={`font-mono text-sm ${textMuted} uppercase tracking-widest`}>
                      {dict.bio_unavailable || "[ BIOGRAFÍA NO DISPONIBLE ]"}
                    </p>
                 </div>
@@ -209,14 +228,14 @@ export default function ProducerProfile({
 
       {/* DISCOGRAPHY SECTION */}
       {artist.releases && artist.releases.length > 0 && (
-        <section className="bg-[#000000] py-24 md:py-32">
+        <section className={`${bgAlt} py-24 md:py-32`}>
           <div className="container mx-auto px-6 md:px-12">
             <div className="mb-16 flex flex-col md:flex-row justify-between items-baseline gap-6">
               <div>
-                <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-[#bbbbbb] block mb-4">
+                <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] ${textMuted} block mb-4`}>
                   {dict.catalog_label || "CATÁLOGO"}
                 </span>
-                <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tight text-white">
+                <h2 className={`text-4xl md:text-6xl font-bold uppercase tracking-tight ${textMain}`}>
                   {dict.tracks_label || "TRACKS"}
                 </h2>
               </div>
@@ -225,7 +244,7 @@ export default function ProducerProfile({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {artist.releases.map((release, index) => (
                 <div key={release.id} className="group cursor-pointer">
-                  <div className="relative aspect-square bg-[#010314] overflow-hidden mb-4 rounded-sm border border-white/5 group-hover:border-white/20 transition-colors">
+                  <div className={`relative aspect-square ${bgMain} overflow-hidden mb-4 rounded-sm border ${isRed ? 'border-border group-hover:border-foreground/20' : 'border-white/5 group-hover:border-white/20'} transition-colors`}>
                     {release.cover_url ? (
                        <Image
                          src={release.cover_url}
@@ -255,11 +274,11 @@ export default function ProducerProfile({
                   </div>
                   <div className="flex justify-between items-start gap-4">
                     <h3 className={`font-bold text-lg uppercase leading-tight group-hover:${themeText} transition-colors`}>{release.title}</h3>
-                    <span className="font-mono text-[10px] text-[#bbbbbb] border border-white/20 px-2 py-1 rounded-sm">
+                    <span className={`font-mono text-[10px] ${textMuted} border ${isRed ? 'border-foreground/20' : 'border-white/20'} px-2 py-1 rounded-sm`}>
                       {new Date(release.release_date || Date.now()).getFullYear()}
                     </span>
                   </div>
-                  <p className="text-xs text-[#bbbbbb] font-mono mt-1 uppercase tracking-wider">{dict.beat_label || "BEAT"}</p>
+                  <p className={`text-xs ${textMuted} font-mono mt-1 uppercase tracking-wider`}>{dict.beat_label || "BEAT"}</p>
                 </div>
               ))}
             </div>
@@ -268,15 +287,15 @@ export default function ProducerProfile({
       )}
 
       {/* FOOTER NAV */}
-      <div className="border-t border-white/10 bg-[#010314] py-16 md:py-24 text-center">
+      <div className={`border-t ${borderClr} ${bgMain} py-16 md:py-24 text-center`}>
         <Link
           href={`/${lang}/artists`}
           className="group inline-flex flex-col items-center gap-6"
         >
-          <span className="text-xs font-mono text-[#bbbbbb] uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+          <span className={`text-xs font-mono ${textMuted} uppercase tracking-[0.2em] group-hover:${textMain} transition-colors`}>
             {dict.back_to_team || "VOLVER AL EQUIPO"}
           </span>
-          <div className="h-16 w-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300">
+          <div className={`h-16 w-16 rounded-full border ${isRed ? 'border-foreground/20' : 'border-white/20'} flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300`}>
             <ArrowRight className="h-6 w-6 rotate-180 group-hover:-translate-x-2 transition-transform" />
           </div>
         </Link>

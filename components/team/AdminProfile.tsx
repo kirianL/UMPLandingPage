@@ -27,17 +27,31 @@ export default function AdminProfile({
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_admin || "ADMINISTRATIVO");
 
+  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
+  const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  
+  const bgImage = isPurple
+    ? "/assets/backgrounds/Background_purple.png"
+    : isRed
+    ? "/assets/backgrounds/Background_red.png"
+    : "/assets/backgrounds/Backgroud_blue.png";
+    
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
+  
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : "group-hover:text-[#bbdbfa]";
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
+    <div className={`min-h-screen bg-[#010314] text-white ${themeSelection} font-sans -mt-20`}>
       {/* HERO SECTION */}
       <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-x-clip overflow-y-visible">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/backgrounds/Backgroud_blue.png"
+            src={bgImage}
             alt="Atmospheric Background"
             fill
             className="object-cover opacity-80"

@@ -35,6 +35,9 @@ export default function ArtistProfile({
     artist.slug === "Eymar" ||
     artist.slug.toLowerCase() === "eymar" ||
     artist.name.toLowerCase().includes("eymar");
+  const isGreen =
+    artist.slug.toLowerCase() === "djmemo" ||
+    artist.name.toLowerCase().includes("djmemo");
 
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
@@ -42,7 +45,9 @@ export default function ArtistProfile({
       ? "/assets/backgrounds/Background_red.png"
       : isLightBlue
         ? "/assets/backgrounds/Background_lightBlue.png"
-        : "/assets/backgrounds/Backgroud_blue.png";
+        : isGreen
+          ? "/assets/backgrounds/Background_green.png"
+          : "/assets/backgrounds/Backgroud_blue.png";
 
   const longestWordLength = Math.max(
     ...artist.name.split(" ").map((w) => w.length),
@@ -68,28 +73,36 @@ export default function ArtistProfile({
       ? "text-[#ef4444]"
       : isLightBlue
         ? "text-[#7dd3fc]"
-        : "text-[#bbdbfa]";
+        : isGreen
+          ? "text-[#4ade80]"
+          : "text-[#bbdbfa]";
   const themeBg60 = isPurple
     ? "bg-[#d8b4fe]/60"
     : isRed
       ? "bg-[#ef4444]/60"
       : isLightBlue
         ? "bg-[#7dd3fc]/60"
-        : "bg-[#bbdbfa]/60";
+        : isGreen
+          ? "bg-[#4ade80]/60"
+          : "bg-[#bbdbfa]/60";
   const themeSelection = isPurple
     ? "selection:bg-[#d8b4fe]"
     : isRed
       ? "selection:bg-[#ef4444]"
       : isLightBlue
         ? "selection:bg-[#7dd3fc]"
-        : "selection:bg-[#bbdbfa]";
+        : isGreen
+          ? "selection:bg-[#4ade80]"
+          : "selection:bg-[#bbdbfa]";
   const themeGroupHoverText = isPurple
     ? "group-hover:text-[#d8b4fe]"
     : isRed
       ? "group-hover:text-[#ef4444]"
       : isLightBlue
         ? "group-hover:text-[#7dd3fc]"
-        : "group-hover:text-[#bbdbfa]";
+        : isGreen
+          ? "group-hover:text-[#4ade80]"
+          : "group-hover:text-[#bbdbfa]";
 
   return (
     <div

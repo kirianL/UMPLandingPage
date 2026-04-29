@@ -40,7 +40,7 @@ export async function generateViewport({
   params: Promise<{ slug: string }>;
 }): Promise<Viewport> {
   const { slug } = await params;
-  const isPurple = slug === "milletck" || slug.includes("mille");
+  const isPurple = slug === "milletck" || slug.includes("mille") || slug.toLowerCase() === "ckayy";
   const isRed = slug.toLowerCase() === "kidoffi";
 
   // Dark colors that match the top of their respective backgrounds

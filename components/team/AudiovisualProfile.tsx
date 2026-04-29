@@ -27,7 +27,7 @@ export default function AudiovisualProfile({
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_audiovisual || "AUDIOVISUAL");
   
-  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
+  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille") || artist.slug.toLowerCase() === "ckayy" || artist.name.toLowerCase().includes("ckayy");
   const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
   const isLightBlue = artist.slug === "Eymar" || artist.slug.toLowerCase() === "eymar" || artist.name.toLowerCase().includes("eymar");
   

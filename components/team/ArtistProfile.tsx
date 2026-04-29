@@ -27,7 +27,7 @@ export default function ArtistProfile({
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
 
   const isPurple =
-    artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
+    artist.slug === "milletck" || artist.name.toLowerCase().includes("mille") || artist.slug.toLowerCase() === "ckayy" || artist.name.toLowerCase().includes("ckayy");
   const isRed =
     artist.slug.toLowerCase() === "kidoffi" ||
     artist.name.toLowerCase().includes("kidoffi");

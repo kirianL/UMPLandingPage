@@ -32,12 +32,11 @@ export default function ArtistProfile({
     artist.slug.toLowerCase() === "kidoffi" ||
     artist.name.toLowerCase().includes("kidoffi");
   const isLightBlue =
-    artist.slug.toLowerCase() === "Eymar" ||
-    artist.name.toLowerCase().includes("Eymar") ||
-    artist.slug.toLowerCase() === "Eymar" ||
-    artist.name.toLowerCase().includes("Eymar") ||
-    artist.slug.toLowerCase() === "Eymar" ||
-    artist.name.toLowerCase().includes("Eymar");
+    artist.slug === "Eymar" ||
+    artist.slug.toLowerCase() === "eymar" ||
+    artist.name.toLowerCase().includes("eymar") ||
+    artist.slug.toLowerCase() === "ery" ||
+    artist.name.toLowerCase().includes("ery");
 
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"

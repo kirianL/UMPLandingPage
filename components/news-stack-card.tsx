@@ -117,11 +117,7 @@ export default function NewsStackCard({
           {news.image_url ? (
             <motion.div
               className="w-full h-full relative"
-              style={{
-                clipPath: clipProgress.get
-                  ? undefined
-                  : undefined,
-              }}
+              style={{}}
             >
               <Image
                 src={news.image_url}

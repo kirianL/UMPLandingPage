@@ -34,9 +34,7 @@ export default function ArtistProfile({
   const isLightBlue =
     artist.slug === "Eymar" ||
     artist.slug.toLowerCase() === "eymar" ||
-    artist.name.toLowerCase().includes("eymar") ||
-    artist.slug.toLowerCase() === "ery" ||
-    artist.name.toLowerCase().includes("ery");
+    artist.name.toLowerCase().includes("eymar");
 
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"

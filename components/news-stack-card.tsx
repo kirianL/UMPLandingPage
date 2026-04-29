@@ -78,7 +78,6 @@ export default function NewsStackCard({
           scale,
           opacity: exitOpacity,
           y: yShift,
-          filter: blur.get ? undefined : undefined,
           position: "sticky",
           top: `${stickyTop}px`,
         }}

@@ -28,7 +28,7 @@ export default function ArtistProfile({
 
   const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille");
   const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
-  const isLightBlue = artist.slug.toLowerCase() === "ery" || artist.name.toLowerCase().includes("ery");
+  const isLightBlue = artist.slug.toLowerCase() === "ery" || artist.name.toLowerCase().includes("ery") || artist.slug.toLowerCase() === "eymar" || artist.name.toLowerCase().includes("eymar");
   
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"

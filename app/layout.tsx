@@ -49,10 +49,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: [
+  /* themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FAFAFA" },
     { media: "(prefers-color-scheme: dark)", color: "#050505" },
-  ],
+  ], */
 };
 
 /* ═══ SEO: Global Metadata ═══ */
@@ -125,6 +125,11 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   category: "music",
+  appleWebApp: {
+    title: "UMPmusic",
+    statusBarStyle: "black-translucent",
+    capable: true,
+  },
 };
 
 /* ═══ JSON-LD Structured Data ═══ */

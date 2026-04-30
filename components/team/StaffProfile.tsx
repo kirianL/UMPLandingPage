@@ -27,24 +27,52 @@ export default function StaffProfile({
   const bioContent = isEn && artist.bio_en ? artist.bio_en : artist.bio_es;
   const roleDisplay = (isEn && artist.role_en) ? artist.role_en : (artist.role || dict.role_staff || "STAFF");
 
+  const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille") || artist.slug.toLowerCase() === "ckayy" || artist.name.toLowerCase().includes("ckayy");
+  const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  const isPink = artist.slug.toLowerCase() === "jimena-alvarado" || artist.name.toLowerCase().includes("jimena");
+  
+  const bgImage = isPurple
+    ? "/assets/backgrounds/Background_purple.png"
+    : isRed
+    ? "/assets/backgrounds/Background_red.png"
+    : isPink
+    ? "/assets/backgrounds/Background_pink.png"
+    : "/assets/backgrounds/Backgroud_blue.png";
+
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isPink ? "text-[#f472b6]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isPink ? "bg-[#f472b6]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : isPink ? "selection:bg-[#f472b6]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : isPink ? "group-hover:text-[#f472b6]" : "group-hover:text-[#bbdbfa]";
+
+  // Theme-aware colors: system bg (black/white) for all
+  const bgMain = "bg-background";
+  const bgAlt = "bg-muted";
+  const textMain = "text-foreground";
+  const textMuted = "text-muted-foreground";
+  const borderClr = "border-border";
+  const selectionBg = "selection:text-background";
+  const gradientVia = "via-background/60";
+  const gradientTo = "to-background";
+  const proseClasses = "prose prose-lg md:prose-2xl max-w-4xl prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:font-light prose-strong:text-foreground";
+
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white selection:bg-[#bbdbfa] selection:text-[#010314] font-sans -mt-20">
+    <div className={`min-h-screen ${bgMain} ${textMain} ${themeSelection} ${selectionBg} font-sans -mt-20`}>
       {/* HERO SECTION */}
       <section className="relative w-full h-[100svh] flex flex-col items-center justify-end overflow-x-clip overflow-y-visible">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/backgrounds/Backgroud_blue.png"
+            src={bgImage}
             alt="Atmospheric Background"
             fill
             className="object-cover opacity-80"
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#010314]/60 to-[#010314]" />
+          <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${gradientVia} ${gradientTo}`} />
         </div>
 
 
@@ -55,7 +83,7 @@ export default function StaffProfile({
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] text-[#bbdbfa] text-center opacity-90 select-none`}
+            className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>
@@ -99,8 +127,8 @@ export default function StaffProfile({
             className="flex flex-col items-center md:items-start text-center md:text-left gap-3 pointer-events-auto"
           >
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="hidden md:block h-px w-6 bg-[#bbdbfa]/60"></div>
-              <span className="text-[10px] font-mono tracking-[0.2em] text-[#bbdbfa] uppercase">
+              <div className={`hidden md:block h-px w-6 ${themeBg60}`}></div>
+              <span className={`text-[10px] font-mono tracking-[0.2em] ${themeText} uppercase`}>
                 {roleDisplay}
               </span>
             </div>
@@ -116,17 +144,17 @@ export default function StaffProfile({
             className="flex flex-wrap justify-center md:flex-col md:items-end gap-x-6 gap-y-2 md:gap-y-4 pointer-events-auto"
           >
             {artist.instagram_url && (
-              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.instagram_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ INSTAGRAM ]
               </a>
             )}
             {artist.spotify_url && (
-              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.spotify_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ SPOTIFY ]
               </a>
             )}
             {artist.youtube_url && (
-              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className="text-[10px] md:text-xs font-mono tracking-[0.2em] text-[#bbdbfa] hover:text-white uppercase transition-colors">
+              <a href={artist.youtube_url} target="_blank" rel="noreferrer" className={`text-[10px] md:text-xs font-mono tracking-[0.2em] ${themeText} hover:text-white uppercase transition-colors`}>
                 [ YOUTUBE ]
               </a>
             )}
@@ -135,24 +163,24 @@ export default function StaffProfile({
       </section>
 
       {/* ABOUT SECTION */}
-      <section className="bg-[#010314] py-24 md:py-32 relative z-10">
+      <section className={`${bgMain} py-24 md:py-32 relative z-10`}>
         <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-24">
           <div className="md:col-span-4 lg:col-span-3">
              <div className="sticky top-32">
-               <span className="text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-[#bbbbbb] block mb-4">
+               <span className={`text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] ${textMuted} block mb-4`}>
                  {dict.origin_journey || "ORIGEN // TRAYECTORIA"}
                </span>
-               <h2 className="text-3xl md:text-4xl font-bold uppercase tracking-tight text-white mb-8">
+               <h2 className={`text-3xl md:text-4xl font-bold uppercase tracking-tight ${textMain} mb-8`}>
                  {dict.the_story || "LA HISTORIA"}
                </h2>
                
-               <div className="space-y-6 pt-8 border-t border-white/10">
+               <div className={`space-y-6 pt-8 border-t ${borderClr}`}>
                  <div>
-                   <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">{dict.years_active || "AÑOS ACTIVO"}</p>
+                   <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>{dict.years_active || "AÑOS ACTIVO"}</p>
                    <p className="text-2xl font-bold">{currentYear - startYear}+</p>
                  </div>
                  <div>
-                   <p className="text-[10px] font-mono text-[#bbbbbb] uppercase tracking-widest mb-1">{dict.quality || "DEDICACIÓN"}</p>
+                   <p className={`text-[10px] font-mono ${textMuted} uppercase tracking-widest mb-1`}>{dict.quality || "DEDICACIÓN"}</p>
                    <p className="text-2xl font-bold">100%</p>
                  </div>
                </div>
@@ -161,8 +189,8 @@ export default function StaffProfile({
           
           <div className="md:col-span-8 lg:col-span-9">
              {bioContent ? (
-                <div className="prose prose-invert prose-lg md:prose-2xl max-w-4xl prose-p:text-[#bbbbbb] prose-p:leading-relaxed prose-p:font-light prose-strong:text-white">
-                  <p className="text-2xl md:text-4xl text-white font-medium leading-tight mb-8">
+                <div className={proseClasses}>
+                  <p className={`text-2xl md:text-4xl ${textMain} font-medium leading-tight mb-8`}>
                     {bioContent.split("\n")[0]}
                   </p>
                   {bioContent
@@ -175,8 +203,8 @@ export default function StaffProfile({
                     ))}
                 </div>
               ) : (
-                <div className="py-20 border border-white/10 flex justify-center items-center rounded-sm">
-                   <p className="font-mono text-sm text-[#bbbbbb] uppercase tracking-widest">
+                <div className={`py-20 border ${borderClr} flex justify-center items-center rounded-sm`}>
+                   <p className={`font-mono text-sm ${textMuted} uppercase tracking-widest`}>
                      {dict.bio_unavailable || "[ BIOGRAFÍA NO DISPONIBLE ]"}
                    </p>
                 </div>
@@ -186,15 +214,15 @@ export default function StaffProfile({
       </section>
 
       {/* FOOTER NAV */}
-      <div className="border-t border-white/10 bg-[#010314] py-16 md:py-24 text-center">
+      <div className={`border-t ${borderClr} ${bgMain} py-16 md:py-24 text-center`}>
         <Link
           href={`/${lang}/artists`}
           className="group inline-flex flex-col items-center gap-6"
         >
-          <span className="text-xs font-mono text-[#bbbbbb] uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+          <span className={`text-xs font-mono ${textMuted} uppercase tracking-[0.2em] group-hover:${textMain} transition-colors`}>
             {dict.back_to_team || "VOLVER AL EQUIPO"}
           </span>
-          <div className="h-16 w-16 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300">
+          <div className={`h-16 w-16 rounded-full border border-border flex items-center justify-center group-hover:bg-[#ebf213] group-hover:border-[#ebf213] group-hover:text-black transition-all duration-300`}>
             <ArrowRight className="h-6 w-6 rotate-180 group-hover:-translate-x-2 transition-transform" />
           </div>
         </Link>

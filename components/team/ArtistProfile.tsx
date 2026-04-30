@@ -31,6 +31,9 @@ export default function ArtistProfile({
   const isRed =
     artist.slug.toLowerCase() === "kidoffi" ||
     artist.name.toLowerCase().includes("kidoffi");
+  const isPink =
+    artist.slug.toLowerCase() === "jimena-alvarado" ||
+    artist.name.toLowerCase().includes("jimena");
   const isLightBlue =
     artist.slug === "Eymar" ||
     artist.slug.toLowerCase() === "eymar" ||
@@ -43,7 +46,9 @@ export default function ArtistProfile({
     ? "/assets/backgrounds/Background_purple.png"
     : isRed
       ? "/assets/backgrounds/Background_red.png"
-      : isLightBlue
+      : isPink
+        ? "/assets/backgrounds/Background_pink.png"
+        : isLightBlue
         ? "/assets/backgrounds/Background_lightBlue.png"
         : isGreen
           ? "/assets/backgrounds/Background_green.png"
@@ -71,7 +76,9 @@ export default function ArtistProfile({
     ? "text-[#d8b4fe]"
     : isRed
       ? "text-[#ef4444]"
-      : isLightBlue
+      : isPink
+        ? "text-[#f472b6]"
+        : isLightBlue
         ? "text-[#7dd3fc]"
         : isGreen
           ? "text-[#4ade80]"
@@ -80,7 +87,9 @@ export default function ArtistProfile({
     ? "bg-[#d8b4fe]/60"
     : isRed
       ? "bg-[#ef4444]/60"
-      : isLightBlue
+      : isPink
+        ? "bg-[#f472b6]/60"
+        : isLightBlue
         ? "bg-[#7dd3fc]/60"
         : isGreen
           ? "bg-[#4ade80]/60"
@@ -89,7 +98,9 @@ export default function ArtistProfile({
     ? "selection:bg-[#d8b4fe]"
     : isRed
       ? "selection:bg-[#ef4444]"
-      : isLightBlue
+      : isPink
+        ? "selection:bg-[#f472b6]"
+        : isLightBlue
         ? "selection:bg-[#7dd3fc]"
         : isGreen
           ? "selection:bg-[#4ade80]"
@@ -98,7 +109,9 @@ export default function ArtistProfile({
     ? "group-hover:text-[#d8b4fe]"
     : isRed
       ? "group-hover:text-[#ef4444]"
-      : isLightBlue
+      : isPink
+        ? "group-hover:text-[#f472b6]"
+        : isLightBlue
         ? "group-hover:text-[#7dd3fc]"
         : isGreen
           ? "group-hover:text-[#4ade80]"

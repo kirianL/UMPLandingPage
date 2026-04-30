@@ -28,12 +28,15 @@ export default function DJProfile({
 
   const isPurple = artist.slug === "milletck" || artist.name.toLowerCase().includes("mille") || artist.slug.toLowerCase() === "ckayy" || artist.name.toLowerCase().includes("ckayy");
   const isRed = artist.slug.toLowerCase() === "kidoffi" || artist.name.toLowerCase().includes("kidoffi");
+  const isPink = artist.slug.toLowerCase() === "jimena-alvarado" || artist.name.toLowerCase().includes("jimena");
   const isGreen = artist.slug.toLowerCase() === "djmemo" || artist.name.toLowerCase().includes("djmemo");
   
   const bgImage = isPurple
     ? "/assets/backgrounds/Background_purple.png"
     : isRed
     ? "/assets/backgrounds/Background_red.png"
+    : isPink
+    ? "/assets/backgrounds/Background_pink.png"
     : isGreen
     ? "/assets/backgrounds/Background_green.png"
     : "/assets/backgrounds/Backgroud_blue.png";
@@ -42,10 +45,10 @@ export default function DJProfile({
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
   const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
   
-  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isGreen ? "text-[#4ade80]" : "text-[#bbdbfa]";
-  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isGreen ? "bg-[#4ade80]/60" : "bg-[#bbdbfa]/60";
-  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : isGreen ? "selection:bg-[#4ade80]" : "selection:bg-[#bbdbfa]";
-  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : isGreen ? "group-hover:text-[#4ade80]" : "group-hover:text-[#bbdbfa]";
+  const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isPink ? "text-[#f472b6]" : isGreen ? "text-[#4ade80]" : "text-[#bbdbfa]";
+  const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isPink ? "bg-[#f472b6]/60" : isGreen ? "bg-[#4ade80]/60" : "bg-[#bbdbfa]/60";
+  const themeSelection = isPurple ? "selection:bg-[#d8b4fe]" : isRed ? "selection:bg-[#ef4444]" : isPink ? "selection:bg-[#f472b6]" : isGreen ? "selection:bg-[#4ade80]" : "selection:bg-[#bbdbfa]";
+  const themeGroupHoverText = isPurple ? "group-hover:text-[#d8b4fe]" : isRed ? "group-hover:text-[#ef4444]" : isPink ? "group-hover:text-[#f472b6]" : isGreen ? "group-hover:text-[#4ade80]" : "group-hover:text-[#bbdbfa]";
 
   // Theme-aware colors: system bg (black/white) for all
   const bgMain = "bg-background";

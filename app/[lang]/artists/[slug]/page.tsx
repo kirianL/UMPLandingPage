@@ -42,9 +42,10 @@ export async function generateViewport({
   const { slug } = await params;
   const isPurple = slug === "milletck" || slug.includes("mille") || slug.toLowerCase() === "ckayy";
   const isRed = slug.toLowerCase() === "kidoffi";
+  const isPink = slug.toLowerCase() === "jimena-alvarado" || slug.toLowerCase().includes("jimena");
 
   // Dark colors that match the top of their respective backgrounds
-  const topColor = isPurple ? "#1a0b2e" : isRed ? "#450a0a" : "#010314";
+  const topColor = isPurple ? "#1a0b2e" : isRed ? "#450a0a" : isPink ? "#500724" : "#010314";
 
   return {
     themeColor: topColor,

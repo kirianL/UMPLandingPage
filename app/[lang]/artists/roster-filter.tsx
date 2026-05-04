@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Artist } from "@/lib/types";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Disc,
@@ -156,12 +157,15 @@ export default function RosterFilter({
                 href={`/${lang}/artists/${artist.slug}`}
                 className="group block h-full"
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-muted border border-border transition-colors group-hover:border-primary/50 h-full">
+                <div className="relative aspect-[3/4] overflow-hidden bg-card border border-border transition-colors group-hover:border-primary/50 h-full">
                   {artist.photo_url ? (
-                    <img
+                    <Image
                       src={artist.photo_url}
                       alt={artist.name}
-                      className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300 ease-out group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-opacity duration-300"
+                      loading="lazy"
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center text-muted-foreground font-mono">

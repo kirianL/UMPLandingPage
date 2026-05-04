@@ -27,15 +27,15 @@ export async function generateStaticParams() {
 
 import { cache } from "react";
 
-// Cached data fetcher
 const getNewsItem = cache(async (slug: string) => {
+  const decodedSlug = decodeURIComponent(slug);
   const supabase = await createServerClient();
   const { data: newsItem } = await supabase
     .from("news")
     .select(
       "id, title:title_es, title_en, slug, image_url, published_at, created_at, excerpt:excerpt_es, excerpt_en, content:content_es, content_en",
     )
-    .eq("slug", slug)
+    .eq("slug", decodedSlug)
     .eq("is_published", true)
     .single();
 
@@ -48,7 +48,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string; lang: string }>;
 }) {
   const { slug, lang } = await params;
-  const news = await getNewsItem(slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const news = await getNewsItem(decodedSlug);
 
   if (!news) return { title: "Noticia no encontrada" };
   const isEn = lang === "en";
@@ -69,7 +70,7 @@ export async function generateMetadata({
       type: "article",
       publishedTime: news.published_at || news.created_at,
       siteName: "UMPmusic",
-      url: `${siteUrl}/${lang}/news/${slug}`,
+      url: `${siteUrl}/${lang}/news/${decodedSlug}`,
     },
     twitter: {
       card: "summary_large_image",
@@ -80,10 +81,10 @@ export async function generateMetadata({
         : [{ url: `${siteUrl}/assets/og-image.webp`, width: 1200, height: 630 }],
     },
     alternates: {
-      canonical: `/${lang}/news/${slug}`,
+      canonical: `/${lang}/news/${decodedSlug}`,
       languages: {
-        es: `/es/news/${slug}`,
-        en: `/en/news/${slug}`,
+        es: `/es/news/${decodedSlug}`,
+        en: `/en/news/${decodedSlug}`,
       },
     },
   };
@@ -95,10 +96,11 @@ export default async function NewsDetailPage({
   params: Promise<{ slug: string; lang: string }>;
 }) {
   const { slug, lang } = await params;
+  const decodedSlug = decodeURIComponent(slug);
   const dict = await getDictionary(lang);
   const isEn = lang === "en";
 
-  const newsItem = await getNewsItem(slug);
+  const newsItem = await getNewsItem(decodedSlug);
 
   if (!newsItem) {
     notFound();

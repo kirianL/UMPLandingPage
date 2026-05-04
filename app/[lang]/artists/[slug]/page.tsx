@@ -40,9 +40,10 @@ export async function generateViewport({
   params: Promise<{ slug: string }>;
 }): Promise<Viewport> {
   const { slug } = await params;
-  const isPurple = slug === "milletck" || slug.includes("mille") || slug.toLowerCase() === "ckayy";
-  const isRed = slug.toLowerCase() === "kidoffi";
-  const isPink = slug.toLowerCase() === "jimena-alvarado" || slug.toLowerCase().includes("jimena");
+  const decodedSlug = decodeURIComponent(slug);
+  const isPurple = decodedSlug === "milletck" || decodedSlug.includes("mille") || decodedSlug.toLowerCase() === "ckayy";
+  const isRed = decodedSlug.toLowerCase() === "kidoffi";
+  const isPink = decodedSlug.toLowerCase() === "jimena-alvarado" || decodedSlug.toLowerCase().includes("jimena");
 
   // Dark colors that match the top of their respective backgrounds
   const topColor = isPurple ? "#1a0b2e" : isRed ? "#450a0a" : isPink ? "#500724" : "#010314";
@@ -58,7 +59,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string; lang: string }>;
 }) {
   const { slug, lang } = await params;
-  const artist = await getArtist(slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const artist = await getArtist(decodedSlug);
   if (!artist) return { title: "Artista no encontrado" };
   const isEn = lang === "en";
 
@@ -92,6 +94,7 @@ export async function generateMetadata({
 }
 
 async function getArtist(slug: string) {
+  const decodedSlug = decodeURIComponent(slug);
   const supabase = await createServerClient();
   const { data, error } = await supabase
     .from("artists")
@@ -110,7 +113,7 @@ async function getArtist(slug: string) {
       )
     `,
     )
-    .eq("slug", slug)
+    .eq("slug", decodedSlug)
     .maybeSingle();
 
   if (error) {
@@ -129,7 +132,8 @@ export default async function ArtistDetailPage({
   params: Promise<{ slug: string; lang: string }>;
 }) {
   const { slug, lang } = await params;
-  const artist = await getArtist(slug);
+  const decodedSlug = decodeURIComponent(slug);
+  const artist = await getArtist(decodedSlug);
   const dict = await getDictionary(lang);
 
   if (!artist) {

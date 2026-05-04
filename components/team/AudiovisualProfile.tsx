@@ -93,7 +93,7 @@ export default function AudiovisualProfile({
                 {word.split('').map((char, j) => (
                   <span 
                     key={j} 
-                    style={char.toUpperCase() === 'Ñ' ? { display: 'inline-block', marginRight: '0.3em' } : {}}
+                    style={char.toUpperCase() === 'Ñ' ? { display: 'inline-block', marginRight: '0.12em' } : {}}
                   >
                     {char}
                   </span>

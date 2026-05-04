@@ -84,9 +84,16 @@ export default function ProducerProfile({
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
-            {artist.name.replace(/ñ/gi, 'N').split(' ').map((word, i) => (
+            {artist.name.split(' ').map((word, i) => (
               <span key={i} className="block">
-                {word}
+                {word.split('').map((char, j) => (
+                  <span 
+                    key={j} 
+                    style={char.toUpperCase() === 'Ñ' ? { display: 'inline-block', marginRight: '0.3em' } : {}}
+                  >
+                    {char}
+                  </span>
+                ))}
               </span>
             ))}
           </motion.h1>

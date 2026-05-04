@@ -40,7 +40,7 @@ export default function ProducerProfile({
     
   const longestWordLength = Math.max(...artist.name.split(' ').map(w => w.length));
   const mobileTextSize = longestWordLength > 8 ? "text-[15vw]" : longestWordLength > 6 ? "text-[18vw]" : longestWordLength > 5 ? "text-[22vw]" : "text-[28vw]";
-  const desktopTextSize = longestWordLength > 8 ? "md:text-[12vw]" : longestWordLength > 6 ? "md:text-[15vw]" : "md:text-[20vw]";
+  const desktopTextSize = longestWordLength > 8 ? "md:text-[11vw]" : longestWordLength > 6 ? "md:text-[13vw]" : "md:text-[16.5vw]";
   
   const themeText = isPurple ? "text-[#d8b4fe]" : isRed ? "text-[#ef4444]" : isPink ? "text-[#f472b6]" : "text-[#bbdbfa]";
   const themeBg60 = isPurple ? "bg-[#d8b4fe]/60" : isRed ? "bg-[#ef4444]/60" : isPink ? "bg-[#f472b6]/60" : "bg-[#bbdbfa]/60";
@@ -77,7 +77,7 @@ export default function ProducerProfile({
 
 
         {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-20">
           <motion.h1 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

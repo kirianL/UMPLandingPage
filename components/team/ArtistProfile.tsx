@@ -67,10 +67,10 @@ export default function ArtistProfile({
           : "text-[28vw]";
   const desktopTextSize =
     longestWordLength > 8
-      ? "md:text-[12vw]"
+      ? "md:text-[11vw]"
       : longestWordLength > 6
-        ? "md:text-[15vw]"
-        : "md:text-[20vw]";
+        ? "md:text-[13vw]"
+        : "md:text-[16.5vw]";
 
   const themeText = isPurple
     ? "text-[#d8b4fe]"
@@ -151,7 +151,7 @@ export default function ArtistProfile({
         {/* Top Header */}
 
         {/* Huge Text (Behind Image) */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-0">
+        <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none pb-[180px] md:pb-20">
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

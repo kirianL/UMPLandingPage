@@ -86,7 +86,13 @@ export default function MarketingProfile({
             className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
             {artist.name.split(' ').map((word, i) => (
-              <span key={i} className="block">{word}</span>
+              <span key={i} className="block">
+                {word.split('').map((char, j) => (
+                  <span key={j} className={char.toUpperCase() === 'Ñ' ? 'pr-[0.15em] inline-block' : ''}>
+                    {char}
+                  </span>
+                ))}
+              </span>
             ))}
           </motion.h1>
         </div>

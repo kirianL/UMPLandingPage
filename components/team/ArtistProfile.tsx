@@ -160,7 +160,11 @@ export default function ArtistProfile({
           >
             {artist.name.split(" ").map((word, i) => (
               <span key={i} className="block">
-                {word}
+                {word.split('').map((char, j) => (
+                  <span key={j} className={char.toUpperCase() === 'Ñ' ? 'pr-[0.15em] inline-block' : ''}>
+                    {char}
+                  </span>
+                ))}
               </span>
             ))}
           </motion.h1>

@@ -55,6 +55,8 @@ export async function generateMetadata({
   const title = isEn && news.title_en ? news.title_en : news.title;
   const description = isEn && news.excerpt_en ? news.excerpt_en : news.excerpt;
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ultimatemediaproductions.com";
+
   return {
     title,
     description,
@@ -62,16 +64,20 @@ export async function generateMetadata({
       title,
       description: description || undefined,
       images: news.image_url
-        ? [{ url: news.image_url, width: 1200, height: 630, alt: title }]
-        : [{ url: "/assets/og-image.webp", width: 1200, height: 630 }],
+        ? [{ url: news.image_url, width: 1200, height: 630, alt: title, type: "image/jpeg" }]
+        : [{ url: `${siteUrl}/assets/og-image.webp`, width: 1200, height: 630 }],
       type: "article",
       publishedTime: news.published_at || news.created_at,
+      siteName: "UMPmusic",
+      url: `${siteUrl}/${lang}/news/${slug}`,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: description || undefined,
-      images: news.image_url ? [news.image_url] : ["/assets/og-image.webp"],
+      images: news.image_url
+        ? [{ url: news.image_url, width: 1200, height: 630, alt: title }]
+        : [{ url: `${siteUrl}/assets/og-image.webp`, width: 1200, height: 630 }],
     },
     alternates: {
       canonical: `/${lang}/news/${slug}`,

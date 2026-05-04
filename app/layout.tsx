@@ -79,7 +79,7 @@ export const metadata: Metadata = {
   creator: "UMPmusic",
   publisher: "UMPmusic",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://umpmusic.com",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://ultimatemediaproductions.com",
   ),
   openGraph: {
     type: "website",
@@ -137,8 +137,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MusicGroup",
   name: "UMPmusic",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://umpmusic.com",
-  logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://umpmusic.com"}/assets/UMP LOGO NEGATIVO.webp`,
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://ultimatemediaproductions.com",
+  logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://ultimatemediaproductions.com"}/assets/UMP LOGO NEGATIVO.webp`,
   description:
     "Sello discográfico independiente de Limón, Costa Rica. Artistas, DJs y productores del Caribe costarricense.",
   foundingLocation: {

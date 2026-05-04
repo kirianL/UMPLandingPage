@@ -254,7 +254,7 @@ export default async function NewsDetailPage({
                         alt={lang === "en" && item.title_en ? item.title_en : item.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest">

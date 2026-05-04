@@ -40,27 +40,9 @@ export default function NewsArticleContent({
           }
         }
 
-        /* ═══ DROP CAP — first paragraph ═══ */
+        /* ═══ FIRST PARAGRAPH ═══ */
         .editorial-body p:first-of-type {
           text-indent: 0;
-        }
-
-        .editorial-body p:first-of-type::first-letter {
-          float: left;
-          font-size: 3.75rem;
-          line-height: 0.8;
-          font-weight: 900;
-          margin-right: 0.4rem;
-          margin-top: 0.15rem;
-          color: hsl(var(--primary));
-          font-family: var(--font-quilon), Georgia, serif;
-        }
-
-        @media (min-width: 768px) {
-          .editorial-body p:first-of-type::first-letter {
-            font-size: 4.5rem;
-            margin-right: 0.5rem;
-          }
         }
 
         /* ═══ HEADINGS ═══ */

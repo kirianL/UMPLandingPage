@@ -203,32 +203,34 @@ export default async function NewsDetailPage({
           </div>
         </header>
 
-        {/* Article Content */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-          {/* Share Sidebar - Desktop */}
-          <aside className="hidden md:block md:col-span-2 sticky top-24 h-fit">
-            <div className="flex flex-col gap-4 border-l-2 border-primary/30 pl-4">
-              <span className="text-[10px] text-muted-foreground font-mono uppercase tracking-widest">
-                {dict.news.share_label}
-              </span>
-              <ShareButton
-                title={newsItem.title}
-                dict={dict.components.share_button}
-              />
-            </div>
-          </aside>
+        {/* Article Content — Centered editorial column */}
+        <div className="flex justify-center">
+          <div className="w-full max-w-[720px] relative">
+            {/* Floating Share Sidebar - Desktop */}
+            <aside className="hidden lg:block absolute -left-20 top-0 w-14 sticky top-24 h-fit">
+              <div className="flex flex-col gap-4 border-l-2 border-primary/30 pl-3">
+                <span className="text-[9px] text-muted-foreground font-mono uppercase tracking-widest">
+                  {dict.news.share_label}
+                </span>
+                <ShareButton
+                  title={newsItem.title}
+                  dict={dict.components.share_button}
+                />
+              </div>
+            </aside>
 
-          <NewsArticleContent paragraphs={contentParagraphs || []} />
+            <NewsArticleContent paragraphs={contentParagraphs || []} />
+          </div>
         </div>
 
         {/* LATEST NEWS SHOWCASE */}
         {latestNews && latestNews.length > 0 && (
-          <section className="mt-32 pt-16 border-t border-border">
-            <div className="mb-12">
+          <section className="mt-24 md:mt-32 pt-12 md:pt-16 border-t border-border">
+            <div className="mb-8 md:mb-12">
               <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground block mb-2">
                 {dict.news.portfolio || "PORTFOLIO"}
               </span>
-              <h2 className="text-4xl md:text-5xl font-black font-quilon uppercase tracking-tighter text-foreground mb-2">
+              <h2 className="text-3xl md:text-5xl font-black font-quilon uppercase tracking-tighter text-foreground mb-2">
                 {dict.news.latest_news_showcase || "LATEST EPISODES SHOWCASE"}
               </h2>
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
@@ -236,37 +238,55 @@ export default async function NewsDetailPage({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x divide-border border-t border-b border-border">
+            {/* Mobile: vertical cards | Desktop: 3 column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {latestNews.map((item) => (
                 <Link
                   href={`/${lang}/news/${item.slug}`}
                   key={item.id}
-                  className="group flex flex-col md:flex-row bg-transparent overflow-hidden hover:bg-muted/50 transition-colors"
+                  className="group flex flex-col bg-transparent overflow-hidden border border-border hover:border-primary/40 transition-all duration-300"
                 >
-                  <div className="p-6 md:p-8 flex flex-col justify-center flex-1">
-                    <h3 className="text-xl md:text-2xl font-black font-quilon uppercase leading-tight text-foreground mb-4 group-hover:text-primary transition-colors">
-                      {lang === "en" && item.title_en ? item.title_en : item.title}
-                    </h3>
-                    <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider line-clamp-3 mb-8 leading-relaxed opacity-70">
-                      {lang === "en" && item.excerpt_en ? item.excerpt_en : item.excerpt}
-                    </p>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-foreground mt-auto">
-                      [ {dict.components?.news_card?.read_article || (isEn ? "VIEW MORE" : "VER MÁS")} ]
-                    </span>
-                  </div>
-                  <div className="relative aspect-square md:aspect-auto md:w-1/2 lg:w-[45%] md:shrink-0 bg-muted">
+                  {/* Image — always full width horizontal */}
+                  <div className="relative w-full aspect-[16/9] overflow-hidden bg-muted shrink-0">
                     {item.image_url ? (
                       <Image
                         src={item.image_url}
-                        alt={item.title}
+                        alt={lang === "en" && item.title_en ? item.title_en : item.title}
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-muted-foreground">
+                      <div className="w-full h-full flex items-center justify-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
                         {dict.components?.news_card?.no_image || "NO IMAGE"}
                       </div>
                     )}
+                    {/* Date badge */}
+                    <div className="absolute top-3 left-3 bg-background/80 backdrop-blur-sm border border-border px-2.5 py-1">
+                      <time
+                        dateTime={item.published_at || item.created_at}
+                        className="text-[9px] font-mono text-foreground uppercase tracking-wider"
+                        suppressHydrationWarning
+                      >
+                        {new Date(item.published_at || item.created_at).toLocaleDateString(
+                          lang === "en" ? "en-US" : "es-ES",
+                          { month: "short", day: "numeric", timeZone: "America/Costa_Rica" }
+                        )}
+                      </time>
+                    </div>
+                  </div>
+
+                  {/* Text content */}
+                  <div className="p-4 md:p-5 flex flex-col flex-1">
+                    <h3 className="text-base md:text-lg font-black font-quilon uppercase leading-tight text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                      {lang === "en" && item.title_en ? item.title_en : item.title}
+                    </h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed mb-4 flex-1">
+                      {lang === "en" && item.excerpt_en ? item.excerpt_en : item.excerpt}
+                    </p>
+                    <span className="text-[10px] font-mono uppercase tracking-[0.15em] text-foreground group-hover:text-primary transition-colors">
+                      [ {dict.components?.news_card?.read_article || (isEn ? "READ ARTICLE" : "LEER ARTÍCULO")} ]
+                    </span>
                   </div>
                 </Link>
               ))}

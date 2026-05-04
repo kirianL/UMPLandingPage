@@ -85,13 +85,9 @@ export default function StaffProfile({
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className={`${mobileTextSize} ${desktopTextSize} font-black uppercase tracking-tighter leading-[0.85] ${themeText} text-center opacity-90 select-none`}
           >
-            {artist.name.split(' ').map((word, i) => (
+            {artist.name.replace(/ñ/gi, 'N').split(' ').map((word, i) => (
               <span key={i} className="block">
-                {word.split('').map((char, j) => (
-                  <span key={j} className={char.toUpperCase() === 'Ñ' ? 'pr-[0.15em] inline-block' : ''}>
-                    {char}
-                  </span>
-                ))}
+                {word}
               </span>
             ))}
           </motion.h1>

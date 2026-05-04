@@ -157,7 +157,7 @@ export default function RosterFilter({
                 href={`/${lang}/artists/${artist.slug}`}
                 className="group block h-full"
               >
-                <div className="relative aspect-[3/4] overflow-hidden bg-card border border-border transition-colors group-hover:border-primary/50 h-full">
+                <div className="relative aspect-[3/4] overflow-hidden bg-zinc-100 border border-border transition-colors group-hover:border-primary/50 h-full">
                   {artist.photo_url ? (
                     <Image
                       src={artist.photo_url}

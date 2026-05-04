@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/admin") ||
     pathname.startsWith("/auth") ||
     pathname.startsWith("/assets") ||
-    pathname.match(/\.(png|jpg|jpeg|webp|svg|ico)$/)
+    pathname.match(/\.(png|jpg|jpeg|webp|svg|ico|json|txt|xml)$/)
   ) {
     return await updateSession(request);
   }
@@ -37,6 +37,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|json|txt|xml)$).*)",
   ],
 };
